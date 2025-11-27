@@ -1,3 +1,4 @@
+'use client';
 import UnderConstruction from '../../components/UnderConstruction';
 import { CameraIcon } from '../../components/Icons';
 import SpotlightCard from '../../components/SpotlightCard';
