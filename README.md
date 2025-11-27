@@ -35,4 +35,4 @@ A personal landing page built with **Next.js**, designed to serve as a central h
 ## Customization
 
 -   **Hero Animation:** Modify `src/components/HeroTitle.module.css` to adjust the typewriter speed or blink effect.
--   **Links:** Update the `href` attributes in `src/app/page.js` to point to your actual subdomains.
+-   **Links:** Update the `href` attributes in `src/app/page.js` to point to your actual subdomains. 
