@@ -26,7 +26,8 @@ export default function Home() {
       {/* Section 2: Biography */}
       <section id="bio" className="section content-section">
         <div className="card-wrapper">
-          <SpotlightCard href="https://christoskataxenos.com/bio">
+          {/* ΑΛΛΑΓΗ 1: Μόνο κάθετος και το όνομα */}
+          <SpotlightCard href="/bio">
             <div className="card-icon">
               <UserIcon />
             </div>
@@ -39,7 +40,8 @@ export default function Home() {
       {/* Section 3: Dev Blog */}
       <section id="blog" className="section content-section">
         <div className="card-wrapper">
-          <SpotlightCard href="https://christoskataxenos.com/blog">
+          {/* ΑΛΛΑΓΗ 2: Μόνο κάθετος και το όνομα */}
+          <SpotlightCard href="/blog">
             <div className="card-icon">
               <CodeIcon />
             </div>
@@ -52,7 +54,8 @@ export default function Home() {
       {/* Section 4: Photography Portfolio */}
       <section id="portfolio" className="section content-section">
         <div className="card-wrapper">
-          <SpotlightCard href="https://christoskataxenos.com/portfolio">
+          {/* ΑΛΛΑΓΗ 3: Μόνο κάθετος και το όνομα */}
+          <SpotlightCard href="/portfolio">
             <div className="card-icon">
               <CameraIcon />
             </div>
