@@ -15,13 +15,11 @@ export default async function Post({ params }) {
   const postData = await getPostData(resolvedParams.slug);
 
   return (
-    <div className="h-screen overflow-y-auto bg-[#0a0a0c] text-white p-6 md:p-12 font-sans"> {/* Χρησιμοποιούμε το ίδιο container με το blog list */}
-        <Link href="/blog" className="back-to-blog-link">← Back to Blog</Link>
-        <h1>{postData.title}</h1>
-      
+    <div className="blog-container">
       <article className="prose">
-        <h1 className="neon-text" style={{fontSize: '2.5rem', marginTop: '1rem'}}>{postData.title}</h1>
-        <div className="post-date" style={{marginBottom: '2rem'}}>{postData.date}</div>
+        <Link href="/blog" className="back-link">← Back to Blog</Link>
+        <h1>{postData.title}</h1>
+        <div className="post-date">{postData.date}</div>
         
         <MDXRemote source={postData.content} />
       </article>

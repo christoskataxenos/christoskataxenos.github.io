@@ -264,24 +264,27 @@ h1, h2, h3 {
   color: #d1d5db;
 }
 
-/* Back link style */
-.prose .back-to-blog-link { /* Changed class name for clarity */
+/* Back link style - Modernized */
+.back-link {
   display: inline-flex;
   align-items: center;
-  margin-bottom: 2rem; /* Added margin for breathing space */
-  color: #94a1b2;
-  font-weight: 500;
-  font-size: 0.95rem;
+  gap: 0.5rem; /* Space between arrow and text */
+  margin-bottom: 2rem;
+  color: #94a1b2; /* Muted gray text */
   text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
 }
 
-.prose .back-to-blog-link:hover {
-  color: #7f5af0;
-  transform: translateX(-5px);
+.back-link:hover {
+  color: #7f5af0; /* Brand Purple on hover */
+  transform: translateX(-5px); /* Subtle slide left effect */
 }
 
-.post-date {
+.prose h1 {
   font-family: var(--font-mono);
   color: #94a1b2;
   font-size: 0.9rem;
