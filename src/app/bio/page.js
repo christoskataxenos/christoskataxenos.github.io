@@ -1,10 +1,10 @@
-'use client';
-import UnderConstruction from '../../components/UnderConstruction';
-import { UserIcon } from '../../components/Icons';
-import SpotlightCard from '../../components/SpotlightCard';
+import BioSection from '../../components/BioSection';
 
-
+export const metadata = {
+  title: 'Bio | Christos Kataxenos',
+  description: 'Christos Kataxenos - Biography and CV',
+};
 
 export default function BioPage() {
-  return <UnderConstruction title="Biography" Icon={UserIcon} SpotlightCard={SpotlightCard} />;
+  return <BioSection />;
 }
