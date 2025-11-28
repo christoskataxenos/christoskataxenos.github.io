@@ -1,44 +1,55 @@
 # Christos Kataxenos - Landing Page
 
-A personal landing page built with **Next.js**, designed to serve as a central hub linking to various sub-projects (Biography, Dev Blog, Photography).
+A personal landing page built with **Next.js**, serving as a central hub for my Biography, Dev Blog, and Photography projects.
 
-## Features
+---
 
--   **Identity Reveal Effect:** A custom hero title component that transitions from English ("Christos Kataxenos") to Greek ("Χρήστος Καταξένος") on hover using a stack-based layout to prevent layout shifts.
--   **Neon/Dark Mode Theme:** Styled with CSS Modules and global CSS variables for a consistent, modern dark aesthetic.
--   **Holographic Cards:** Interactive 3D-like hover effects for navigation links.
--   **Performance Optimized:** Uses `next/font` for Geist font loading and optimized SVG components.
+## 🇬🇧 English
 
-## Project Structure
+### Overview
+This project is a modern, dark-themed portfolio site designed to showcase my work and thoughts. It features a custom identity reveal animation and a glassmorphic UI.
 
--   `src/app/page.js`: Main entry point.
--   `src/app/layout.js`: Root layout, fonts, and metadata.
--   `src/components/HeroTitle.js`: The isolated component for the name reveal effect.
--   `src/components/Icons.js`: Reusable SVG icons.
--   `src/components/HeroTitle.module.css`: Scoped CSS for the hero animation.
+### Key Features
+-   **Identity Reveal:** Smooth transition effect between English and Greek names.
+-   **Dark Aesthetics:** Neon accents and holographic card effects.
+-   **Performance:** Optimized with Next.js App Router and Tailwind CSS.
+-   **Bilingual Support:** Blog content available in both English and Greek.
 
-## Getting Started
+### Getting Started
 
 1.  **Install dependencies:**
     ```bash
     npm install
     ```
-
-2.  **Run the development server:**
+2.  **Start the dev server:**
     ```bash
     npm run dev
     ```
+3.  **View the site:**
+    Open [http://localhost:3000](http://localhost:3000).
 
-3.  **Open local preview:**
-    Navigate to [http://localhost:3000](http://localhost:3000).
+---
 
-## Customization
+## 🇬🇷 Ελληνικά
 
--   **Hero Animation:** Modify `src/components/HeroTitle.module.css` to adjust the typewriter speed or blink effect.
--   **Links:** Update the `href` attributes in `src/app/page.js` to point to your actual subdomains.
+### Περιγραφή
+Μια προσωπική ιστοσελίδα (landing page) χτισμένη με **Next.js**, η οποία λειτουργεί ως κεντρικός κόμβος για το Βιογραφικό, το Dev Blog και το φωτογραφικό μου έργο.
 
-## Deployment
+### Βασικά Χαρακτηριστικά
+-   **Identity Reveal:** Εφέ εναλλαγής του ονόματος από Αγγλικά σε Ελληνικά.
+-   **Σχεδιασμός:** Μοντέρνο dark theme με στοιχεία "glassmorphism" και neon λεπτομέρειες.
+-   **Απόδοση:** Βελτιστοποιημένη με Next.js App Router και Tailwind CSS.
+-   **Δίγλωσσο Περιεχόμενο:** Το Blog υποστηρίζει Ελληνικά και Αγγλικά.
 
-Deployments are handled via GitHub Actions.
+### Οδηγίες Εγκατάστασης
 
-<!-- Forced update to trigger CI/CD -->
+1.  **Εγκατάσταση βιβλιοθηκών:**
+    ```bash
+    npm install
+    ```
+2.  **Εκκίνηση server:**
+    ```bash
+    npm run dev
+    ```
+3.  **Προβολή:**
+    Ανοίξτε το [http://localhost:3000](http://localhost:3000).
