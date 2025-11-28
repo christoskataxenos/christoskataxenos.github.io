@@ -12,78 +12,73 @@ export async function generateStaticParams() {
 
 /** @type {import('rehype-pretty-code').Options} */
 const prettyCodeOptions = {
+  // Use one of Shiki's packaged themes
   theme: 'one-dark-pro',
+ 
+  // Keep the background or use a custom background color?
   keepBackground: true,
+
+  // Callback hooks to add custom logic to nodes when visiting
+  // them.
   onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and allow empty
+    // lines to be copy/pasted
     if (node.children.length === 0) {
       node.children = [{ type: 'text', value: ' ' }];
     }
   },
   onVisitHighlightedLine(node) {
+    // Each line node by default has `class="line"`.
     node.properties.className.push('line--highlighted');
   },
   onVisitHighlightedWord(node) {
+    // Each word node has no className by default.
     node.properties.className = ['word--highlighted'];
   },
 };
 
 export default async function Post({ params }) {
+  // Await the params before using them
   const resolvedParams = await params;
   const postData = await getPostData(resolvedParams.slug);
 
   return (
-    <div className="min-h-screen font-sans">
-      <div className="mx-auto max-w-3xl px-6 py-12 sm:px-8 lg:px-12">
-        
-        {/* Modern Back Button */}
-        <div className="mb-12">
-          <Link 
-            href="/blog" 
-            className="group inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-sm font-medium text-gray-400 ring-1 ring-white/10 transition-all duration-300 hover:bg-white/10 hover:text-white hover:ring-purple-500/50"
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              className="transition-transform duration-300 group-hover:-translate-x-1"
-            >
-              <path d="M19 12H5"></path>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-            <span>Back to Blog</span>
-          </Link>
-        </div>
+    <div className="prose prose-invert mx-auto max-w-3xl p-4 sm:p-6 lg:p-8">
+      <Link 
+        href="/blog" 
+        className="group inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          className="transition-transform group-hover:-translate-x-1"
+        >
+          <path d="M19 12H5"></path>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Blog
+      </Link>
 
-        {/* Post Header */}
-        <header className="mb-12 border-b border-white/10 pb-8">
-          <time className="mb-4 block font-mono text-sm text-purple-400">
-            {postData.date}
-          </time>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            {postData.title}
-          </h1>
-        </header>
-          
-        {/* Post Content */}
-        <article className="prose prose-invert prose-lg max-w-none prose-headings:text-gray-100 prose-p:text-gray-300 prose-a:text-purple-400 hover:prose-a:text-purple-300 prose-code:text-purple-300 prose-pre:bg-[#1e1e24] prose-pre:border prose-pre:border-white/10">
-          <MDXRemote 
-            source={postData.content}
-            options={{
-              mdxOptions: {
-                rehypePlugins: [
-                  [rehypePrettyCode, prettyCodeOptions],
-                ],
-              },
-            }}
-          />
-        </article>
-      </div>
+      <h1 className="mt-8 text-4xl font-bold">{postData.title}</h1>
+      <div className="text-gray-400">{postData.date}</div>
+        
+      <MDXRemote 
+        source={postData.content}
+        options={{
+          mdxOptions: {
+            rehypePlugins: [
+              [rehypePrettyCode, prettyCodeOptions],
+            ],
+          },
+        }}
+      />
     </div>
   );
 }
