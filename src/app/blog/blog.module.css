@@ -1,8 +1,8 @@
 .container {
   width: 100%;
-  max-width: 1000px; /* Max width for centering */
-  margin: 0 auto; /* Center the container */
-  padding: 6rem 1.5rem 4rem;
+  max-width: 1000px; /* Περιορίζουμε το πλάτος για να μην απλώνει σε ultrawide οθόνες */
+  margin: 0 auto;    /* Κεντράρισμα στη μέση της οθόνης */
+  padding: 6rem 20px 4rem;   /* "Αέρας" δεξιά-αριστερά για κινητά, διατηρώντας κάθετο padding */
   min-height: auto; 
 }
 
@@ -22,8 +22,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Flexible grid for responsiveness */
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Αυτόματη δημιουργία στηλών */
+  gap: 2rem; /* Κενό ανάμεσα στα cards */
+  justify-content: center; /* Κεντράρισμα του grid */
 }
 
 .cardLink {
@@ -104,7 +105,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .container {
-    padding: 4rem 1rem;
+    padding: 4rem 20px; /* Adjusted padding for mobile */
   }
   
   .title {

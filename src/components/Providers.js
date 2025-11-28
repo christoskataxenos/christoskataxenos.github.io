@@ -1,17 +1,15 @@
-'use client';
-
+import React from 'react';
+import { MouseProvider } from '../context/MouseContext';
 import { LanguageProvider } from '../context/LanguageContext';
-import CustomCursor from './CustomCursor';
 import ScrollProgressIndicator from './ScrollProgressIndicator';
-import SocialLinks from './SocialLinks';
 
 export function Providers({ children }) {
   return (
     <LanguageProvider>
-      <CustomCursor />
-      <ScrollProgressIndicator />
-      <SocialLinks />
-      {children}
+      <MouseProvider>
+        <ScrollProgressIndicator />
+        {children}
+      </MouseProvider>
     </LanguageProvider>
   );
 }
