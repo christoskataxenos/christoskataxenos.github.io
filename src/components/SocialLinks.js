@@ -28,7 +28,7 @@ export default function SocialLinks() {
           z-index: 999;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1280px) {
           .social-links {
             display: none;
           }

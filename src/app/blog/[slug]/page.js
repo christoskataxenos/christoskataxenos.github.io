@@ -15,12 +15,11 @@ export default async function Post({ params }) {
   const postData = await getPostData(resolvedParams.slug);
 
   return (
-    <div className="blog-container"> {/* Χρησιμοποιούμε το ίδιο container με το blog list */}
-      <Link href="/blog" className="read-more">← Back to Blog</Link>
-      
+    <div className="blog-container">
       <article className="prose">
-        <h1 className="neon-text" style={{fontSize: '2.5rem', marginTop: '1rem'}}>{postData.title}</h1>
-        <div className="post-date" style={{marginBottom: '2rem'}}>{postData.date}</div>
+        <Link href="/blog" className="read-more" style={{ display: 'inline-block', marginBottom: '2rem' }}>← Back to Blog</Link>
+        <h1>{postData.title}</h1>
+        <div className="post-date" style={{marginBottom: '3rem'}}>{postData.date}</div>
         
         <MDXRemote source={postData.content} />
       </article>
