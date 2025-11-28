@@ -11,7 +11,7 @@ export default function Blog() {
   const allPostsData = getSortedPostsData();
 
   return (
-    <div className={styles.container}>
+    <div className="h-screen overflow-y-auto bg-[#0a0a0c] text-white p-8 font-sans">
       <header className={styles.header}>
         <h1 className={styles.title}>DevLog</h1>
         <p style={{color: '#94a1b2'}}>Insights from the digital frontier.</p>

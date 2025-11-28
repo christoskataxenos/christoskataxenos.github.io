@@ -15,7 +15,7 @@ export default async function Post({ params }) {
   const postData = await getPostData(resolvedParams.slug);
 
   return (
-    <div className="blog-container"> {/* Χρησιμοποιούμε το ίδιο container με το blog list */}
+    <div className="h-screen overflow-y-auto bg-[#0a0a0c] text-white p-6 md:p-12 font-sans"> {/* Χρησιμοποιούμε το ίδιο container με το blog list */}
       <Link href="/blog" className="read-more">← Back to Blog</Link>
       
       <article className="prose">
