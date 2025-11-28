@@ -1,9 +1,9 @@
-/* --- 1. TAILWIND DIRECTIVES (Αυτά πρέπει να είναι ΠΡΩΤΑ) --- */
+/* --- 1. TAILWIND DIRECTIVES --- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* --- 2. ΤΟ CUSTOM CSS ΣΟΥ (Μην το πειράξεις) --- */
+/* --- 2. CUSTOM CSS --- */
 
 /* Minimal Dark Mode with Animations */
 
