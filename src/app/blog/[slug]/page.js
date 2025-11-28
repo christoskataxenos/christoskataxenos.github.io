@@ -44,8 +44,26 @@ export default async function Post({ params }) {
 
   return (
     <div className="prose prose-invert mx-auto max-w-3xl p-4 sm:p-6 lg:p-8">
-      <Link href="/blog" className="no-underline hover:text-blue-400">
-        ← Back to Blog
+      <Link 
+        href="/blog" 
+        className="group inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="16" 
+          height="16" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          className="transition-transform group-hover:-translate-x-1"
+        >
+          <path d="M19 12H5"></path>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Blog
       </Link>
 
       <h1 className="mt-8 text-4xl font-bold">{postData.title}</h1>
