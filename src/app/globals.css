@@ -21,7 +21,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Απαραίτητο για το scroll snapping */
+  overflow-x: hidden;
   color: #fffffe !important;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;

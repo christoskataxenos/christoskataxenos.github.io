@@ -4,9 +4,18 @@ import HeroTitle from '../components/HeroTitle';
 import { UserIcon, CodeIcon, CameraIcon } from '../components/Icons';
 import { useLanguage } from '../context/LanguageContext';
 import SpotlightCard from '../components/SpotlightCard';
+import { useEffect } from 'react';
 
 export default function Home() {
   const { t } = useLanguage();
+
+  useEffect(() => {
+    // Lock body scroll for this page only to handle scroll snapping via .scroll-container
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   return (
     <div className="scroll-container">
