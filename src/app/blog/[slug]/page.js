@@ -43,7 +43,7 @@ export default async function Post({ params }) {
   const postData = await getPostData(resolvedParams.slug);
 
   return (
-    <div className="prose prose-invert mx-auto max-w-3xl p-4 sm:p-6 lg:p-8">
+    <div className="prose prose-invert mx-auto max-w-3xl py-4 pt-20 sm:py-6 sm:pt-20 lg:py-8 lg:pt-20">
       <Link 
         href="/blog" 
         className="group inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"

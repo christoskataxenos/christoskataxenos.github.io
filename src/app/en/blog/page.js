@@ -12,7 +12,7 @@ export default function BlogPage() {
   const allPostsData = getSortedPostsData('en');
 
   return (
-    <main className="min-h-screen p-8 font-sans">
+    <main className="min-h-screen py-8 pt-20 font-sans">
       <div className="max-w-[800px] mx-auto space-y-6">
         
         <header className="mb-12 text-center pt-8 relative">
