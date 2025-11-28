@@ -2,35 +2,48 @@ import Link from 'next/link';
 import { getSortedPostsData } from '../../lib/posts';
 
 export const metadata = {
-  title: 'DevLog | Christos Kataxenos',
-  description: 'Coding adventures and bugs found along the way.',
+  title: 'Blog | Christos Kataxenos',
+  description: 'Thoughts, ideas, and developer diaries.',
 };
 
-export default function Blog() {
+export default function BlogPage() {
   const allPostsData = getSortedPostsData();
 
   return (
-    <main className="min-h-screen bg-[#0a0a0c] text-white font-sans p-4 sm:p-6 lg:p-8">
-      {/* Centered content container */}
+    <main className="min-h-screen bg-neutral-950 px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-2xl">
-        <header className="text-center py-16">
-          <h1 className="text-5xl font-bold tracking-tight text-white">DevLog</h1>
-          <p className="mt-3 text-lg text-gray-400">Insights from the digital frontier.</p>
+        
+        <header className="mb-16 text-center">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
+            Blog
+          </h1>
+          <p className="text-lg text-neutral-400">
+            Insights from the digital frontier.
+          </p>
         </header>
 
-        {/* Vertical list of blog posts */}
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-6">
           {allPostsData.map(({ slug, date, title, description }) => (
-            <Link href={`/blog/${slug}`} key={slug} className="block group">
-              <article>
-                <p className="text-base text-gray-400">{date}</p>
-                <h2 className="mt-2 text-3xl font-bold text-gray-100 transition-colors group-hover:text-purple-400">
+            <Link href={`/blog/${slug}`} key={slug} className="block no-underline group">
+              <article className="border border-neutral-800 p-6 rounded-xl bg-neutral-900/20 hover:border-neutral-600 transition-colors duration-200">
+                
+                <time className="text-sm font-mono text-neutral-500 mb-2 block">
+                  {date}
+                </time>
+                
+                <h2 className="text-2xl font-bold text-neutral-100 mb-2">
                   {title}
                 </h2>
-                <p className="mt-3 text-lg text-gray-300">{description}</p>
-                <span className="mt-4 inline-block font-medium text-purple-400 group-hover:underline">
-                  Read more →
-                </span>
+                
+                <p className="text-neutral-400 mt-2 leading-relaxed">
+                  {description}
+                </p>
+                
+                <div className="mt-4 text-sky-400 group-hover:text-sky-300 text-sm font-medium inline-flex items-center gap-1 transition-colors">
+                  Read More
+                  <span aria-hidden="true">&rarr;</span>
+                </div>
+                
               </article>
             </Link>
           ))}
