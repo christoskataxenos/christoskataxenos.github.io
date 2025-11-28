@@ -1,6 +1,6 @@
-import { getSortedPostsData } from '../../lib/posts';
-import BlogCard from '../../components/BlogCard';
 import Link from 'next/link';
+import { getSortedPostsData } from '../../../../lib/posts';
+import BlogCard from '../../../../components/BlogCard';
 
 export const metadata = {
   title: 'Blog | Christos Kataxenos',
@@ -8,7 +8,8 @@ export const metadata = {
 };
 
 export default function BlogPage() {
-  const allPostsData = getSortedPostsData();
+  // Fetch English posts
+  const allPostsData = getSortedPostsData('en');
 
   return (
     <main className="min-h-screen p-8 font-sans">
@@ -16,11 +17,11 @@ export default function BlogPage() {
         
         <header className="mb-12 text-center pt-8 relative">
           <div className="absolute top-0 right-0">
-            <Link href="/en/blog" className="text-sm font-mono text-gray-500 hover:text-purple-400 transition-colors">
-              <span className="text-white">GR</span> / EN
+            <Link href="/blog" className="text-sm font-mono text-gray-500 hover:text-purple-400 transition-colors">
+              GR / <span className="text-white">EN</span>
             </Link>
           </div>
-
+          
           <h1 className="text-4xl font-bold tracking-tight text-white mb-4">
             Blog
           </h1>
@@ -37,6 +38,7 @@ export default function BlogPage() {
               date={date}
               title={title}
               description={description}
+              basePath="/en/blog"
             />
           ))}
         </div>

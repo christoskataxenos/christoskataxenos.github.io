@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 
-export default function BlogCard({ slug, date, title, description }) {
+export default function BlogCard({ slug, date, title, description, basePath = '/blog' }) {
   const divRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
@@ -35,7 +35,7 @@ export default function BlogCard({ slug, date, title, description }) {
 
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={`${basePath}/${slug}`}
       ref={divRef}
       onMouseMove={handleMouseMove}
       onFocus={handleFocus}
