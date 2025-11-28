@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function ScrollProgressIndicator() {
   const [activeSection, setActiveSection] = useState('hero');
+  const pathname = usePathname();
 
   useEffect(() => {
     const sections = ['hero', 'bio', 'blog', 'portfolio'];
@@ -38,6 +40,10 @@ export default function ScrollProgressIndicator() {
       });
     };
   }, []);
+
+  if (pathname !== '/') {
+    return null;
+  }
 
   return (
     <div className="scroll-progress-indicator">
