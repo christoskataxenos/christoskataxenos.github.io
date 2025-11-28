@@ -40,3 +40,5 @@ A personal landing page built with **Next.js**, designed to serve as a central h
 ## Deployment
 
 Deployments are handled via GitHub Actions.
+
+<!-- Forced update to trigger CI/CD -->
