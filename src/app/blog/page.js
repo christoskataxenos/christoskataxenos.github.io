@@ -1,5 +1,5 @@
 import { getSortedPostsData } from '../../lib/posts';
-import SpotlightCard from '../../components/SpotlightCard';
+import BlogCard from '../../components/BlogCard';
 
 export const metadata = {
   title: 'Blog | Christos Kataxenos',
@@ -22,27 +22,15 @@ export default function BlogPage() {
           </p>
         </header>
 
-        <div className="flex flex-col space-y-8">
+        <div className="flex flex-col space-y-6">
           {allPostsData.map(({ slug, date, title, description }) => (
-            <SpotlightCard
-              href={`/blog/${slug}`}
+            <BlogCard
               key={slug}
-              style={{ width: '100%', height: 'auto', minHeight: '200px', alignItems: 'flex-start', justifyContent: 'flex-start', padding: '2rem' }}
-            >
-                <div className="flex flex-col w-full h-full text-left">
-                    <time className="text-xs font-mono text-gray-500 mb-4 block">
-                    {date}
-                    </time>
-
-                    <h2 className="text-xl font-bold text-gray-100 mb-3 group-hover:text-purple-400 transition-colors">
-                    {title}
-                    </h2>
-
-                    <p className="text-gray-400 leading-relaxed text-sm">
-                    {description}
-                    </p>
-                </div>
-            </SpotlightCard>
+              slug={slug}
+              date={date}
+              title={title}
+              description={description}
+            />
           ))}
         </div>
       </div>

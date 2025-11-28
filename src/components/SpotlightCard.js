@@ -1,9 +1,8 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import Link from 'next/link';
 
-export default function SpotlightCard({ children, href, className = "", style = {} }) {
+export default function SpotlightCard({ children, href, className = "" }) {
   const divRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
@@ -34,7 +33,7 @@ export default function SpotlightCard({ children, href, className = "", style = 
   };
 
   return (
-    <Link
+    <a
       href={href}
       ref={divRef}
       onMouseMove={handleMouseMove}
@@ -43,7 +42,6 @@ export default function SpotlightCard({ children, href, className = "", style = 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={`spotlight-card ${className}`}
-      style={style}
     >
       <div
         className="spotlight-overlay"
@@ -115,9 +113,8 @@ export default function SpotlightCard({ children, href, className = "", style = 
           flex-direction: column;
           align-items: center;
           gap: 1.5rem;
-          width: 100%; /* Ensure content takes full width if needed */
         }
       `}</style>
-    </Link>
+    </a>
   );
 }
