@@ -2,6 +2,7 @@ import { getPostData, getSortedPostsData } from '../../../lib/posts';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import rehypePrettyCode from 'rehype-pretty-code';
+import BackButton from '../../../components/BackButton';
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData();
@@ -32,25 +33,11 @@ export default async function Post({ params }) {
   const postData = await getPostData(resolvedParams.slug);
 
   return (
-    <div className="mx-auto max-w-3xl py-8 pt-32 px-6"> {/* Αύξησα το pt-24 σε pt-32 για περισσότερο αέρα */}
-      
-      {/* --- FORCE FIX BACK BUTTON --- */}
-      <Link 
-        href="/blog" 
-        className="!group !inline-flex !items-center !gap-3 !text-sm !font-mono !text-gray-500 hover:!text-cyan-400 !transition-colors !mb-12 !no-underline"
-        style={{ textDecoration: 'none' }} // Διπλή ασφάλεια για το 1990
-      >
-        <span className="transform group-hover:-translate-x-1 transition-transform duration-200 text-lg no-underline">
-          ←
-        </span>
-        <span className="uppercase tracking-widest text-xs font-bold no-underline">
-          BACK TO BLOG
-        </span>
-      </Link>
-      {/* ----------------------------- */}
+    <div className="mx-auto max-w-3xl py-8 pt-32 px-6">
+      <BackButton href="/blog" label="BACK TO BLOG" />
 
       <article className="prose prose-invert max-w-none font-sans prose-p:font-sans prose-headings:font-sans prose-li:font-sans prose-strong:font-sans leading-loose space-y-6 text-gray-300">
-          <h1 className="text-4xl md::text-5xl font-bold text-white mb-4 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
             {postData.title}
           </h1>
           
