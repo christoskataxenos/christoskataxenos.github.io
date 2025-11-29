@@ -76,6 +76,18 @@ export default function BioSection() {
                   <span className="text-4xl mb-2">👨‍💻</span>
                   <span className="text-cyan-400 font-mono text-xs">USER_ID: CHRIS</span>
                   <span className="text-purple-400 font-mono text-[10px]">STATUS: ONLINE</span>
+                  {/* --- INTERESTS SECTION (In Avatar Placeholder) --- */}
+                  <div className="mt-6 flex flex-wrap justify-center gap-2 max-w-[260px] mx-auto">
+                    {t.interestsTitle && <h4 className="w-full text-center text-[10px] font-semibold text-purple-400 mb-1">{t.interestsTitle}</h4>}
+                    {t.interests && t.interests.map((interest, index) => (
+                      <span 
+                        key={index} 
+                        className="px-3 py-1 text-[10px] font-bold tracking-wider text-cyan-400 uppercase bg-gray-900/60 border border-cyan-500/30 rounded-full hover:bg-cyan-500/20 hover:border-cyan-400 hover:scale-105 transition-all cursor-default"
+                      >
+                        {interest}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
