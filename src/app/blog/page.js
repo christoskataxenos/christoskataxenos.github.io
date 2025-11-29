@@ -24,7 +24,7 @@ export default function BlogPage() {
           </p>
         </header>
 
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col space-y-10">
           {allPostsData.map(({ slug, date, title, description }) => (
             <BlogCard
               key={slug}

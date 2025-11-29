@@ -42,7 +42,7 @@ export default function BlogCard({ slug, date, title, description, basePath = '/
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="blog-card"
+      className="blog-card block w-full"
     >
       <div
         className="spotlight-overlay"
