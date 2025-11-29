@@ -3,9 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Providers } from "../components/Providers";
 import GridBackground from "../components/GridBackground";
-import Header from "../components/Header";
-import SocialLinks from "../components/SocialLinks"; // Import SocialLinks
-import BackToHomeButton from "../components/BackToHomeButton"; // Import BackToHomeButton
+import FloatingDock from "../components/FloatingDock"; // Import FloatingDock
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,7 +12,7 @@ const inter = Inter({
 });
 
 const jetbrains = JetBrains_Mono({
-  subsets: ['latin', 'greek'], // CRITICAL: Must include 'greek'
+  subsets: ['latin', 'greek'],
   variable: '--font-jetbrains',
   display: 'swap',
 });
@@ -31,10 +29,8 @@ export default function RootLayout({ children }) {
       {/* Font configuration */}
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased text-white bg-[#0a0a0c] leading-relaxed`}>
         <GridBackground />
-        <Providers defaultLang="el">
-          <Header />
-          <SocialLinks /> {/* Render SocialLinks */}
-          <BackToHomeButton /> {/* Render BackToHomeButton */}
+        <Providers> {/* Removed defaultLang prop */}
+          <FloatingDock /> {/* Render FloatingDock */}
           <main className="min-h-screen relative z-10">
              {children}
           </main>
