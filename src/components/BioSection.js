@@ -101,16 +101,6 @@ export default function BioSection() {
                   </ul>
                 </div>
               </li>
-              <li className="border-l-2 border-gray-700 pl-4 group-hover:border-purple-500/50 transition-colors duration-300">
-                <h4 className="text-white font-semibold">Senior Developer</h4>
-                <p className="text-sm text-cyan-300">Tech Corp • 2023 - Present</p>
-                <p className="text-xs text-gray-400 mt-1">Leading frontend architecture and cyberpunk UI implementation.</p>
-              </li>
-              <li className="border-l-2 border-gray-700 pl-4 group-hover:border-purple-500/50 transition-colors duration-300">
-                <h4 className="text-white font-semibold">Web Engineer</h4>
-                <p className="text-sm text-cyan-300">StartUp Inc • 2021 - 2023</p>
-                <p className="text-xs text-gray-400 mt-1">Developed scalable React applications.</p>
-              </li>
             </ul>
           </div>
         </div>
@@ -161,6 +151,11 @@ export default function BioSection() {
                  <span className="text-xs text-gray-400 font-mono">2025</span>
                </li>
                <li className="text-sm text-gray-400 italic">Πληροφορική (BSc)</li>
+               <li className="flex justify-between items-baseline border-b border-white/5 pb-2 mt-3">
+                 <span className="text-white font-medium">ΙΕΚ Ρόδου</span>
+                 <span className="text-xs text-gray-400 font-mono">2008-2010</span>
+               </li>
+               <li className="text-sm text-gray-400 italic">Τεχνικός ηλεκτρονικών υπολογιστών και δικτύων</li>
             </ul>
           </div>
 
