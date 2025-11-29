@@ -138,7 +138,7 @@ export default function BioSection() {
           </div>
 
           {/* Skills Card */}
-          <div className="group relative p-6 bg-[#0a0a0c]/80 backdrop-blur-md border border-purple-500/30 rounded-xl shadow-[0_0_15px_rgba(168,85,247,0.2)] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] hover:border-cyan-400/50 cursor-pointer">
+          <div className="group relative p-5 bg-[#0a0a0c]/80 backdrop-blur-md border border-purple-500/30 rounded-xl shadow-[0_0_15px_rgba(168,85,247,0.2)] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] hover:border-cyan-400/50 cursor-pointer">
              {/* Corner Accent */}
              <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-cyan-400 rounded-bl-md" />
             
@@ -147,16 +147,16 @@ export default function BioSection() {
               {t.skillsTitle}
             </h3>
             
-            <div className="space-y-6">
+            <div className="space-y-3">
               {t.skillGroups && Object.entries(t.skillGroups).map(([key, group]) => (
                 <div key={key}>
-                  <h4 className="text-sm font-bold text-purple-400 uppercase tracking-wider mb-4 border-b border-white/5 pb-1">
+                  <h4 className="text-sm font-bold text-purple-400 uppercase tracking-wider mb-2 border-b border-white/5 pb-1">
                     {group.title}
                   </h4>
-                  <div className="space-y-4">
+                  <div className="space-y-2">
                     {group.skills && group.skills.map((skill, index) => (
                       <div key={index}>
-                        <div className="flex justify-between text-xs font-mono text-gray-300 mb-1.5">
+                        <div className="flex justify-between text-[10px] font-mono text-gray-300 mb-1.5">
                           <span>{skill.label}</span>
                           <span className={`
                             ${skill.level === 'Loading...' || skill.level === 'Exploring' ? 'text-purple-400 animate-pulse' : ''}
