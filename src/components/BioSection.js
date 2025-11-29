@@ -179,7 +179,7 @@ export default function BioSection() {
               <div>
                 <div className="flex justify-between text-xs font-mono text-gray-400 mb-1">
                   <span>REACT / NEXT.JS</span>
-                  <span>90%</span>
+                  <span>15%</span>
                 </div>
                 <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 w-[15%] shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
@@ -190,7 +190,7 @@ export default function BioSection() {
               <div>
                 <div className="flex justify-between text-xs font-mono text-gray-400 mb-1">
                   <span>PYTHON</span>
-                  <span>85%</span>
+                  <span>40%</span>
                 </div>
                 <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 w-[40%] shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
@@ -201,7 +201,7 @@ export default function BioSection() {
               <div>
                 <div className="flex justify-between text-xs font-mono text-gray-400 mb-1">
                   <span>CSS / TAILWIND</span>
-                  <span>95%</span>
+                  <span>30%</span>
                 </div>
                 <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 w-[30%] shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
