@@ -181,7 +181,7 @@ export function LanguageProvider({ children, defaultLang }) {
     setLanguage((prev) => (prev === 'en' ? 'el' : 'en'));
   };
 
-  const t = translations[language];
+  const t = translations[language] || translations.en;
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
