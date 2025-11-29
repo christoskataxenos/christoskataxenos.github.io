@@ -45,7 +45,7 @@ export default async function Post({ params }) {
 
   return (
     <div className="mx-auto max-w-3xl py-8 pt-24 px-6">
-      <Link href="/blog" className="flex items-center gap-2 text-sm text-gray-500 hover:text-cyan-400 transition-colors mb-6">
+      <Link href="/blog" className="flex items-center gap-2 text-sm text-gray-500 hover:text-cyan-400 transition-colors mb-8 no-underline">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 12H5"></path>
           <polyline points="12 19 5 12 12 5"></polyline>
