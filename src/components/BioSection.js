@@ -31,19 +31,19 @@ export default function BioSection() {
                 <div className="text-sm text-gray-300 space-y-2">
                   <p className="font-semibold text-white">{t.roles.technician.responsibilities}</p>
                   <ul className="list-disc list-inside ml-2 text-gray-400 space-y-2">
-                    {t.roles.technician.responsibilitiesList.map((item, index) => (
+                    {t.roles.technician.responsibilitiesList && t.roles.technician.responsibilitiesList.map((item, index) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
                   <p className="font-semibold text-white mt-2">{t.roles.technician.skillsLabel}</p>
                   <ul className="list-disc list-inside ml-2 text-gray-400 space-y-2">
-                    {t.roles.technician.skillsList.map((item, index) => (
+                    {t.roles.technician.skillsList && t.roles.technician.skillsList.map((item, index) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
                   <p className="font-semibold text-white mt-2">{t.roles.technician.achievementsLabel}</p>
                   <ul className="list-disc list-inside ml-2 text-gray-400 space-y-2">
-                    {t.roles.technician.achievementsList.map((item, index) => (
+                    {t.roles.technician.achievementsList && t.roles.technician.achievementsList.map((item, index) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
@@ -87,7 +87,7 @@ export default function BioSection() {
           {/* --- INTERESTS SECTION --- */}
           <div className="mt-8 flex flex-wrap justify-center gap-3 w-full">
             <h4 className="w-full text-center text-sm font-semibold text-purple-400 mb-2">{t.interestsTitle}</h4>
-            {t.interests.map((interest, index) => (
+            {t.interests && t.interests.map((interest, index) => (
               <span 
                 key={index} 
                 className="px-3 py-1 bg-gray-900/80 border border-cyan-500/30 rounded-full text-xs uppercase font-bold tracking-wider text-cyan-400 
@@ -140,13 +140,13 @@ export default function BioSection() {
             </h3>
             
             <div className="space-y-6">
-              {Object.entries(t.skillGroups).map(([key, group]) => (
+              {t.skillGroups && Object.entries(t.skillGroups).map(([key, group]) => (
                 <div key={key}>
                   <h4 className="text-sm font-bold text-purple-400 uppercase tracking-wider mb-4 border-b border-white/5 pb-1">
                     {group.title}
                   </h4>
                   <div className="space-y-4">
-                    {group.skills.map((skill, index) => (
+                    {group.skills && group.skills.map((skill, index) => (
                       <div key={index}>
                         <div className="flex justify-between text-xs font-mono text-gray-300 mb-1.5">
                           <span>{skill.label}</span>
