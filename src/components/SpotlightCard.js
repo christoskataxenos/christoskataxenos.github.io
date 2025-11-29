@@ -44,9 +44,9 @@ export default function SpotlightCard({ children, href, className = "" }) {
       className={`
         relative flex flex-col items-center justify-center gap-6 p-6
         w-full md:w-[300px] h-[400px]
-        bg-gray-900/50 backdrop-blur-md border border-cyan-500/30 rounded-xl
+        bg-gray-900/50 backdrop-blur-md border border-purple-500/30 rounded-xl
         text-decoration-none overflow-hidden transition-all duration-300 ease-in-out
-        hover:scale-105 shadow-lg shadow-[0_0_20px_rgba(34,211,238,0.3)] ${className}
+        hover:scale-105 shadow-lg shadow-[0_0_20px_rgba(168,85,247,0.3)] ${className}
       `}
     >
       <div

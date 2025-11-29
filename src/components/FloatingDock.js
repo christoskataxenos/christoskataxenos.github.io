@@ -49,12 +49,12 @@ export default function FloatingDock() {
       className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 
                  flex items-center gap-6 px-6 py-3 rounded-full 
                  bg-black/50 backdrop-blur-md border border-white/10 
-                 shadow-lg shadow-cyan-500/10"
+                 shadow-lg shadow-purple-500/10"
     >
       {/* Home Icon */}
       <Tooltip text={isEn ? 'Home' : 'Αρχική'}>
         <Link href="/" className="hover:scale-110 transition-transform duration-200" aria-label={isEn ? 'Home' : 'Αρχική'}>
-          <FaHome size={20} className={pathname === '/' ? 'text-cyan-400' : 'text-gray-400 hover:text-white'} />
+          <FaHome size={20} className={pathname === '/' ? 'text-purple-400' : 'text-gray-400 hover:text-white'} />
         </Link>
       </Tooltip>
 
@@ -77,9 +77,9 @@ export default function FloatingDock() {
         onClick={handleLanguageToggle}
         aria-label="Toggle Language"
       >
-        <span className={isEn ? 'text-gray-600 hover:text-gray-400' : 'text-cyan-400 font-bold'}>GR</span>
+        <span className={isEn ? 'text-gray-600 hover:text-gray-400' : 'text-purple-400 font-bold'}>GR</span>
         <span className="mx-1 text-gray-600">/</span>
-        <span className={isEn ? 'text-cyan-400 font-bold' : 'text-gray-600 hover:text-gray-400'}>EN</span>
+        <span className={isEn ? 'text-purple-400 font-bold' : 'text-gray-600 hover:text-gray-400'}>EN</span>
       </div>
     </div>
   );
