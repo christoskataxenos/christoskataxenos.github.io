@@ -58,52 +58,42 @@ export default function BioSection() {
           </div>
         </div>
 
-        {/* --- CENTER COLUMN: Avatar (Vertically Centered on Desktop) --- */}
-        <div className="order-1 lg:order-2 flex justify-center relative lg:self-center py-8 lg:py-0">
-          {/* Glowing Ring Behind */}
-          <div className="absolute w-64 h-64 bg-purple-600/20 rounded-full blur-3xl animate-pulse" />
+        {/* --- CENTER COLUMN: Avatar & Interests --- */}
+        <div className="order-1 lg:order-2 flex flex-col items-center justify-center relative lg:self-center py-8 lg:py-0">
           
-          <div className="relative w-56 h-56 sm:w-64 sm:h-64 transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer">
-            {/* Hexagon Border Container */}
-            <div 
-              className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 p-[2px]"
-              style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
-            >
-              <div className="w-full h-full bg-[#0a0a0c] flex items-center justify-center" 
-                   style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}>
-                {/* Placeholder for Image */}
-                <div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center text-center p-4">
-                  <span className="text-4xl mb-2">👨‍💻</span>
-                  <span className="text-cyan-400 font-mono text-xs">USER_ID: CHRIS</span>
-                  <span className="text-purple-400 font-mono text-[10px]">STATUS: ONLINE</span>
-                  {/* --- INTERESTS SECTION (In Avatar Placeholder) --- */}
-                  <div className="mt-6 flex flex-wrap justify-center gap-2 max-w-[260px] mx-auto">
-                    {t.interestsTitle && <h4 className="w-full text-center text-[10px] font-semibold text-purple-400 mb-1">{t.interestsTitle}</h4>}
-                    {t.interests && t.interests.map((interest, index) => (
-                      <span 
-                        key={index} 
-                        className="px-3 py-1 text-[10px] font-bold tracking-wider text-cyan-400 uppercase bg-gray-900/60 border border-cyan-500/30 rounded-full hover:bg-cyan-500/20 hover:border-cyan-400 hover:scale-105 transition-all cursor-default"
-                      >
-                        {interest}
-                      </span>
-                    ))}
+          {/* Avatar Hexagon Container (Child 1) */}
+          <div className="mb-8">
+            {/* Glowing Ring Behind */}
+            <div className="absolute w-64 h-64 bg-purple-600/20 rounded-full blur-3xl animate-pulse" />
+            
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer">
+              {/* Hexagon Border Container */}
+              <div 
+                className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 p-[2px]"
+                style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
+              >
+                <div className="w-full h-full bg-[#0a0a0c] flex items-center justify-center" 
+                     style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}>
+                  {/* Placeholder for Image */}
+                  <div className="w-full h-full bg-neutral-900 flex flex-col items-center justify-center text-center p-4">
+                    <span className="text-4xl mb-2">👨‍💻</span>
+                    <span className="text-cyan-400 font-mono text-xs">USER_ID: CHRIS</span>
+                    <span className="text-purple-400 font-mono text-[10px]">STATUS: ONLINE</span>
                   </div>
                 </div>
               </div>
+              
+              {/* Floating HUD Elements around portrait */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] text-cyan-500 font-mono animate-bounce">SCANNING...</div>
             </div>
-            
-            {/* Floating HUD Elements around portrait */}
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] text-cyan-500 font-mono animate-bounce">SCANNING...</div>
           </div>
-          
-          {/* --- INTERESTS SECTION --- */}
-          <div className="mt-8 flex flex-wrap justify-center gap-3 w-full">
-            <h4 className="w-full text-center text-sm font-semibold text-purple-400 mb-2">{t.interestsTitle}</h4>
-            {t.interests && t.interests.map((interest, index) => (
+
+          {/* Interests Section (Child 2 - SEPARATE SIBLING) */}
+          <div className="flex flex-wrap justify-center gap-3 max-w-[280px]">
+            {['PHOTOGRAPHY', 'GAMING', 'TRAVELLING', 'CUSTOM RIGS'].map((interest, index) => (
               <span 
                 key={index} 
-                className="px-3 py-1 bg-gray-900/80 border border-cyan-500/30 rounded-full text-xs uppercase font-bold tracking-wider text-cyan-400 
-                           transition-all duration-300 ease-in-out hover:bg-cyan-500/20 hover:border-cyan-400 hover:scale-105 cursor-default"
+                className="px-3 py-1 text-[10px] font-bold tracking-wider text-cyan-400 uppercase bg-gray-900/60 border border-cyan-500/30 rounded-full hover:bg-cyan-500/20 hover:border-cyan-400 hover:scale-105 transition-all cursor-default"
               >
                 {interest}
               </span>
