@@ -1,10 +1,10 @@
 'use client';
 
 import HeroTitle from '../components/HeroTitle';
-import { UserIcon, CodeIcon, CameraIcon } from '../components/Icons';
 import { useLanguage } from '../context/LanguageContext';
 import SpotlightCard from '../components/SpotlightCard';
 import { useRef, useState } from 'react'; // Import useRef and useState
+import { FaUser, FaTerminal, FaCamera } from 'react-icons/fa'; // Import icons from react-icons/fa
 
 export default function Home() {
   const { t } = useLanguage();
@@ -74,9 +74,7 @@ export default function Home() {
       <section id="bio" className="section content-section">
         <div className="card-wrapper">
           <SpotlightCard href="/bio">
-            <div className="card-icon">
-              <UserIcon />
-            </div>
+            <FaUser className="text-5xl text-gray-600 group-hover:text-purple-400 group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] transition-all duration-300 ease-in-out group-hover:scale-110" />
             <span className="card-title font-mono uppercase tracking-widest">{t.bioTitle}</span>
           </SpotlightCard>
           <p className="code-caption">{'//'} {t.bioCaption}</p>
@@ -87,9 +85,7 @@ export default function Home() {
       <section id="blog" className="section content-section">
         <div className="card-wrapper">
           <SpotlightCard href="/blog">
-            <div className="card-icon">
-              <CodeIcon />
-            </div>
+            <FaTerminal className="text-5xl text-gray-600 group-hover:text-purple-400 group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] transition-all duration-300 ease-in-out group-hover:scale-110" />
             <span className="card-title font-mono uppercase tracking-widest">{t.blogTitle}</span>
           </SpotlightCard>
           <p className="code-caption">{'//'} {t.blogCaption}</p>
@@ -100,9 +96,7 @@ export default function Home() {
       <section id="portfolio" className="section content-section">
         <div className="card-wrapper">
           <SpotlightCard href="/portfolio">
-            <div className="card-icon">
-              <CameraIcon />
-            </div>
+            <FaCamera className="text-5xl text-gray-600 group-hover:text-purple-400 group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] transition-all duration-300 ease-in-out group-hover:scale-110" />
             <span className="card-title font-mono uppercase tracking-widest">{t.photoTitle}</span>
           </SpotlightCard>
           <p className="code-caption">{'//'} {t.photoCaption}</p>
