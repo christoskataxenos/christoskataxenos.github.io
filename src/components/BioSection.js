@@ -181,50 +181,36 @@ export default function BioSection() {
               {t.skillsTitle}
             </h3>
             
-            <div className="space-y-4">
-              {/* Skill 1 */}
-              <div>
-                <div className="flex justify-between text-xs font-mono text-gray-300 mb-1.5">
-                  <span>{t.skillLabels.react}</span>
-                  <span className="text-cyan-400">15%</span>
+            <div className="space-y-6">
+              {Object.entries(t.skillGroups).map(([key, group]) => (
+                <div key={key}>
+                  <h4 className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-3 border-b border-white/5 pb-1">
+                    {group.title}
+                  </h4>
+                  <div className="space-y-4">
+                    {group.skills.map((skill, index) => (
+                      <div key={index}>
+                        <div className="flex justify-between text-xs font-mono text-gray-300 mb-1.5">
+                          <span>{skill.label}</span>
+                          <span className={`
+                            ${skill.level === 'Loading...' ? 'text-yellow-400 animate-pulse' : ''}
+                            ${skill.level === 'Intermediate' ? 'text-cyan-400' : ''}
+                            ${skill.level === 'Production Ready' ? 'text-green-400' : ''}
+                          `}>
+                            {skill.level}
+                          </span>
+                        </div>
+                        <div className="w-full h-2 bg-gray-800/50 rounded-full overflow-hidden border border-white/5 relative">
+                          <div 
+                            className={`h-full bg-gradient-to-r from-purple-600 to-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.5)] transition-all duration-1000 ease-out`}
+                            style={{ width: skill.width }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="w-full h-2 bg-gray-800/50 rounded-full overflow-hidden border border-white/5">
-                  <div className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 w-[15%] shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
-                </div>
-              </div>
-              
-              {/* Skill 2 */}
-              <div>
-                <div className="flex justify-between text-xs font-mono text-gray-300 mb-1.5">
-                  <span>{t.skillLabels.python}</span>
-                  <span className="text-cyan-400">40%</span>
-                </div>
-                <div className="w-full h-2 bg-gray-800/50 rounded-full overflow-hidden border border-white/5">
-                  <div className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 w-[40%] shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
-                </div>
-              </div>
-
-              {/* Skill 3 */}
-              <div>
-                <div className="flex justify-between text-xs font-mono text-gray-300 mb-1.5">
-                  <span>{t.skillLabels.css}</span>
-                  <span className="text-cyan-400">30%</span>
-                </div>
-                <div className="w-full h-2 bg-gray-800/50 rounded-full overflow-hidden border border-white/5">
-                  <div className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 w-[30%] shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
-                </div>
-              </div>
-              
-              {/* Skill 4: Networking */}
-              <div>
-                <div className="flex justify-between text-xs font-mono text-gray-300 mb-1.5">
-                  <span>{t.skillLabels.networking}</span>
-                  <span className="text-cyan-400">85%</span>
-                </div>
-                <div className="w-full h-2 bg-gray-800/50 rounded-full overflow-hidden border border-white/5">
-                  <div className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 w-[85%] shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
-                </div>
-              </div>
+              ))}
             </div>
 
           </div>

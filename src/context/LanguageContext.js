@@ -57,11 +57,26 @@ const translations = {
       iek: "IEK Rhodes",
       iekDegree: "Computer and Network Technician"
     },
-    skillLabels: {
-      react: "REACT / NEXT.JS",
-      python: "PYTHON",
-      css: "CSS / TAILWIND",
-      networking: "NETWORKING & INFRASTRUCTURE"
+    skillGroups: {
+      frontend: {
+        title: "Frontend & UI",
+        skills: [
+          { label: "REACT / NEXT.JS", level: "Loading...", width: "25%" },
+          { label: "CSS / TAILWIND", level: "Loading...", width: "35%" }
+        ]
+      },
+      backend: {
+        title: "Backend",
+        skills: [
+          { label: "PYTHON", level: "Intermediate", width: "50%" }
+        ]
+      },
+      infrastructure: {
+        title: "Infrastructure",
+        skills: [
+          { label: "NETWORKING", level: "Production Ready", width: "90%" }
+        ]
+      }
     }
   },
   el: {
@@ -116,11 +131,26 @@ const translations = {
       iek: "ΙΕΚ Ρόδου",
       iekDegree: "Τεχνικός ηλεκτρονικών υπολογιστών και δικτύων"
     },
-    skillLabels: {
-      react: "REACT / NEXT.JS",
-      python: "PYTHON",
-      css: "CSS / TAILWIND",
-      networking: "ΔΙΚΤΥΑ & ΥΠΟΔΟΜΕΣ"
+    skillGroups: {
+      frontend: {
+        title: "Frontend & UI",
+        skills: [
+          { label: "REACT / NEXT.JS", level: "Loading...", width: "25%" },
+          { label: "CSS / TAILWIND", level: "Loading...", width: "35%" }
+        ]
+      },
+      backend: {
+        title: "Backend",
+        skills: [
+          { label: "PYTHON", level: "Intermediate", width: "50%" }
+        ]
+      },
+      infrastructure: {
+        title: "Υποδομές",
+        skills: [
+          { label: "ΔΙΚΤΥΑ / INFRA", level: "Production Ready", width: "90%" }
+        ]
+      }
     }
   }
 };
