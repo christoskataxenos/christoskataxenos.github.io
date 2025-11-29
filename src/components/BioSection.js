@@ -82,7 +82,6 @@ export default function BioSection() {
             
             {/* Floating HUD Elements around portrait */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] text-cyan-500 font-mono animate-bounce">SCANNING...</div>
-            <div className="absolute bottom-4 -right-4 text-[10px] text-purple-500 font-mono rotate-90">SYS.VER.2.0</div>
           </div>
         </div>
 
