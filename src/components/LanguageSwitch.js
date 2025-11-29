@@ -53,7 +53,6 @@ export default function LanguageSwitch() {
           cursor: pointer;
           padding: 0.5rem;
           z-index: 1000;
-          margin-right: 1rem; 
         }
 
         .toggle-track {

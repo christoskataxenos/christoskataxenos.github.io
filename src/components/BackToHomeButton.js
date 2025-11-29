@@ -6,10 +6,10 @@ export default function BackToHomeButton() {
   return (
     <Link
       href="/"
-      className="fixed bottom-8 right-8 z-50 p-4 rounded-full 
+      className="fixed bottom-8 right-8 z-50 p-5 rounded-full 
                  bg-gray-900/80 backdrop-blur border border-cyan-500/30 
-                 text-cyan-400 shadow-lg transition-all duration-300 ease-in-out
-                 hover:scale-110 hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] cursor-pointer"
+                 text-cyan-400 shadow-xl transition-all duration-300 ease-in-out
+                 hover:scale-110 hover:shadow-[0_0_25px_rgba(6,182,212,0.8)] cursor-pointer"
       aria-label="Back to Home"
     >
       <svg

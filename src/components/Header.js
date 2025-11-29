@@ -5,8 +5,12 @@ import LanguageSwitch from './LanguageSwitch';
 export default function Header() {
   return (
     <header className="navbar">
-      <div className="header-content">
+      {/* LanguageSwitch positioned absolutely */}
+      <div className="absolute top-0 right-0 p-4 z-[1001] pointer-events-auto">
         <LanguageSwitch />
+      </div>
+      
+      <div className="header-content">
       </div>
       
       <style jsx>{`
@@ -30,12 +34,9 @@ export default function Header() {
           padding: 0 1rem; /* Adjust padding for better alignment with blog p-8 or p-6 */
           display: flex;
           align-items: center;
-          justify-content: flex-end; /* Keep LanguageSwitch on the right within this aligned container */
+          /* Keep LanguageSwitch on the right within this aligned container */
+          justify-content: flex-end; 
           height: 100%;
-        }
-
-        .navbar :global(.lang-switch) {
-          pointer-events: auto;
         }
 
         @media (max-width: 768px) {

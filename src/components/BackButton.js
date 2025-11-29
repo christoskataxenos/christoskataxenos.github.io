@@ -6,10 +6,10 @@ export default function BackButton({ href = '/blog', label = 'Back to Blog' }) {
   return (
     <Link 
       href={href}
-      className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-6 py-3 
+      className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-8 py-3 
                  bg-[#16161a]/90 backdrop-blur-md border border-[#242629] rounded-full 
                  text-[#94a1b2] text-sm font-medium shadow-2xl 
-                 transition-all duration-300 hover:scale-105 hover:bg-[#242629] hover:text-[#fffffe] hover:border-[#7f5af0] hover:shadow-[#7f5af0]/20
+                 transition-all duration-300 hover:scale-105 hover:bg-[#242629] hover:text-[#fffffe] hover:border-[#7f5af0] hover:shadow-[#7f5af0]/30
                  group"
       aria-label={label}
     >
