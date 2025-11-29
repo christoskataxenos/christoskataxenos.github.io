@@ -108,8 +108,7 @@ h1, h2, h3 {
 }
 
 .section {
-  /* Removed height: 100vh; scroll-snap-align: start; scroll-snap-stop: normal; */
-  /* Allowing natural height and positioning */
+  min-height: 100vh; /* Ensure section takes at least full viewport height */
   width: 100%;
   display: flex;
   align-items: center;
