@@ -1,18 +1,14 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Providers } from "../components/Providers";
 import GridBackground from "../components/GridBackground";
 import Header from "../components/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "greek"],
+  display: "swap"
 });
 
 export const metadata = {
@@ -25,7 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="el">
       {/* Font configuration */}
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased text-white bg-[#0a0a0c]`}>
+      <body className={`${inter.variable} font-sans antialiased text-white bg-[#0a0a0c] leading-relaxed`}>
         <GridBackground />
         <Providers defaultLang="el">
           <Header />
