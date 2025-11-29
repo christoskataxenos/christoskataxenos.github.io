@@ -27,7 +27,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="el">
+    <html lang="el" suppressHydrationWarning={true}>
       {/* Font configuration */}
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased text-white bg-[#0a0a0c] leading-relaxed`}>
         <GridBackground />
