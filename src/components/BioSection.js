@@ -10,7 +10,7 @@ export default function BioSection() {
     <section className="relative w-full min-h-screen flex items-center justify-center p-4 lg:p-12 overflow-hidden font-sans">
       
       {/* --- Main Grid Layout --- */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12 w-full max-w-7xl items-start pt-20">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12 w-full max-w-7xl items-center pt-20">
         
         {/* --- LEFT COLUMN: Professional Experience --- */}
         <div className="order-2 lg:order-1 flex flex-col gap-6">
