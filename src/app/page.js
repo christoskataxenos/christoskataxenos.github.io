@@ -12,9 +12,9 @@ export default function Home() {
     <div className="scroll-container">
       {/* Section 1: Hero */}
       <section id="hero" className="section hero-section">
-        <div className="hero-content">
+        <div className="hero-content p-8 md:p-12 rounded-2xl bg-black/50 backdrop-blur-lg border border-white/10 shadow-xl mx-auto max-w-4xl">
           <HeroTitle />
-          <p className="hero-description max-w-2xl mx-auto">
+          <p className="hero-description max-w-2xl mx-auto mt-4 text-white text-lg">
             {t.heroDescription}
           </p>
         </div>
