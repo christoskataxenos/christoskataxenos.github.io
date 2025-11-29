@@ -83,6 +83,20 @@ export default function BioSection() {
             {/* Floating HUD Elements around portrait */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] text-cyan-500 font-mono animate-bounce">SCANNING...</div>
           </div>
+          
+          {/* --- INTERESTS SECTION --- */}
+          <div className="mt-8 flex flex-wrap justify-center gap-3 w-full">
+            <h4 className="w-full text-center text-sm font-semibold text-purple-400 mb-2">{t.interestsTitle}</h4>
+            {t.interests.map((interest, index) => (
+              <span 
+                key={index} 
+                className="px-3 py-1 bg-gray-900/80 border border-cyan-500/30 rounded-full text-xs uppercase font-bold tracking-wider text-cyan-400 
+                           transition-all duration-300 ease-in-out hover:bg-cyan-500/20 hover:border-cyan-400 hover:scale-105 cursor-default"
+              >
+                {interest}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* --- RIGHT COLUMN: Education & Skills --- */}

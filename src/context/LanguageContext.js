@@ -78,11 +78,18 @@ const translations = {
           { label: "NETWORKING", level: "Production Ready", width: "95%" },
           { label: "HARDWARE & SYSTEMS", level: "Production Ready", width: "100%" }
         ]
-      }
+      },
+      interestsTitle: "Interests",
+      interests: [
+        "PHOTOGRAPHY",
+        "GAMING",
+        "TRAVELLING",
+        "CUSTOM RIGS & SERVERS"
+      ]
     }
   },
   el: {
-    heroDescription: "Από τη διαχείριση δικτύων, στον σχεδιασμό λογισμικού. Με έδρα τη Στουτγκάρδη και ως φοιτητής Computer Science, εξελίσσω το τεχνικό μου υπόβαθρο σε δημιουργική γνώση. Στόχος μου είναι να συνδυάσω την εμπειρία των υποδομών με τον κώδικα, χτίζοντας γερές βάσεις για μια σύγχρονη καριέρα στο Software Development.",
+    heroDescription: "Από τη διαχείριση δικτύων, στον σχεδιασμό λογισμικού. Με έδρα τη Στουτγκάρδη και ως φοιτητής Computer Science, εξελίσσω το τεχνικό μου υπόβαθρο σε δημιουργική γνώση. Στόχος μου είναι να συνδυάσω την εμπειρία των υποδοδομών με τον κώδικα, χτίζοντας γερές βάσεις για μια σύγχρονη καριέρα στο Software Development.",
     bioTitle: "Βιογραφικό",
     bioCaption: "// Με καύσιμο καφεΐνη και console.log",
     blogTitle: "Dev Blog",
@@ -155,7 +162,14 @@ const translations = {
           { label: "HARDWARE & SYSTEMS", level: "Production Ready", width: "100%" }
         ]
       }
-    }
+    },
+    interestsTitle: "Ενδιαφέροντα",
+    interests: [
+      "ΦΩΤΟΓΡΑΦΙΑ",
+      "GAMING",
+      "ΤΑΞΙΔΙΑ",
+      "CUSTOM PCs & SERVERS"
+    ]
   }
 };
 
