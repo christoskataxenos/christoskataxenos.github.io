@@ -85,4 +85,4 @@ export default async function Post({ params }) {
       </article>
     </div>
   );
-}
+} 
