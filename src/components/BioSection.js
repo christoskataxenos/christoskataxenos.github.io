@@ -89,13 +89,13 @@ export default function BioSection() {
           </div>
 
           {/* Interests Section (Child 2 - SEPARATE SIBLING) */}
-          <div className="mt-6 w-full max-w-[300px] bg-gray-900/50 backdrop-blur-sm border border-cyan-900/30 rounded-xl p-4 mx-auto">
+          <div className="mt-6 w-[300px] bg-gray-900/50 backdrop-blur-sm border border-cyan-900/30 rounded-xl p-4 mx-auto">
             <h5 className="text-[10px] text-gray-500 uppercase tracking-widest mb-3 text-center">PERSONAL MODULE</h5>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="grid grid-cols-2 gap-3">
               {['PHOTOGRAPHY', 'GAMING', 'TRAVELLING', 'CUSTOM RIGS'].map((interest, index) => (
                 <span 
                   key={index} 
-                  className="px-3 py-1 text-[10px] font-bold tracking-wider text-cyan-400 uppercase bg-gray-900/60 border border-cyan-500/30 rounded-full hover:bg-cyan-500/20 hover:border-cyan-400 hover:scale-105 transition-all cursor-default"
+                  className="w-full flex justify-center items-center text-center px-3 py-1 text-[10px] font-bold tracking-wider text-cyan-400 uppercase bg-gray-900/60 border border-cyan-500/30 rounded-full hover:bg-cyan-500/20 hover:border-cyan-400 hover:scale-105 transition-all cursor-default"
                 >
                   {interest}
                 </span>
