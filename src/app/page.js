@@ -40,13 +40,13 @@ export default function Home() {
   };
 
   return (
-    <div className="scroll-container">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4"> {/* New container for overall centering */}
       {/* Section 1: Hero */}
-      <section id="hero" className="section hero-section">
+      <section id="hero" className="section hero-section mb-16"> {/* Adjusted margin-bottom */}
         <div 
-          className="hero-content relative p-8 md:p-12 rounded-2xl bg-black/30 backdrop-blur-lg border border-white/10 shadow-xl mx-auto max-w-4xl overflow-hidden" // Added relative and overflow-hidden
-          ref={divRef} // Added ref
-          onMouseMove={handleMouseMove} // Added event handlers
+          className="hero-content relative p-8 md:p-12 rounded-2xl bg-black/30 backdrop-blur-lg border border-white/10 shadow-xl mx-auto max-w-4xl overflow-hidden" 
+          ref={divRef} 
+          onMouseMove={handleMouseMove} 
           onFocus={handleFocus}
           onBlur={handleBlur}
           onMouseEnter={handleMouseEnter}
@@ -54,21 +54,21 @@ export default function Home() {
         >
           {/* Spotlight Overlay for hero-content */}
           <div
-            className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0" //z-0 so text is above
+            className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0" 
             style={{
               opacity,
               background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(127, 90, 240, 0.15), transparent 40%)`,
             }}
           />
           <HeroTitle />
-          <p className="hero-description relative z-10 max-w-2xl mx-auto mt-4 text-white text-lg"> {/* Added relative z-10 */}
+          <p className="hero-description relative z-10 max-w-2xl mx-auto mt-4 text-white text-lg"> 
             {t.heroDescription}
           </p>
         </div>
       </section>
 
       {/* Section for Cards */}
-      <section id="cards-section" className="mt-24">
+      <section id="cards-section" className="section"> {/* Removed mt-24, now handled by overall flex gap */}
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <SpotlightCard href="/bio" className="h-full">
@@ -88,7 +88,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

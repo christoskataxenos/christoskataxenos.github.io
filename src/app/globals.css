@@ -96,8 +96,7 @@ h1, h2, h3 {
 
 /* --- LAYOUT & SCROLLING --- */
 .scroll-container {
-  /* Removed height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; */
-  /* Allowing natural scroll */
+  /* No specific scroll properties here */
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
@@ -108,7 +107,7 @@ h1, h2, h3 {
 }
 
 .section {
-  min-height: 100vh; /* Ensure section takes at least full viewport height */
+  /* Removed min-height: 100vh; */
   width: 100%;
   display: flex;
   align-items: center;
