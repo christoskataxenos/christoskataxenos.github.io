@@ -65,9 +65,6 @@ export default function Home() {
             {t.heroDescription}
           </p>
         </div>
-        <div className="scroll-down-indicator">
-          <span></span>
-        </div>
       </section>
 
       {/* Section for Cards */}

@@ -96,12 +96,11 @@ h1, h2, h3 {
 
 /* --- LAYOUT & SCROLLING --- */
 .scroll-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  /* Removed height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; */
+  /* Allowing natural scroll */
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
 .scroll-container::-webkit-scrollbar {
@@ -109,13 +108,12 @@ h1, h2, h3 {
 }
 
 .section {
-  height: 100vh;
+  /* Removed height: 100vh; scroll-snap-align: start; scroll-snap-stop: normal; */
+  /* Allowing natural height and positioning */
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  scroll-snap-align: start;
-  scroll-snap-stop: normal;
   flex-shrink: 0;
   position: relative;
   text-align: center;
@@ -161,32 +159,7 @@ h1, h2, h3 {
   animation: fade-in-up 1s ease-out 0.3s forwards;
 }
 
-/* --- SCROLL DOWN INDICATOR --- */
-.scroll-down-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-}
 
-.scroll-down-indicator span {
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-bottom: 2px solid var(--text-secondary);
-  border-right: 2px solid var(--text-secondary);
-  transform: rotate(45deg);
-  animation: scroll-bounce 2s infinite;
-}
-
-@keyframes scroll-bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
-  40% { transform: translateY(-10px) rotate(45deg); }
-  60% { transform: translateY(-5px) rotate(45deg); }
-}
 
 /* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
