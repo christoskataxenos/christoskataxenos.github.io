@@ -14,7 +14,7 @@ export default function Home() {
       <section id="hero" className="section hero-section">
         <div className="hero-content">
           <HeroTitle />
-          <p className="hero-description">
+          <p className="hero-description max-w-2xl mx-auto">
             {t.heroDescription}
           </p>
         </div>
