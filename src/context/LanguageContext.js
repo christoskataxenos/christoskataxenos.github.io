@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 const LanguageContext = createContext();
 
@@ -174,8 +175,7 @@ const translations = {
 };
 
 export function LanguageProvider({ children }) {
-  // Initialize with 'en' to avoid hydration mismatch,
-  // then update from localStorage in useEffect
+  const pathname = usePathname();
   const [language, setLanguage] = useState('en');
 
   // Effect to load language preference from localStorage on mount
@@ -184,15 +184,25 @@ export function LanguageProvider({ children }) {
     if (storedLang && (storedLang === 'en' || storedLang === 'el')) {
       setLanguage(storedLang);
     } else {
-      // Default to 'en' if no preference or invalid preference found
       setLanguage('en');
     }
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
-  // Effect to save language preference to localStorage whenever language changes
+  // Force language based on URL path (specific for blog)
+  useEffect(() => {
+    if (!pathname) return;
+
+    if (pathname.startsWith('/en/blog')) {
+      if (language !== 'en') setLanguage('en');
+    } else if (pathname.startsWith('/blog')) {
+      if (language !== 'el') setLanguage('el');
+    }
+  }, [pathname, language]);
+
+  // Effect to save language preference to localStorage
   useEffect(() => {
     localStorage.setItem('languagePreference', language);
-  }, [language]); // Runs whenever 'language' state changes
+  }, [language]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'en' ? 'el' : 'en'));

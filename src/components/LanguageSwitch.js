@@ -20,11 +20,10 @@ export default function LanguageSwitch() {
         const newPath = pathname.replace('/en', '');
         window.location.href = newPath;
       } else {
-        const newPath = `/en${pathname}`;
+        const cleanPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
+        const newPath = `/en${cleanPath}`;
         window.location.href = newPath;
       }
-      if (language === 'en') toggleLanguage(); 
-      else if (language === 'el') toggleLanguage();
     } else {
       toggleLanguage();
     }
