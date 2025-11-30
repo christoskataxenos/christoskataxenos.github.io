@@ -1,0 +1,87 @@
+---
+title: "Human vs Compiler: How plh10.exe made me write my own Interpreter"
+date: "2025-12-05"
+description: "When the university toolchain acts like a virus destroying your local environment, there is only one solution: Web-Based Salvation."
+tags: ["coding", "side-project", "pseudo-interpreter", "web-dev", "dependency-hell", "c-lang"]
+---
+
+<Stats panicLevel={100} coffeeCups={8} hoursSpent={48} />
+
+There is an unwritten law in Software Engineering: **"If it works, don't touch it"**. At EAP (HOU), however, we discovered a new corollary to this law: **"To make the university compiler work, you must break everything else that works on your PC."**
+
+Welcome to the Pseudolanguage war.
+
+## The Boss Fight: plh10.exe and Dependency Hell
+
+As part of our studies, we had to use the official compiler/interpreter (`plh10.exe`). At first, we thought it was just an OS issue. "If you have Linux/Mac, forget it," they told us. But the truth was much darker.
+
+Even on **Windows**, in its "natural" habitat, the tool was... *toxic*.
+
+The installation ritual in VSCode was dangerous. If you managed (after prayers and tampering with PATH) to get `plh10.exe` to run Pseudolanguage, suddenly magic happened: **Standard C stopped working.**
+
+It was a zero-sum game.
+* Want Pseudolanguage? You lose GCC/MinGW.
+* Want to write C? You lose Pseudolanguage.
+* Want both? **Blue Screen of Death (psychological).**
+
+The VSCode configuration got corrupted faster than a save file in a cyberpunk game on release day.
+
+## The Equation of Redemption
+
+When patience (P) tends to 0 and Environment Pollution (EP) tends to infinity, then innovation (I) is the only way.
+
+```math
+I = \frac{Rage \times Coffee}{BrokenConfigs}
+```
+
+At that moment, watching my VSCode suffer, I said the historic words: **"Fine, I'll do it myself."**
+
+## Enter: The Web-Based Savior
+
+Instead of fighting conflicts, local paths, and binaries from 1990 that hate modern development, I decided to build something **sandboxed**.
+
+Thus, the **Pseudolanguage Interpreter** was born.
+
+No install needed. Doesn't touch the registry. Doesn't destroy your C compiler. You just open the browser and write code. It's Web-based, lightweight, and most importantly **IT IS NOT plh10.exe**.
+
+### The Legacy vs The New Way
+
+Since the problem was C, let's see the difference in the language of pain (C). Look at how my life ran before (Segmentation Fault) and after:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <sanity.h> // Library not found in EAP
+
+void main() {
+    int patience = 100;
+    
+    // SCENARIO A: The Legacy Workflow
+    printf("Attempting to run plh10.exe...\n");
+    
+    if (system("run_eap_compiler")) {
+        // Dependency hell strikes
+        patience = -1; // Integer Overflow
+        
+        // Destruction of GCC environment
+        free(gcc_path); 
+        
+        printf("Error: Segmentation fault. Your weekend is corrupted.\n");
+        return;
+    }
+
+    // SCENARIO B: The Web Solution
+    // No system intervention. No malloc.
+    printf("Opening Web Interpreter...\n");
+    system("start https://pseudo-interpreter-landing.vercel.app");
+    
+    printf("Success: Code running. Dev environment safe.\n");
+    return 0;
+}
+```
+
+The project is live and open for all fellow students who are tired of choosing which programming language to "sacrifice" today to do their assignment.
+
+🔗 **Try it here:** [Pseudolanguage Interpreter - Landing](https://pseudo-interpreter-landing.vercel.app)
+
+Because ultimately, the best tool is the one that doesn't need a manual to avoid blowing up your PC.
