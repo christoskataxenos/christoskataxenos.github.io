@@ -3,6 +3,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import rehypePrettyCode from 'rehype-pretty-code';
 import BackButton from '../../../../components/BackButton';
+import Stats from '../../../../components/Stats';
+import Callout from '../../../../components/Callout';
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData('en');
@@ -59,6 +61,7 @@ export default async function Post({ params }) {
             
           <MDXRemote 
             source={postData.content}
+            components={{ Stats, Callout }}
             options={{
               mdxOptions: {
                 rehypePlugins: [
