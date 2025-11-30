@@ -39,7 +39,8 @@ I = \frac{Rage \cdot Coffee}{BrokenConfigs}
 
 Αντί να παλεύω με conflicts, local paths και binaries του 1990 που μισούν το modern development, αποφάσισα να φτιάξω κάτι που να είναι sandboxed. Έτσι γεννήθηκε ο Ψευδογλώσσα Interpreter.
 
-<FileTree>
+
+```text
 - public
   - index.html
 - src
@@ -48,7 +49,8 @@ I = \frac{Rage \cdot Coffee}{BrokenConfigs}
     - parser.js
     - executor.js
 - package.json
-</FileTree>
+```
+
 
 Δεν χρειάζεται install. Δεν πειράζει το registry. Δεν διαλύει τον C compiler σου. Απλά ανοίγεις τον browser και γράφεις κώδικα. Είναι Web-based, lightweight και κυρίως ΔΕΝ ΕΙΝΑΙ ΤΟ `plh10.exe`.
 
@@ -58,11 +60,13 @@ I = \frac{Rage \cdot Coffee}{BrokenConfigs}
 
 Πριν την αλλαγή, το terminal έδειχνε συχνά αυτό:
 
-<Terminal title="cmd.exe">
+
+```cmd
 $ gcc main.c -o main 
 Error: 'gcc' is not recognized as an internal or external command. 
 PATH is currently pointing to: C:\EAP\PLH10\WHY_ME
-</Terminal>
+```
+
 
 Και ιδού η λογική στον κώδικα:
 
