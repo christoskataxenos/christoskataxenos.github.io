@@ -19,9 +19,43 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Christos Kataxenos | Developer & Photographer",
+  metadataBase: new URL('https://christoskataxenos.com'),
+  title: {
+    default: "Christos Kataxenos | Developer & Photographer",
+    template: "%s | Christos Kataxenos"
+  },
   description: "Personal portal of Christos Kataxenos. Exploring the intersection of Software Development, Network Infrastructure, and Photography. Based in Stuttgart.",
   keywords: ["Christos Kataxenos", "Software Developer", "Stuttgart", "Computer Science", "Photography", "Dev Blog"],
+  authors: [{ name: 'Christos Kataxenos' }],
+  creator: 'Christos Kataxenos',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://christoskataxenos.com',
+    title: "Christos Kataxenos | Developer & Photographer",
+    description: "Software Development, Network Infrastructure, and Photography.",
+    siteName: 'Christos Kataxenos Portfolio',
+    images: [
+      {
+        url: '/images/og-default.png', // Must be added to public/images/
+        width: 1200,
+        height: 630,
+        alt: 'Christos Kataxenos - Developer & Photographer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Christos Kataxenos | Developer & Photographer",
+    description: "Software Development, Network Infrastructure, and Photography.",
+    images: ['/images/og-default.png'],
+    creator: '@christoskataxenos', // Update if you have a handle
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({ children }) {
