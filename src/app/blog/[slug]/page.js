@@ -2,7 +2,6 @@ import { getPostData, getSortedPostsData } from '../../../lib/posts';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import rehypePrettyCode from 'rehype-pretty-code';
-import BackButton from '../../../components/BackButton';
 import Stats from '../../../components/Stats';
 import Callout from '../../../components/Callout';
 
@@ -36,7 +35,6 @@ export default async function Post({ params }) {
 
   return (
     <div className="mx-auto max-w-3xl py-8 pt-32 px-6">
-      <BackButton href="/blog" label="BACK TO BLOG" />
 
       <article className="prose prose-invert max-w-none font-sans prose-p:font-sans prose-headings:font-sans prose-li:font-sans prose-strong:font-sans leading-loose space-y-6 text-gray-300">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
