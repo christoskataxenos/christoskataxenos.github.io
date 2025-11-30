@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 import { getSortedPostsData } from '../lib/posts';
 
 export default async function sitemap() {
