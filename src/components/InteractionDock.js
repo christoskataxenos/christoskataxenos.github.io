@@ -79,7 +79,7 @@ export default function InteractionDock({ title }) {
   };
 
   return (
-    <aside className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-6">
+    <aside className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-6">
       
       {/* Dock Container */}
       <div className="flex flex-col items-center gap-4 px-3 py-6 rounded-full 
