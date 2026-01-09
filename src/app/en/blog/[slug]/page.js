@@ -2,12 +2,9 @@ import { getPostData, getSortedPostsData } from '../../../../lib/posts';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import rehypePrettyCode from 'rehype-pretty-code';
-import Stats from '../../../../components/Stats';
-import Callout from '../../../../components/Callout';
-import FileTree from '../../../../components/FileTree';
+import { mdxComponents } from '../../../../components/mdx-components';
 import InteractionDock from '../../../../components/InteractionDock';
 import ReadingProgress from '../../../../components/ReadingProgress';
-import Terminal from '../../../../components/Terminal';
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData('en');
@@ -110,7 +107,7 @@ export default async function Post({ params }) {
 
         <MDXRemote
           source={postData.content}
-          components={{ Stats, Callout, FileTree, Terminal }}
+          components={mdxComponents}
           options={{
             mdxOptions: {
               rehypePlugins: [
