@@ -1,0 +1,61 @@
+---
+title: "ANSI C, Pseudocode, and Back to the Future: Surviving GE2"
+date: "2026-01-09"
+description: "A review of the second assignments at HOU. The madness of ANSI C in 2026, the nightmare of pseudocode, and the salvation of Python."
+tags: ["eap", "c", "python", "devlog", "assignments"]
+---
+
+<Stats panicLevel={85} coffeeCups={12} hoursSpent={48} />
+
+Finally, a breath of fresh air. I just submitted the second Written Assignments (GE2) and I feel like I've just stepped out of a time capsule.
+
+To be fair, the **Hellenic Open University (HOU)** has a unique way of keeping us on our toes (or in a state of permanent panic, depending on how you look at it). This time, however, the experience felt like a sci-fi movie... filmed in 1989.
+
+## Pseudocode and Bipolar Disorder
+
+Let's start with the obvious. Someone needs to explain the logic of writing the *exact same* exercise twice. Once in C and once in Pseudocode.
+
+<Callout type="warning" title="Logic Error">
+Writing code that works and then having to "break" it to convert it into the university's pseudocode is a form of torture not covered by the Geneva Convention.
+</Callout>
+
+The funny thing is you find yourself debugging the pseudocode. "Yes, but is this assignment arrow `<-` correct, or should I have used a colon?". Details that suck the life out of you, while the C compiler just laughs at you.
+
+## ANSI C: Back to the Future
+
+And now for the "main course". It's 2026. Technology is racing, AI is writing poetry, and at HOU we have to write in **ANSI C (C89)**.
+
+Yes, you read that correctly. They ask us to write C as if we're in Back to the Future with Marty McFly. Forget declaring a variable inside a `for loop`. Forbidden. Everything at the top, nice and tidy, just like in '89.
+
+<Terminal title="gcc terminal">
+error: 'for' loop initial declarations are only allowed in C99 or C11 mode
+note: use option -std=c99, -std=gnu99, -std=c11 or -std=gnu11 to compile your code
+</Terminal>
+
+Here’s the difference that made our lives difficult:
+
+```c
+/* Modern C (How it should be) */
+for (int i = 0; i < 10; i++) {
+    printf("%d", i);
+}
+
+/* ANSI C (How HOU wants it) */
+int i; /* Must be declared at the top of the block, otherwise error */
+
+for (i = 0; i < 10; i++) {
+    printf("%d", i);
+}
+```
+
+## The Salvation of Python
+
+Fortunately, the second assignment (for the PLH11 module) involved Python. After 48 hours of `malloc`, `structs`, and "segfaults" in ANSI C, writing Python felt like taking off tight shoes after a 10km walk.
+
+Where C required 50 lines of code to read a file, Python did it in 3. The difference in mental health is measurable in coffee cups.
+
+## Conclusion
+
+GE2 was a lesson in patience. I learned how to think like a 1990 computer and how to appreciate modern programming languages. If I survived this, nothing can stop me.
+
+Onward to GE3. With more coffee and fewer `Segmentation Faults` (hopefully).
