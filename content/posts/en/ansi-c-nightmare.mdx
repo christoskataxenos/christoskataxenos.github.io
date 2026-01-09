@@ -22,6 +22,38 @@ error: 'for' loop initial declarations are only allowed in C99 or C11 mode
 note: use option -std=c99, -std=gnu99, -std=c11 or -std=gnu11 to compile your code
 </Terminal>
 
+Here is the difference that made our lives difficult:
+
+```c
+/* Modern C (How it should be) */
+for (int i = 0; i < 10; i++) {
+    printf("%d", i);
+}
+
+/* ANSI C (How HOU wants it) */
+int i; /* Must be declared at the top of the block, otherwise error */
+
+for (i = 0; i < 10; i++) {
+    printf("%d", i);
+}
+```
+
+### ANSI C vs Python: The Comparison
+
+To understand the culture shock, look at the difference in the same operation:
+
+| Feature | ANSI C (C89) | Modern Python |
+| :--- | :--- | :--- |
+| **Variable Declaration** | Must be at the top of the block | Anywhere (on the fly) |
+| **Comments** | Only `/* block */` | `# line` or `""" docstrings """` |
+| **For Loops** | `int i; for(i=0; i<n; i++)` | `for i in range(n):` |
+| **Reading Files** | 15+ lines (fopen, check, loop, fclose) | `data = open('file.txt').read()` |
+| **Mental Health** | 📉 Hard Reset | 📈 Zen Mode |
+
+<Callout type="danger" title="The Pedantic Trap">
+If you're writing C for HOU, watch your comments! The `//` syntax was officially introduced in C99. If you use it and your professor runs the compiler with the `-ansi -pedantic` flags, your assignment might be riddled with warnings or errors before the grading even starts. Use only `/* ... */`.
+</Callout>
+
 ### The Torture of Bead Sort
 
 As if the language wasn't enough, we had the assignments.
@@ -87,5 +119,7 @@ In PLH10, I learned how to think like a 1990 computer and how to manage memory (
 In PLHPRO, I learned how to solve problems quickly and elegantly, appreciating modern languages.
 
 The difference in mental health is measurable in coffee cups. If I survived the combination of Bead Sort in C and Library Management in Python in the same week, nothing can stop me.
+
+If you think ANSI C was the only problem in this module, take a look at how [plh10.exe broke my VS Code](/en/blog/human-vs-compiler) in the previous assignment.
 
 Onward to GE3. With more coffee and fewer Segmentation Faults (hopefully).

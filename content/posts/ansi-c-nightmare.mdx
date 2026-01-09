@@ -22,6 +22,38 @@ error: 'for' loop initial declarations are only allowed in C99 or C11 mode
 note: use option -std=c99, -std=gnu99, -std=c11 or -std=gnu11 to compile your code
 </Terminal>
 
+Ορίστε η διαφορά που μας έκανε τη ζωή δύσκολη:
+
+```c
+/* Modern C (Πως θα έπρεπε να είναι) */
+for (int i = 0; i < 10; i++) {
+    printf("%d", i);
+}
+
+/* ANSI C (Πως το θέλει το ΕΑΠ) */
+int i; /* Πρέπει να δηλωθεί στην αρχή του block αλλιώς τρως error */
+
+for (i = 0; i < 10; i++) {
+    printf("%d", i);
+}
+```
+
+### ANSI C vs Python: Η Σύγκριση
+
+Για να καταλάβετε το πολιτισμικό σοκ, δείτε τη διαφορά στην ίδια λειτουργία:
+
+| Feature | ANSI C (C89) | Modern Python |
+| :--- | :--- | :--- |
+| **Variable Declaration** | Υποχρεωτικά στην αρχή του block | Οπουδήποτε (on the fly) |
+| **Comments** | Μόνο `/* block */` | `# line` ή `""" docstrings """` |
+| **For Loops** | `int i; for(i=0; i<n; i++)` | `for i in range(n):` |
+| **Reading Files** | 15+ γραμμές (fopen, check, loop, fclose) | `data = open('file.txt').read()` |
+| **Mental Health** | 📉 Hard Reset | 📈 Zen Mode |
+
+<Callout type="danger" title="The Pedantic Trap">
+Αν γράφετε C για το ΕΑΠ, προσοχή στα comments! Το `//` εισήχθη επίσημα στην C99. Αν το χρησιμοποιήσετε και ο καθηγητής τρέξει τον compiler με το flag `-ansi -pedantic`, η εργασία σας μπορεί να γεμίσει warnings ή errors πριν καν ξεκινήσει η διόρθωση. Χρησιμοποιείτε μόνο `/* ... */`.
+</Callout>
+
 ### Το μαρτύριο του Bead Sort
 
 Και σα να μην έφτανε η γλώσσα, είχαμε και τα θέματα.
@@ -87,5 +119,7 @@ while True:
 Στην ΠΛΗΠΡΟ έμαθα πώς να λύνω προβλήματα γρήγορα και κομψά, εκτιμώντας τις σύγχρονες γλώσσες.
 
 Η διαφορά στην ψυχική υγεία είναι μετρήσιμη σε κούπες καφέ. Αν επιβίωσα από τον συνδυασμό Bead Sort σε C και Library Management σε Python την ίδια εβδομάδα, τίποτα δεν μπορεί να με σταματήσει.
+
+Αν νομίζετε ότι η ANSI C ήταν το μόνο πρόβλημα αυτής της ενότητας, ρίξτε μια ματιά και στο πώς το [plh10.exe διέλυσε το VS Code μου](/blog/human-vs-compiler) στην προηγούμενη εργασία.
 
 Πάμε για τις ΓΕ3 τώρα. Με περισσότερο καφέ και λιγότερα Segmentation Faults (ελπίζω).
