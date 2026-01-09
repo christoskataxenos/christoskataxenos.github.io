@@ -7,6 +7,7 @@ import Callout from '../../../../components/Callout';
 import FileTree from '../../../../components/FileTree';
 import InteractionDock from '../../../../components/InteractionDock';
 import ReadingProgress from '../../../../components/ReadingProgress';
+import Terminal from '../../../../components/Terminal';
 
 export async function generateStaticParams() {
   const posts = getSortedPostsData('en');
@@ -109,7 +110,7 @@ export default async function Post({ params }) {
 
         <MDXRemote
           source={postData.content}
-          components={{ Stats, Callout, FileTree }}
+          components={{ Stats, Callout, FileTree, Terminal }}
           options={{
             mdxOptions: {
               rehypePlugins: [
