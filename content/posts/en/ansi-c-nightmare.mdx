@@ -42,13 +42,16 @@ for (i = 0; i < 10; i++) {
 
 To understand the culture shock, look at the difference in the same operation:
 
-| Feature | ANSI C (C89) | Modern Python |
-| :--- | :--- | :--- |
-| **Variable Declaration** | Must be at the top of the block | Anywhere (on the fly) |
-| **Comments** | Only `/* block */` | `# line` or `""" docstrings """` |
-| **For Loops** | `int i; for(i=0; i<n; i++)` | `for i in range(n):` |
-| **Reading Files** | 15+ lines (fopen, check, loop, fclose) | `data = open('file.txt').read()` |
-| **Mental Health** | 📉 Hard Reset | 📈 Zen Mode |
+<ComparisonTable 
+  headers={["Feature", "ANSI C (C89)", "Modern Python"]}
+  rows={[
+    ["Variable Declaration", "Must be at the top of the block", "Anywhere (on the fly)"],
+    ["Comments", "Only /* block */", "# line or \"\"\" docstrings \"\"\""],
+    ["For Loops", "int i; for(i=0; i<n; i++)", "for i in range(n):"],
+    ["Reading Files", "15+ lines (fopen, check, loop, fclose)", "data = open('file.txt').read()"],
+    ["Mental Health", "📉 Hard Reset", "📈 Zen Mode"]
+  ]}
+/>
 
 <Callout type="danger" title="The Pedantic Trap">
 If you're writing C for HOU, watch your comments! The `//` syntax was officially introduced in C99. If you use it and your professor runs the compiler with the `-ansi -pedantic` flags, your assignment might be riddled with warnings or errors before the grading even starts. Use only `/* ... */`.

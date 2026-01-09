@@ -42,13 +42,16 @@ for (i = 0; i < 10; i++) {
 
 Για να καταλάβετε το πολιτισμικό σοκ, δείτε τη διαφορά στην ίδια λειτουργία:
 
-| Feature | ANSI C (C89) | Modern Python |
-| :--- | :--- | :--- |
-| **Variable Declaration** | Υποχρεωτικά στην αρχή του block | Οπουδήποτε (on the fly) |
-| **Comments** | Μόνο `/* block */` | `# line` ή `""" docstrings """` |
-| **For Loops** | `int i; for(i=0; i<n; i++)` | `for i in range(n):` |
-| **Reading Files** | 15+ γραμμές (fopen, check, loop, fclose) | `data = open('file.txt').read()` |
-| **Mental Health** | 📉 Hard Reset | 📈 Zen Mode |
+<ComparisonTable 
+  headers={["Feature", "ANSI C (C89)", "Modern Python"]}
+  rows={[
+    ["Variable Declaration", "Υποχρεωτικά στην αρχή του block", "Οπουδήποτε (on the fly)"],
+    ["Comments", "Μόνο /* block */", "# line ή \"\"\" docstrings \"\"\""],
+    ["For Loops", "int i; for(i=0; i<n; i++)", "for i in range(n):"],
+    ["Reading Files", "15+ γραμμές (fopen, check, loop, fclose)", "data = open('file.txt').read()"],
+    ["Mental Health", "📉 Hard Reset", "📈 Zen Mode"]
+  ]}
+/>
 
 <Callout type="danger" title="The Pedantic Trap">
 Αν γράφετε C για το ΕΑΠ, προσοχή στα comments! Το `//` εισήχθη επίσημα στην C99. Αν το χρησιμοποιήσετε και ο καθηγητής τρέξει τον compiler με το flag `-ansi -pedantic`, η εργασία σας μπορεί να γεμίσει warnings ή errors πριν καν ξεκινήσει η διόρθωση. Χρησιμοποιείτε μόνο `/* ... */`.
