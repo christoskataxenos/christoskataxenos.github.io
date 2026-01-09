@@ -1,29 +1,19 @@
 ---
-title: "ANSI C, Pseudocode, and Back to the Future: Surviving GE2"
-date: "2026-01-09"
-description: "A review of the second assignments at HOU. The madness of ANSI C in 2026, the nightmare of pseudocode, and the salvation of Python."
-tags: ["eap", "c", "python", "devlog", "assignments"]
+title: "ANSI C vs Python: Personality Split in GE2"
+date: "2026-01-10"
+description: "The ultimate recap of the second assignments (PLH10 & PLHPRO). From the nightmare of Bead Sort in C89 to the salvation of Python Dictionaries."
+tags: ["eap", "plh10", "plhpro", "c", "python", "devlog", "assignments"]
 ---
 
-<Stats panicLevel={85} coffeeCups={12} hoursSpent={48} />
+<Stats panicLevel={85} coffeeCups={16} hoursSpent={55} />
 
-Finally, a breath of fresh air. I just submitted the second Written Assignments (GE2) and I feel like I've just stepped out of a time capsule.
+Finally, a breath of fresh air. I just submitted both second Written Assignments (GE2) for PLH10 and PLHPRO, and I feel like I've just stepped out of a time capsule.
 
-To be fair, the **Hellenic Open University (HOU)** has a unique way of keeping us on our toes (or in a state of permanent panic, depending on how you look at it). This time, however, the experience felt like a sci-fi movie... filmed in 1989.
+To be fair, the **Hellenic Open University (HOU)** has a unique way of keeping us on our toes (or in a state of permanent panic, depending on how you look at it). This time, however, the experience felt like a sci-fi movie... filmed in 1989, with intermittent shots from 2026.
 
-## Pseudocode and Bipolar Disorder
+## PLH10: Back to the Future (with ANSI C)
 
-Let's start with the obvious. Someone needs to explain the logic of writing the *exact same* exercise twice. Once in C and once in Pseudocode.
-
-<Callout type="warning" title="Logic Error">
-Writing code that works and then having to "break" it to convert it into the university's pseudocode is a form of torture not covered by the Geneva Convention.
-</Callout>
-
-The funny thing is you find yourself debugging the pseudocode. "Yes, but is this assignment arrow `<-` correct, or should I have used a colon?". Details that suck the life out of you, while the C compiler just laughs at you.
-
-## ANSI C: Back to the Future
-
-And now for the "main course". It's 2026. Technology is racing, AI is writing poetry, and at HOU we have to write in **ANSI C (C89)**.
+Let's start with the "main course" of pain. It's 2026. Technology is racing, AI is writing poetry, and in PLH10 we have to write in **ANSI C (C89)**.
 
 Yes, you read that correctly. They ask us to write C as if we're in Back to the Future with Marty McFly. Forget declaring a variable inside a `for loop`. Forbidden. Everything at the top, nice and tidy, just like in '89.
 
@@ -32,30 +22,70 @@ error: 'for' loop initial declarations are only allowed in C99 or C11 mode
 note: use option -std=c99, -std=gnu99, -std=c11 or -std=gnu11 to compile your code
 </Terminal>
 
-Here’s the difference that made our lives difficult:
+### The Torture of Bead Sort
 
-```c
-/* Modern C (How it should be) */
-for (int i = 0; i < 10; i++) {
-    printf("%d", i);
-}
+As if the language wasn't enough, we had the assignments.
 
-/* ANSI C (How HOU wants it) */
-int i; /* Must be declared at the top of the block, otherwise error */
+1.  **Cubes vs Squares:** Prove if $1^3 + ... + N^3 = (1+...+N)^2$. Easy? Yes. But we had to write it in BOTH Pseudocode AND C, with checks for $N$ between 100 and 300.
+2.  **Bead Sort (Gravity Sort):** This is where it got real. We had to simulate beads falling on an abacus. In C. With arrays. Without dynamic memory allocation.
 
-for (i = 0; i < 10; i++) {
-    printf("%d", i);
-}
+<Callout type="warning" title="Logic Error">
+Trying to count "poles" and fill the `counts` array while wrestling with array pointers is a form of torture not covered by the Geneva Convention.
+</Callout>
+
+3.  **Cities Matrix:** A distance matrix where we only read the upper right triangle (since distance A->B is the same as B->A). At least this worked without segfaults after "mirroring" the values to the bottom half.
+
+## Pseudocode and Bipolar Disorder
+
+Someone needs to explain the logic of writing the *exact same* exercise twice. Once in C and once in Pseudocode.
+
+The funny thing is you find yourself debugging the pseudocode. "Yes, but is this assignment arrow `<-` correct, or should I have used a colon?". Details that suck the life out of you, while the C compiler just laughs at you.
+
+## PLHPRO: The Salvation (Python)
+
+Fortunately, the second PLHPRO assignment was a balm for the soul. After 48 hours of `malloc` and variable declarations at the start of functions, writing Python felt like taking off tight shoes after a 10km walk.
+
+### Slicing, Sets, and Libraries
+
+Things were much more civilized here:
+
+* **Strings & Sets:** We reversed strings with slicing (`s[::-1]`) and found books belonging to "either one category or the other but not both" with a simple `^` (Symmetric Difference). In C, I'd still be writing loops for this.
+* **Triangle Inspector:** Area calculation using Heron's formula. `import math` and you're done.
+* **Library System:** The big project. Dictionaries within dictionaries (`Library` dict, `ratings` dict).
+
+My favorite part? Handling book returns, where we had to force the user to provide a rating between 1 and 5.
+
+```python
+# The beauty of Pythonic input validation
+while True:
+    rating_str = input("Enter a rating for the book (1-5): ").strip()
+    try:
+        rating = int(rating_str)
+        if 1 <= rating <= 5:
+            break
+        else:
+            print("The rating must be an integer between 1 and 5.")
+    except ValueError:
+        print("Invalid rating.")
 ```
 
-## The Salvation of Python
-
-Fortunately, the second assignment (for the PLHPRO module) involved Python. After 48 hours of `malloc`, `structs`, and "segfaults" in ANSI C, writing Python felt like taking off tight shoes after a 10km walk.
-
-Where C required 50 lines of code to read a file, Python did it in 3. The difference in mental health is measurable in coffee cups.
+<FileTree>
+- final_submission
+  - plh10_c_pain
+    - main.c (C89 legacy code)
+    - pseudocode.txt (Why?)
+  - plhpro_python_joy
+    - library_system.py (Clean code)
+    - utils.py
+</FileTree>
 
 ## Conclusion
+GE2 was a lesson in patience and schizophrenia.
 
-GE2 was a lesson in patience. I learned how to think like a 1990 computer and how to appreciate modern programming languages. If I survived this, nothing can stop me.
+In PLH10, I learned how to think like a 1990 computer and how to manage memory (and my nerves).
 
-Onward to GE3. With more coffee and fewer `Segmentation Faults` (hopefully).
+In PLHPRO, I learned how to solve problems quickly and elegantly, appreciating modern languages.
+
+The difference in mental health is measurable in coffee cups. If I survived the combination of Bead Sort in C and Library Management in Python in the same week, nothing can stop me.
+
+Onward to GE3. With more coffee and fewer Segmentation Faults (hopefully).
