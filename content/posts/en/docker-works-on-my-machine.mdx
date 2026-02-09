@@ -1,0 +1,240 @@
+---
+title: "Works on My Machine: Saving Project 06 from Disaster"
+date: "2026-02-08"
+description: "A story about 5 students (Gamer, Hybrid User, Mac Aristocrat, Venv Inception, and Sudo Kamikaze), a Python assignment that runs nowhere, and how Docker brought peace."
+tags: ["docker", "python", "student-life", "mysql", "devops", "humor"]
+---
+
+<Stats panicLevel={99} coffeeCups={200} hoursSpent={300} />
+
+## The "But It Works on My Machine!" Syndrome
+
+It's Sunday night. You've finished your part for the **"Family Finance Management"** assignment.
+You, as a classic "Hybrid User" (you declare yourself a Linux Purist on forums, but your main rig runs Windows 11 because "I want to play some games too"), have set everything up perfectly. On your machine, with WSL2 and your terminals, the code "sings".
+
+You upload the file final_final_final.7zip to the team Discord with an "I'm done" attitude, ready for digital applause.
+
+**Response on Discord:** *"Nothing runs. I get `ModuleNotFoundError: pandas`, Tkinter opens a black window, and MySQL asks for drivers that don't exist."*
+
+**Your reaction:** *"BUT IT WORKS ON MY MACHINE!"*
+
+Welcome to the nightmare of **Dependency Hell**. Where dreams die because everyone on the team has built their own "little kingdom" and no one talks to the other.
+
+## Case Study: "Project 06 - The Family Wallet"
+
+Let's talk specifics. We have the Project **"Family Finance Management"**.
+**Tech Stack:** Python, Tkinter (GUI), Matplotlib (Graphs), XlsxWriter (Excel), and MySQL (Database).
+
+**The Team (5 people - Absolute chaos):**
+1.  **The "RGB Lord" (Gamer):** Has a €4,000 PC with water cooling and an RTX 5090. Believes the script will run faster if he sets the LEDs to red. In reality, Valorant's Anti-Cheat blocks the Docker port and his Razer mouse drivers eat 4GB of RAM.
+2.  **The "Hybrid User" (Me):** The "Two-Faced". Shouts "use Linux" on Reddit, but the PC runs Windows 11 Pro with WSL2 because "Valorant doesn't play on Penguin". His environment is a "Chimera" between Windows paths and Linux binaries that confuses everything.
+3.  **The "Silicon Aristocrat" (Mac):** Drinks Latte and everything is beautiful, until he tries to spin up a MySQL container. *"Image platforms linux/amd64 and linux/arm64 do not match"*. Cries in Retina 5K resolution while searching for ARM drivers.
+4.  **The "Venv Inception":** Has created a Virtual Environment INSIDE another Virtual Environment, INSIDE the OneDrive folder. The file path is `C:\Users\Mpampis\OneDrive\Desktop\Ergasia\venv\venv2\final\lib\...` and Windows refuses to read it.
+5.  **The "Sudo Kamikaze":** Doesn't know what's wrong, so he types `sudo pip install` (or Run as Administrator) everywhere. He has destroyed the system permissions so much that now his computer asks for an administrator password even to open the Calculator.
+
+### The Problem: Judgment Day (Merge Sunday)
+
+Sunday night, 23:00. The deadline is tomorrow. You decide to merge the pieces of code.
+The result resembles the Tower of Babel:
+
+*   **RGB Lord's** script looks for files in `D:\Games\MyProjects\Ergasia_Final_V2`, which naturally doesn't exist on **Silicon Aristocrat's** MacBook.
+*   **Hybrid User** ran the code via WSL2, but the script looks for the file in `/mnt/c/Users/...` while on Windows it's in `C:\Users\...`. Result: `FileNotFoundError` and existential crisis.
+*   **Sudo Kamikaze** created the database as `root` user, and now the connection string `user='student'` eats "Access Denied" everywhere.
+*   And for the cherry on top: The Excel Export (`XlsxWriter`) works perfectly, but saves the file named `??_?????.xlsx` due to Windows-1253 encoding which Linux hates.
+
+Result: **Discord Panic Call** and the phrase *"But it runs for me!"* is heard 5 times simultaneously.
+
+### The Solution: The Peace Treaty (Docker Compose)
+
+Instead of wasting 10 hours on Discord trying to find why **Sudo Kamikaze** can't connect to the database, we take a deep breath and write a `docker-compose.yml`.
+
+**What we gain (and how the war stops):**
+
+1.  **The Database (MySQL) is "Sacred":** NO ONE installs it locally. It runs in a container.
+    *   **RGB Lord** doesn't need to close XAMPP or Riot Vanguard. Docker handles everything.
+    *   Everyone connects to `localhost:3306` with `user: root` and `password: secret`. No more "forgotten passwords".
+2.  **Libraries are "Reinforced Concrete":**
+    *   The `requirements.txt` loads inside the container.
+    *   **Hybrid User** stops fighting with WSL2 Path conversions. Inside the container, the path is always `/app`. End of story.
+    *   **Silicon Aristocrat** stops crying about drivers, because the container runs Linux (even on his Mac).
+
+### The Tkinter Paradox (or how not to mess with X11)
+
+Here lies a trap. Docker is perfect for server-side stuff (headless). Trying to open a window (GUI) from within Docker on Windows is harder than passing "Operating Systems II" with a 10. It needs X11 servers, VcXsrv, and prayers to the Virgin Mary.
+
+**The Solution: Hybrid Mode (The Centaur 🐎)**
+We do the following trick to keep everyone happy:
+
+1.  **The "Brain" (MySQL):** Runs on Docker. Isolated, clean, secure. No one installs anything.
+2.  **The "Face" (Tkinter):** Runs *raw* (native) on our PC.
+
+Why is this convenient?
+*   **RGB Lord** sees the GUI on his 4K 240Hz screen without lag.
+*   **Hybrid User** sees it via XServer on Windows (VcXsrv) without needing to dual-boot.
+*   **Sudo Kamikaze** doesn't need to get admin rights to install MySQL. It runs in a container and we (hope) he won't `rm -rf /` the host machine.
+
+It's like ordering delivery (Docker DB) but eating comfortably on your couch (Local Python). The best of both worlds.
+
+### Our Setup (`docker-compose.yml`)
+
+```yaml
+version: '3.8'
+
+services:
+  # Our Database - Common for all Student-Developers
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secretpassword
+      MYSQL_DATABASE: family_finance_db
+    ports:
+      - "3306:3306"  # <--- The base is available on everyone's localhost!
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+```
+
+Now, every Student-Developer just presses `docker-compose up` and **BOOM**: They have a ready, configured MySQL database waiting for the application's data. No installers, no services, no panics.
+
+### Judgment Hour: The ZIP to the Professor
+
+Okay, we are saved. But what do we send to the professor? The instructions say: *"1. Your code, 2. Installation instructions"*.
+
+We don't just throw the Docker container at him. We do the following professional (Senior move):
+
+**In `README.txt` or `INSTALL.txt` we write:**
+
+> **Option A (Recommended - The Smart Way):**
+> 1. Install Docker Desktop.
+> 2. Open terminal in the folder and run: `docker-compose up`.
+> 3. The application will start and the database will be created automatically.
+
+> **Option B (Classic - The Painful Way):**
+> 1. Install Python 3.9+.
+> 2. Install MySQL Server 8.0 local.
+> 3. Create user root/secretpassword.
+> 4. Run `pip install -r requirements.txt`.
+> 5. Good luck.
+
+**Why do this?**
+1.  **Bonus Points:** In the Report (Deliverable 3), write a section *"Challenges and Solutions"*. Explain how Docker solved the team's incompatibility issues. This shows engineering thinking, not just "I wrote code".
+2.  **GitHub Link (Deliverable 6):** Upload the code to GitHub with a nice README that has Docker badges. Shows you are ready for the job market.
+
+This way, you cover the "traditional" way (if the professor doesn't want Docker), but you also show the modern approach.
+
+### Bonus: The "Double-Click" Experience (Windows .bat)
+
+Because the professor (and we) are too bored to type commands in the terminal, we make a `run_app.bat` file in the project folder.
+
+This magical little file does everything by itself. When you run it, you'll see this magical 3 visual:
+
+<Terminal title="CMD: run_app.bat">
+> [INFO] Starting Database Container...
+> [INFO] Waiting for Database to initialize (10s)...
+> [INFO] Installing Python requirements...
+> [INFO] Launching Family Finance App...
+> ... (App window opens) ...
+> [INFO] App closed. Stopping Database...
+> Press any key to continue...
+</Terminal>
+
+And the code for `run_app.bat`:
+
+```batch
+@echo off
+title Family Finance App Launcher
+
+echo [INFO] Starting Database Container...
+docker-compose up -d db
+
+echo [INFO] Waiting for Database to initialize (10s)...
+timeout /t 10 /nobreak
+
+echo [INFO] Installing Python requirements...
+pip install -r requirements.txt
+
+echo [INFO] Launching Family Finance App...
+python main.py
+
+echo [INFO] App closed. Stopping Database...
+docker-compose down
+pause
+```
+
+**What it does:**
+1.  Raises MySQL in the background.
+2.  Waits a bit for the database to wake up.
+3.  Installs libraries (if missing).
+4.  Runs the application.
+5.  When you close the window, it shuts down the database to save memory.
+
+### For Linux/Mac Users (and the Professor)
+
+If the professor runs Ubuntu (or if you have a Mac), the `.bat` won't run. So, we also give `run_app.sh`.
+
+The experience in the Linux terminal will be something like this:
+
+<Terminal title="BASH: ./run_app.sh">
+$ ./run_app.sh
+[INFO] Starting Database Container...
+[+] Running 1/1
+ ✔ Container family-finance-db-1  Started
+[INFO] Waiting for Database to initialize (10s)...
+[INFO] Installing Python requirements...
+Requirement already satisfied: pandas...
+[INFO] Launching Family Finance App...
+...
+</Terminal>
+
+The code for `run_app.sh`:
+
+```bash
+#!/bin/bash
+echo "[INFO] Starting Database Container..."
+docker-compose up -d db
+
+echo "[INFO] Waiting for Database to initialize (10s)..."
+sleep 10
+
+echo "[INFO] Installing Python requirements..."
+pip3 install -r requirements.txt
+
+echo "[INFO] Launching Family Finance App..."
+python3 main.py
+
+echo "[INFO] App closed. Stopping Database..."
+docker-compose down
+```
+
+Now we are truly **Cross-Platform**. It doesn't matter if the professor grades from Windows 11 or Arch Linux. Our app plays everywhere.
+
+### The Cheat Sheet for the Exam
+
+To not be caught unprepared by the professor during the presentation, here is the analogy with... **Tupperware**:
+
+*   **Dockerfile = Grandma's Recipe 📜**
+    It's the paper describing the ingredients: *"I want Linux, Python 3.9 using a dash of Pandas"*. It's just text. Cannot be eaten. Instructions to build the Image.
+
+*   **Image = The Frozen Tupperware 🧊**
+    The result of the recipe. Packaged, "frozen" and **Read-Only**.
+    *   You can't take the peas out of it.
+    *   It is **EXACTLY** the same Tupperware for the Gamer, the Linux guy, and the Mac user.
+
+*   **Container = Heating in the Microwave ♨️**
+    The moment the Image "comes alive".
+    *   You can heat 5 Tupperwares at the same time (Scaling).
+    *   If you "burn" the food (Crash), you throw away the Container and open a new Image from the freezer.
+
+## Epilogue: From "Chaos" to "Distinguished Seniors"
+
+With Docker, the "Project 06" team stopped fighting over drivers and started writing code (or playing Valorant, let's be realistic).
+
+*   **RGB Lord** enjoys the GUI in 4K without touching his setup.
+*   **Hybrid User** sleeps soundly, because he no longer has to choose between Gaming and Coding.
+*   **Sudo Kamikaze** can no longer destroy his PC (at most he'll destroy the container).
+
+And most importantly? The professor will double-click the `.bat`, see MySQL rising on its own, and give a **10** for the "Professional Architecture".
+
+Launch it 🚀

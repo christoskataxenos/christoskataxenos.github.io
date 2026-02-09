@@ -1,0 +1,239 @@
+---
+title: "Works on My Machine: Σώζοντας το Project 06 από την Καταστροφή"
+date: "2026-02-08"
+description: "Μια ιστορία για 5 φοιτητές (Gamer, Hybrid User, Mac Aristocrat, Venv Inception και Sudo Kamikaze), μια εργασία Python που δεν τρέχει πουθενά, και πώς το Docker έφερε την ειρήνη."
+tags: ["docker", "python", "student-life", "mysql", "devops", "humor"]
+---
+
+<Stats panicLevel={99} coffeeCups={200} hoursSpent={300} />
+
+## Το Σύνδρομο "Μα Σε Μένα Δουλεύει!"
+
+Είναι Κυριακή βράδυ. Έχεις τελειώσει το κομμάτι σου για την εργασία **"Διαχείριση Οικογενειακών Οικονομικών"**.
+Εσύ, ως κλασικός "Hybrid User" (δηλώνεις Linux Purist στα forums, αλλά το main rig σου τρέχει Windows 11 γιατί "θέλω να παίξω και κανένα game"), έχεις στήσει τα πάντα τέλεια. Στο δικό σου μηχάνημα, με WSL2 και τα terminal σου, ο κώδικας "κελαηδάει".
+
+Κάνεις upload το αρχείο final_final_final.7zip στο Discord της ομάδας με ύφος "εγώ τελείωσα", έτοιμος για ψηφιακά χειροκροτήματα.
+
+**Απάντηση στο Discord:** *"Δεν τρέχει τίποτα. Μου βγάζει `ModuleNotFoundError: pandas`, το Tkinter ανοίγει μαύρο παράθυρο και η MySQL ζητάει drivers που δεν υπάρχουν."*
+
+**Η αντίδρασή σου:** *"ΜΑ ΣΕ ΜΕΝΑ ΔΟΥΛΕΥΕΙ!"*
+
+Καλωσήρθατε στον εφιάλτη του **Dependency Hell**. Εκεί που τα όνειρα πεθαίνουν επειδή ο καθένας στην ομάδα έχει στήσει το δικό του "μικρό βασίλειο" και κανένα δεν μιλάει με το άλλο.
+
+## Case Study: "Project 06 - Το Οικογενειακό Πορτοφόλι"
+
+Ας μιλήσουμε συγκεκριμένα. Έχουμε το Project **"Διαχείριση Οικογενειακών Οικονομικών"**.
+**Tech Stack:** Python, Tkinter (GUI), Matplotlib (Γραφήματα), XlsxWriter (Excel), και MySQL (Βάση Δεδομένων).
+
+**Η Ομάδα (5 άτομα - Το απόλυτο χάος):**
+1.  **Ο "RGB Lord" (Gamer):** Έχει PC των €4.000 με υδρόψυξη και RTX 5090. Πιστεύει ότι το script θα τρέξει πιο γρήγορα αν βάλει τα LEDs στο κόκκινο. Στην πραγματικότητα, το Anti-Cheat του Valorant μπλοκάρει το Docker port και τα drivers του Razer ποντικιού τρώνε 4GB RAM.
+2.  **Ο "Hybrid User" (Εγώ):** Ο "Διπρόσωπος". Στο Reddit φωνάζει "use Linux", αλλά το PC τρέχει Windows 11 Pro με WSL2 γιατί "το Valorant δεν παίζει σε Penguin". Το περιβάλλον του είναι μια "Χίμαιρα" ανάμεσα σε Windows paths και Linux binaries που μπερδεύει τα πάντα.
+3.  **Ο "Silicon Aristocrat" (Mac):** Πίνει Latte και όλα είναι πανέμορφα, μέχρι να προσπαθήσει να σηκώσει MySQL container. *"Image platforms linux/amd64 and linux/arm64 do not match"*. Κλαίει σε Retina 5K ανάλυση ενώ ψάχνει drivers για ARM.
+4.  **Ο "Venv Inception":** Έχει δημιουργήσει Virtual Environment ΜΕΣΑ σε άλλο Virtual Environment, ΜΕΣΑ στο φάκελο του OneDrive. Το Path του αρχείου είναι `C:\Users\Mpampis\OneDrive\Desktop\Ergasia\venv\venv2\final\lib\...` και τα Windows αρνούνται να το διαβάσουν.
+5.  **Ο "Sudo Kamikaze":** Δεν ξέρει τι φταίει, οπότε γράφει `sudo pip install` (ή Run as Administrator) παντού. Έχει διαλύσει τα permissions του συστήματος τόσο πολύ, που πλέον ο υπολογιστής του ζητάει κωδικό διαχειριστή ακόμα και για να ανοίξει την Αριθμομηχανή.
+
+### Το Πρόβλημα: Η Μέρα της Κρίσης (Merge Sunday)
+
+Κυριακή βράδυ, 23:00. Η προθεσμία είναι αύριο. Αποφασίζετε να ενώσετε τα κομμάτια του κώδικα.
+Το αποτέλεσμα θυμίζει πύργο της Βαβέλ:
+
+*   Το script του **RGB Lord** ψάχνει αρχεία στο `D:\Games\MyProjects\Ergasia_Final_V2`, το οποίο φυσικά δεν υπάρχει στο MacBook του **Silicon Aristocrat**.
+*   Ο **Hybrid User** έτρεξε τον κώδικα μέσω WSL2, αλλά το script ψάχνει το αρχείο στο `/mnt/c/Users/...` ενώ στα Windows είναι στο `C:\Users\...`. Αποτέλεσμα: `FileNotFoundError` και υπαρξιακή κρίση.
+*   Ο **Sudo Kamikaze** έφτιαξε τη βάση δεδομένων ως `root` χρήστης, και τώρα το connection string `user='student'` τρώει "Access Denied" παντού.
+*   Και για κερασάκι: Το Excel Export (`XlsxWriter`) δουλεύει τέλεια, αλλά σώζει το αρχείο με όνομα `??_?????.xlsx` λόγω κωδικοποίησης Windows-1253 που μισεί το Linux.
+
+Αποτέλεσμα: **Discord Panic Call** και η φράση *"Μα σε μένα τρέχει!"* ακούγεται 5 φορές ταυτόχρονα.
+
+### Η Λύση: Η Συνθήκη Ειρήνης (Docker Compose)
+
+Αντί να σπαταλήσουμε 10 ώρες στο Discord προσπαθώντας να βρούμε γιατί ο **Sudo Kamikaze** δεν μπορεί να συνδεθεί στη βάση, παίρνουμε μια βαθιά ανάσα και γράφουμε ένα `docker-compose.yml`.
+
+**Τι κερδίζουμε (και πώς σταματάει ο πόλεμος):**
+
+1.  **Η Βάση Δεδομένων (MySQL) είναι "Ιερή":** Δεν την εγκαθιστά ΚΑΝΕΙΣ τοπικά. Τρέχει σε container.
+    *   O **RGB Lord** δεν χρειάζεται να κλείσει το XAMPP ή το Riot Vanguard. Το Docker τα κανονίζει όλα.
+    *   Όλοι συνδέονται στο `localhost:3306` με `user: root` και `password: secret`. Τέλος τα "ξεχασμένα password".
+2.  **Τα Libraries είναι "Μπετόν Αρμέ":**
+    *   Το `requirements.txt` φορτώνεται μέσα στο container.
+    *   Ο **Hybrid User** σταματάει να παλεύει με τα Path conversions του WSL2. Μέσα στο container, το path είναι πάντα `/app`. Τέλος.
+    *   Ο **Silicon Aristocrat** σταματάει να κλαίει για drivers, γιατί το container τρέχει Linux (ακόμα και στο Mac του).
+
+### Το Tkinter Paradox (ή πώς να μην μπλέξεις με X11)
+
+Εδώ υπάρχει μια παγίδα. Το Docker είναι τέλειο για server-side πράγματα (που δεν έχουν οθόνη). Το να προσπαθήσεις να ανοίξεις παράθυρο (GUI) μέσα από Docker στα Windows, είναι πιο δύσκολο και από το να περάσεις "Λειτουργικά Συστήματα ΙΙ" με 10. Θέλει X11 servers, VcXsrv, και τάματα στην Παναγία.
+
+**Η Λύση: Hybrid Mode (Ο Κένταυρος 🐎)**
+Κάνουμε το εξής κόλπο για να είμαστε όλοι ευτυχισμένοι:
+
+1.  **Ο "Εγκέφαλος" (MySQL):** Τρέχει στο Docker. Απομονωμένος, καθαρός, ασφαλής. Κανείς δεν κάνει install τίποτα.
+2.  **Το "Πρόσωπο" (Tkinter):** Τρέχει *χύμα* (native) στο PC μας.
+
+Γιατί βολεύει αυτό;
+*   Ο **RGB Lord** βλέπει το GUI στην 4K 240Hz οθόνη του χωρίς lag.
+*   Ο **Hybrid User** το βλέπει μέσω XServer στα Windows (VcXsrv) χωρίς να χρειάζεται να κάνει dual-boot.
+*   Ο **Sudo Kamikaze** δεν χρειάζεται να πάρει δικαιώματα διαχειριστή για να εγκαταστήσει τη MySQL. Τρέχει σε container και (ελπίζουμε) ότι δεν θα κάνει `rm -rf /` στο host machine.
+
+Είναι σαν να παραγγέλνεις delivery (Docker DB) αλλά να τρως άνετα στον καναπέ σου (Local Python). Το καλύτερο και από τους δύο κόσμους.
+
+### Το Setup μας (`docker-compose.yml`)
+
+```yaml
+version: '3.8'
+
+services:
+  # Η Βάση μας - Κοινή για όλους τους Developerοφοιτητές
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secretpassword
+      MYSQL_DATABASE: family_finance_db
+    ports:
+      - "3306:3306"  # <--- Η βάση είναι διαθέσιμη στο localhost του καθενός!
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+```
+
+Τώρα, ο κάθε Developerοφοιτητής, απλά πατάει `docker-compose up` και **BOOM**: Έχει έτοιμη, ρυθμισμένη MySQL βάση να περιμένει τα δεδομένα της εφαρμογής. Ούτε installers, ούτε services, ούτε panics.
+### Η Ώρα της Κρίσης: Το ZIP στον Καθηγητή
+
+Ωραία, εμείς σωθήκαμε. Τι στέλνουμε όμως στον καθηγητή; Οι οδηγίες λένε: *"1. Τον κώδικά σας, 2. Οδηγίες εγκατάστασης"*.
+
+Δεν του πετάμε σκέτο το Docker container. Κάνουμε το εξής επαγγελματικό (Senior move):
+
+**Στο `README.txt` ή `INSTALL.txt` γράφουμε:**
+
+> **Επιλογή Α (Προτείνεται - The Smart Way):**
+> 1. Εγκαταστήστε το Docker Desktop.
+> 2. Ανοίξτε τερματικό στο φάκελο και τρέξτε: `docker-compose up`.
+> 3. H εφαρμογή θα ξεκινήσει και η βάση δεδομένων θα δημιουργηθεί αυτόματα.
+
+> **Επιλογή Β (Κλασική - The Painful Way):**
+> 1. Εγκαταστήστε Python 3.9+.
+> 2. Εγκαταστήστε MySQL Server 8.0 local.
+> 3. Φτιάξτε χρήστη root/secretpassword.
+> 4. Τρέξτε `pip install -r requirements.txt`.
+> 5. Καλή τύχη.
+
+**Γιατί να το κάνετε αυτό;**
+1.  **Bonus Points:** Στην Έκθεση (Παραδοτέο 3), γράψτε ένα section *"Προκλήσεις και Λύσεις"*. Εξηγήστε πώς το Docker έλυσε τα προβλήματα ασυμβατότητας της ομάδας. Αυτό δείχνει μηχανική σκέψη, όχι απλά "έγραψα κώδικα".
+2.  **GitHub Link (Παραδοτέο 6):** Ανεβάστε τον κώδικα στο GitHub με ένα ωραίο README που έχει τα badges του Docker. Δείχνει ότι είστε έτοιμοι για την αγορά εργασίας.
+
+Έτσι, καλύπτετε και τον "παραδοσιακό" τρόπο (αν ο καθηγητής δεν θέλει Docker), αλλά δείχνετε και το modern approach.
+
+### Bonus: The "Double-Click" Experience (Windows .bat)
+
+Επειδή ο καθηγητής (και εμείς) βαριόμαστε να γράφουμε εντολές στο τερματικό, φτιάχνουμε ένα αρχείο `run_app.bat` στο φάκελο του project.
+
+Αυτό το μαγικό αρχειάκι κάνει τα πάντα μόνο του. Όταν το τρέξετε, θα δείτε αυτό το μαγικό 3 visual:
+
+<Terminal title="CMD: run_app.bat">
+> [INFO] Starting Database Container...
+> [INFO] Waiting for Database to initialize (10s)...
+> [INFO] Installing Python requirements...
+> [INFO] Launching Family Finance App...
+> ... (App window opens) ...
+> [INFO] App closed. Stopping Database...
+> Press any key to continue...
+</Terminal>
+
+Και ο κώδικας για το `run_app.bat`:
+
+```batch
+@echo off
+title Family Finance App Launcher
+
+echo [INFO] Starting Database Container...
+docker-compose up -d db
+
+echo [INFO] Waiting for Database to initialize (10s)...
+timeout /t 10 /nobreak
+
+echo [INFO] Installing Python requirements...
+pip install -r requirements.txt
+
+echo [INFO] Launching Family Finance App...
+python main.py
+
+echo [INFO] App closed. Stopping Database...
+docker-compose down
+pause
+```
+
+**Τι κάνει:**
+1.  Σηκώνει τη MySQL στο background.
+2.  Περιμένει λίγο να ξυπνήσει η βάση.
+3.  Βάζει τα libraries (αν λείπουν).
+4.  Τρέχει την εφαρμογή.
+5.  Όταν κλείσεις το παράθυρο, σβήνει και τη βάση για να μην πιάνει μνήμη.
+
+### Για τους Linux/Mac Users (και τον Καθηγητή)
+
+Αν ο καθηγητής τρέχει Ubuntu (ή αν εσείς έχετε Mac), το `.bat` δεν θα τρέξει. Οπότε, δίνουμε και το `run_app.sh`.
+
+Η εμπειρία στο Linux τερματικό θα είναι κάπως έτσι:
+
+<Terminal title="BASH: ./run_app.sh">
+$ ./run_app.sh
+[INFO] Starting Database Container...
+[+] Running 1/1
+ ✔ Container family-finance-db-1  Started
+[INFO] Waiting for Database to initialize (10s)...
+[INFO] Installing Python requirements...
+Requirement already satisfied: pandas...
+[INFO] Launching Family Finance App...
+...
+</Terminal>
+
+Ο κώδικας για το `run_app.sh`:
+
+```bash
+#!/bin/bash
+echo "[INFO] Starting Database Container..."
+docker-compose up -d db
+
+echo "[INFO] Waiting for Database to initialize (10s)..."
+sleep 10
+
+echo "[INFO] Installing Python requirements..."
+pip3 install -r requirements.txt
+
+echo "[INFO] Launching Family Finance App..."
+python3 main.py
+
+echo "[INFO] App closed. Stopping Database..."
+docker-compose down
+```
+
+Τώρα είμαστε πραγματικά **Cross-Platform**. Δεν έχει σημασία αν ο καθηγητής διορθώνει από Windows 11 ή από Arch Linux. Η εφαρμογή μας παίζει παντού.
+
+### Το Σκονάκι (Cheat Sheet) για την Εξέταση
+
+Για να μην σε πιάσει αδιάβαστο ο καθηγητής στην παρουσίαση, ορίστε η αναλογία με... **Ταπεράκια**:
+
+*   **Dockerfile = Η Συνταγή της Γιαγιάς 📜**
+    Είναι το χαρτί που περιγράφει τα υλικά: *"Θέλω Linux, Python 3.9 και λίγο Pandas"*. Είναι απλά κείμενο. Δεν τρώγεται. Είναι οι οδηγίες για να φτιαχτεί το Image.
+
+*   **Image = Το Κατεψυγμένο Ταπεράκι 🧊**
+    Το αποτέλεσμα της συνταγής. Είναι πακεταρισμένο, "παγωμένο" και **Read-Only**.
+    *   Δεν μπορείς να βγάλεις τον αρακά από μέσα.
+    *   Είναι **ΑΚΡΙΒΩΣ** το ίδιο ταπεράκι για τον Gamer, τον Linux-ά και τον Mac user.
+
+*   **Container = Το Ζέσταμα στα Μικροκύματα ♨️**
+    Η στιγμή που το Image "ζωντανεύει".
+    *   Μπορείς να ζεστάνεις 5 ταπεράκια ταυτόχρονα (Scaling).
+    *   Αν "κάψεις" το φαγητό (Crash), πετάς το Container και ανοίγεις ένα καινούργιο Image από την κατάψυξη.
+
+## Επίλογος: Από "Chaos" σε "Distinguished Seniors"
+
+Με το Docker, η ομάδα του "Project 06" σταμάτησε να τσακώνεται για drivers και άρχισε να γράφει κώδικα (ή να παίζει Valorant, ας είμαστε ρεαλιστές).
+
+*   Ο **RGB Lord** χαίρεται το GUI σε 4K χωρίς να πειράζει το setup του.
+*   Ο **Hybrid User** κοιμάται ήσυχος, γιατί δεν χρειάζεται να διαλέξει πια ανάμεσα σε Gaming και Coding.
+*   Ο **Sudo Kamikaze** δεν μπορεί πια να διαλύσει το PC του (το πολύ-πολύ να διαλύσει το container).
+
+Και το σημαντικότερο; Ο καθηγητής θα κάνει διπλό κλικ στο `.bat`, θα δει τη MySQL να σηκώνεται μόνη της, και θα βάλει **10άρι** για την "Επαγγελματική Αρχιτεκτονική".
+
+Launch it 🚀
