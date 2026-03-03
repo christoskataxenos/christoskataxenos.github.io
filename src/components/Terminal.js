@@ -23,13 +23,25 @@ export default function Terminal({ children, title = 'terminal' }) {
             </div>
 
             {/* Terminal Content */}
-            <div className="p-4 font-mono text-[10px] sm:text-[12px] leading-tight overflow-x-auto text-gray-300">
+            <div className="terminal-body p-4 font-mono text-[10px] sm:text-[11px] leading-relaxed overflow-x-auto text-gray-300">
+                <style jsx>{`
+                    .terminal-body :global(*) {
+                        font-size: inherit !important;
+                        color: inherit !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        line-height: inherit !important;
+                        display: inline !important;
+                        font-weight: normal !important;
+                        text-shadow: none !important;
+                        border: none !important;
+                    }
+                `}</style>
                 <div className="flex items-start">
                     <span className="mr-3 text-green-400 select-none shrink-0">$</span>
-                    {/* Explicitly setting font-size on pre to avoid prose inheritance */}
-                    <pre className="whitespace-pre overflow-x-auto text-[10px] sm:text-[12px] leading-tight m-0 p-0">
+                    <div className="whitespace-pre overflow-x-auto m-0 p-0 w-full">
                         {children}
-                    </pre>
+                    </div>
                 </div>
             </div>
         </div>
