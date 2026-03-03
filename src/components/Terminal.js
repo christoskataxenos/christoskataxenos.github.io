@@ -20,10 +20,10 @@ export default function Terminal({ children, title = 'terminal' }) {
             </div>
 
             {/* Terminal Content */}
-            <div className="p-4 font-mono text-sm sm:text-base leading-relaxed overflow-x-auto text-gray-300">
-                <div className="flex">
-                    <span className="mr-4 text-green-400 select-none">$</span>
-                    <pre className="inline-block">{children}</pre>
+            <div className="p-4 font-mono text-xs sm:text-sm leading-normal overflow-x-auto text-gray-300">
+                <div className="flex items-start">
+                    <span className="mr-3 text-green-400 select-none shrink-0">$</span>
+                    <pre className="whitespace-pre overflow-x-auto">{children}</pre>
                 </div>
             </div>
         </div>
