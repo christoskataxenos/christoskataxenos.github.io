@@ -41,10 +41,16 @@ const Stats = ({ panicLevel, doubtLevel, coffeeCups, hoursSpent }) => {
 
         {/* Coffee Counter */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '20px' }}>☕</span>
+          <span style={{ fontSize: coffeeCups > 20 ? '28px' : '20px', transition: 'all 0.3s' }}>☕</span>
           <div>
             <div style={{ fontSize: '12px', color: '#888' }}>Caffeine</div>
-            <div style={{ fontWeight: 'bold' }}>{coffeeCups} cups</div>
+            <div style={{ 
+              fontWeight: 'bold', 
+              fontSize: coffeeCups > 20 ? '16px' : '14px',
+              color: coffeeCups > 20 ? '#f59e0b' : '#fff' // Amber color for high caffeine
+            }}>
+              {coffeeCups} {coffeeCups > 20 ? 'MASSIVE' : ''} cups
+            </div>
           </div>
         </div>
 

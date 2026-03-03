@@ -1,0 +1,109 @@
+---
+title: "Week 1: Wurst in the Stew, Monster, and the 36% Oracle"
+date: "2026-03-03"
+description: "The first week of EAP Project 07. From zero GUI to the chaos of team collaboration."
+tags: ["eap", "python", "tkinter", "devlog"]
+---
+
+<Stats panicLevel={88} coffeeCups={24} hoursSpent={64} />
+
+One week after the first meeting for **Project 07** at **EAP**—a one-hour **Viber** call (because we're boomers and Discord gives us anxiety) where 50% of the time was spent fixing "hissing" microphones—and Silicon Valley can finally sleep peacefully: the competition is here and it's wearing pajamas. With the naivety of students thinking they'll build the next Unicorn and become millionaires, we divided roles—Frontend, Backend, Databases—with the same seriousness as roles in a "Karagiozis wedding" school play.
+
+Me, in the role of the "graphics guy," decided to teach style using **Python** and **Tkinter**. Yes, Tkinter is what they want, so what can I do? Because nothing says "2026" more than a library whose aesthetic strongly recalls the era when modems still "screeched" to connect.
+
+<Callout type="info" title="The Masterpiece (RandeBoo)">
+In the Business Plan... I named it **RandeBoo** (obviously Lidl-inspired). It's supposed to be a "premium" appointment management app. In the world of logic, "premium" means "a UI that doesn't hurt your eyes." In our world, if the main window opens without consuming all the system's RAM, I'll consider it a technological feat worthy of NASA.
+</Callout>
+
+### 🎭 Reality Check
+
+To understand the scale of the delusion: while in the "Dream" we saw Microservices and Glassmorphism, in our waking life, reality landed us hard on **db.db** and **Viber calls** with a vacuum cleaner noise in the background.
+
+![The RandeBoo Vision](/images/posts/randeboo-vision.png)
+*Note: The UI is \"top secret\" for now. But IF this (Glassmorphism in Tkinter) ever happens, the competition should truly be afraid.*
+
+### 🏗️ Building the GUI (and my mental health)
+
+In two days, I managed to set up an infrastructure that works better than our chances of graduating on time. Obviously, over the weekend I had nothing better to do with my life (peak no-lifer status), so I said I'd start with the "hard" stuff. The teammate made the start with a very solid and clean `db.db` that had absolutely everything we needed for the project's implementation, but because I'm a masochist, I decided to get my hands dirty. I rewrote the entire implementation in Python with **sqlite3**—exactly as the holy scriptures (project instructions) dictate—to ensure absolute compatibility. The goal? To avoid saying the classic "it works on mine, stick it where the sun don't shine if it doesn't work on yours."
+
+Meanwhile, I implemented a **ThemeManager**—because obviously the most critical element in an app that doesn't yet book appointments is whether the screen will burn our retinas at night. Singleton pattern, of course, to feel a bit like "Software Architects" and forget we're fighting with Tkinter. If we're going to collapse psychologically, let's at least do it in **Dark Mode**.
+
+<FileTree title="Hierarchy of Despair (Expanded Edition)">
+- Survival_Protocol/
+  - Stimulants/
+    - Espresso_Double (deprecated - no longer hits)
+    - Monster_Energy_Ultra.bin (Hardcoded in DNA)
+    - Cold_Pizza_Leftovers.zip
+  - Bio_Hardware/
+    - Eyes/
+      - Blue_Light_Filter.dmg (Failed to load)
+      - Redness_Level.log (CRITICAL_OVERFLOW)
+    - Sleep_Module/
+      - REM_Cycle.tmp (File Corrupted)
+      - PowerNap_v2.0.log (Size: 0 bytes)
+      - Circadian_Rhythm.sys (System Halted - Error 404)
+  - Social_Operating_System/
+    - Friends_List/
+      - Total_Matches (0)
+    - Weekend_Plans.exe (Shortcut: Missing target)
+    - Human_Interaction.dll (Register failed)
+  - Psychological_State/
+    - Imposter_Syndrome.exe (Auto-run on startup)
+    - Dark_Mode_Dependency.env
+    - Sanity_Check.sh (Permission Denied - Admin required)
+  - Team_Dynamics/
+    - Communication_Protocol (Handshake Timeout)
+    - Meeting_Notes/
+      - Silent_Screams.mp3
+      - Mutual_Confusion.pdf
+      - "O_Theos_Voithos.sh" (Running...)
+</FileTree>
+
+### 🛠️ The Project Audit Tool (or "The Oracle of Delphi")
+
+Because "it works on mine" is not an acceptable answer at an academic level (unfortunately), I built a diagnostic tool (`tests/test_main.py`) that runs and checks if the "masterpiece" is still alive. It's the only thing keeping us in touch with reality, reminding us how far we are from delivering something that won't be considered a "bioweapon" for the operating system. The last run yielded an honest **36%**, which for our standards is already a "Success Story" ready to go viral.
+
+<Terminal title="python tests/test_main.py --mode=despair">
+================================================================================
+ FULL SYSTEM DIAGNOSTIC (RandeBoo Project - Pre-Alpha-Chaos)
+================================================================================
+SQLite3 Connector           | OK (Compatibility: 100% - No excuses left)
+Auth Logic                  | OK (Hashing is still a myth)
+UI Theme Manager            | OK (Dark Mode enables: Sanity preserved)
+Database Management         | OK (Classmate's DB integrated - user no-lifer approved)
+--------------------------------------------------------------------------------
+[SYSTEM STATUS]
+Caffeine Saturation         | 89% (Refill required)
+Will to Live                | 12% (Critical)
+Compatibility with Reality  | NOT FOUND
+--------------------------------------------------------------------------------
+TOTAL PROGRESS: 36% | ERRORS: YES | HOPE: ERROR 404
+================================================================================
+</Terminal>
+
+### 🤯 The Clash of Titans (or \"Wurst in the Stew\")
+
+This is where it gets really interesting. The **EAP** team is not "new to this": we have a developer with some years under his belt, a database master, and two others who know exactly what they're doing (even if they sometimes seem to be in their own galaxy). The problem? We speak different dialects of the same language. How do we say it in my village? **Wurst in the stew**.
+
+While I struggle with modular architecture, Singletons, and a "clean" service layer, the rest of the team prefers a more... raw approach. They go straight to implementation, overlooking that building ease often becomes a maintenance nightmare. It's the classic case where vast experience clashes with my obsession for organization. The result? A functional mess that balances between raw experience and structure, waiting for the moment when everything will "click" before the project gains its own consciousness.
+
+<Callout type="warning" title="Friction Points">
+- **Architecture**: The battle of "one file for everything" vs "modular structure." Spoiler: The compiler doesn't care, but our mental health does.
+- **Database Logic**: The DB master delivered with `db.db`, and I'm running behind her to "marry" it with the GUI without the wedding turning into a funeral.
+- **Serviceability**: I'm trying to convince them that "working" is only the beginning. Being able to maintain it without needing an exorcist is the real milestone. Because if they ask for a live edit during the presentation, proper architecture is our only hope not to embarrass ourselves. (Spoiler: They will ask).
+</Callout>
+
+We continue with the hope that the "stew" will eventually become a gourmet dish, and that our 36% will skyrocket to a solid... 36.1% by next week (without having to double our Monster intake) and won't drop to 35%.
+
+### 🐍 Weekly Motto
+
+```python
+if progress < 100:
+    # Hardcode elements because: amateur uber alles
+    monster_cans = 999999
+    team_vibe = "WURST_STON_PATSA"
+    
+    explain_to_titans("Architecture_vFinal_FINAL_v2.py")
+    os.system("sh O_Theos_Voithos.sh")
+    keep_coding(hardcode_logic=True)
+```
