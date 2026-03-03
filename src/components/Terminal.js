@@ -23,7 +23,7 @@ export default function Terminal({ children, title = 'terminal' }) {
             </div>
 
             {/* Terminal Content */}
-            <div className="terminal-body p-4 font-mono text-[10px] sm:text-[11px] leading-relaxed overflow-x-auto text-gray-300">
+            <div className="terminal-body p-4 font-mono text-[11px] sm:text-[13px] leading-relaxed overflow-x-auto text-gray-300">
                 <style jsx>{`
                     .terminal-body :global(*) {
                         font-size: inherit !important;
