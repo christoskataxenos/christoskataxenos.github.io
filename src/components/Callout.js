@@ -1,3 +1,8 @@
+/**
+ * Callout Component
+ * Σκοπός: Εμφάνιση σημαντικών πληροφοριών ή προειδοποιήσεων.
+ * Λειτουργία: Διαφορετικά χρώματα (info, warning, danger) και εικονίδια ανάλογα με τον τύπο.
+ */
 import React from 'react';
 
 const Callout = ({ type = 'info', title, children }) => {
@@ -30,11 +35,11 @@ const Callout = ({ type = 'info', title, children }) => {
       borderRadius: '0 8px 8px 0'
     }}>
       {title && (
-        <div style={{ 
-          fontWeight: 'bold', 
-          marginBottom: '8px', 
-          display: 'flex', 
-          alignItems: 'center', 
+        <div style={{
+          fontWeight: 'bold',
+          marginBottom: '8px',
+          display: 'flex',
+          alignItems: 'center',
           gap: '8px',
           color: '#fff'
         }}>
