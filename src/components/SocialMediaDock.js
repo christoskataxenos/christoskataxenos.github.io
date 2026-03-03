@@ -30,7 +30,7 @@ export default function SocialMediaDock() {
   return (
     <div
       className="fixed left-6 top-1/2 -translate-y-1/2 z-50 
-                 hidden lg:flex flex-col items-center gap-4 py-4 px-3 rounded-full 
+                 hidden xl:flex flex-col items-center gap-4 py-4 px-3 rounded-full 
                  bg-black/50 backdrop-blur-md border border-white/10 
                  shadow-lg shadow-purple-500/10"
     >
