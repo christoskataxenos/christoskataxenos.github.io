@@ -1,3 +1,9 @@
+/**
+ * LanguageSwitch Component
+ * Σκοπός: Εναλλαγή γλώσσας (GR/EN) με animated toggle.
+ * Λειτουργία: Διαχείριση mounted state για αποφυγή hydration mismatch, έλεγχος URL για blog paths.
+ * Σχεδίαση: Custom CSS για το track και το thumb του toggle.
+ */
 'use client';
 
 import { useLanguage } from '../context/LanguageContext';
@@ -11,6 +17,7 @@ export default function LanguageSwitch() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -34,7 +41,7 @@ export default function LanguageSwitch() {
   if (!mounted) return null;
 
   return (
-    <button 
+    <button
       onClick={handleToggle}
       className="lang-switch"
       aria-label="Switch Language"
@@ -109,12 +116,7 @@ export default function LanguageSwitch() {
         }
 
         .toggle-thumb.right {
-          transform: translateX(44px); /* 96 - 4 - 4 - 42 = 46? No. 4 + 44 = 48. Width 96. Right edge 96-4=92. Thumb right: 48+42=90. */
-          /* Let's do exact math. 
-             Container Inner Width = 96 - 8 = 88.
-             Thumb Width = 44.
-             Travel = 88 - 44 = 44.
-          */
+          transform: translateX(44px);
           width: 44px;
         }
 
@@ -127,8 +129,6 @@ export default function LanguageSwitch() {
              height: 36px;
              padding: 3px;
            }
-           /* Inner width: 84 - 6 = 78 */
-           /* Thumb width: 39 */
            .toggle-thumb {
              top: 3px;
              left: 3px;

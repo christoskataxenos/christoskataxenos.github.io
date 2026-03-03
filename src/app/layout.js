@@ -1,3 +1,9 @@
+/**
+ * Root Layout
+ * Σκοπός: Κεντρικό template της εφαρμογής, ορισμός fonts, metadata και καθολικών components.
+ * Λειτουργία: Wrapper για όλο το περιεχόμενο, περιλαμβάνει Background, Providers και Docks.
+ * SEO: Ορισμός OpenGraph, Twitter cards και meta tags.
+ */
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";

@@ -1,3 +1,9 @@
+/**
+ * SocialMediaDock Component
+ * Σκοπός: Εμφάνιση πλευρικού μενού με συνδέσμους social media.
+ * Λειτουργία: Fixed θέση στα αριστερά, κρυφό σε mobile (lg breakpoint) για αποφυγή overlap.
+ * Edge cases: Απόκρυψη σε μικρές οθόνες λόγω περιορισμένου πλάτους περιεχομένου.
+ */
 'use client';
 
 import Link from 'next/link';
@@ -24,7 +30,7 @@ export default function SocialMediaDock() {
   return (
     <div
       className="fixed left-6 top-1/2 -translate-y-1/2 z-50 
-                 flex flex-col items-center gap-4 py-4 px-3 rounded-full 
+                 hidden lg:flex flex-col items-center gap-4 py-4 px-3 rounded-full 
                  bg-black/50 backdrop-blur-md border border-white/10 
                  shadow-lg shadow-purple-500/10"
     >

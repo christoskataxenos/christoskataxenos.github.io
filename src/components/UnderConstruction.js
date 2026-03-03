@@ -1,3 +1,9 @@
+/**
+ * UnderConstruction Component
+ * Σκοπός: Placeholder σελίδα για τμήματα του site που είναι υπό κατασκευή.
+ * Λειτουργία: Εμφάνιση εικονιδίου, τίτλου και μηνύματος με κουμπί επιστροφής.
+ * Δεδομένα: title (string), Icon (component), SpotlightCard (optional component).
+ */
 'use client';
 // src/components/UnderConstruction.js
 import Link from 'next/link';
@@ -10,11 +16,11 @@ export default function UnderConstruction({ title, Icon, SpotlightCard }) {
     <div className="scroll-container">
       <section className="section hero-section">
         <div className="hero-content" style={{ gap: '2rem' }}>
-          
+
           {/* Animated Icon */}
-          <div style={{ 
-            color: '#7f5af0', 
-            width: '120px', 
+          <div style={{
+            color: '#7f5af0',
+            width: '120px',
             height: '120px',
             filter: 'drop-shadow(0 0 15px rgba(127, 90, 240, 0.4))',
             animation: 'pulse 3s infinite ease-in-out'
@@ -23,9 +29,9 @@ export default function UnderConstruction({ title, Icon, SpotlightCard }) {
           </div>
 
           {/* Title */}
-          <h1 style={{ 
-            fontSize: '3rem', 
-            fontWeight: '700', 
+          <h1 style={{
+            fontSize: '3rem',
+            fontWeight: '700',
             color: '#7f5af0',
             textShadow: '0 0 20px rgba(127, 90, 240, 0.6)',
             textAlign: 'center'
@@ -47,13 +53,13 @@ export default function UnderConstruction({ title, Icon, SpotlightCard }) {
           </div>
 
           <p className="hero-description" style={{ maxWidth: '500px', margin: '0' }}>
-            I'm currently building this part of my digital home. 
+            I&apos;m currently building this part of my digital home.
             Check back soon for updates or return to the main landing page.
           </p>
 
           {/* Back Button */}
           <CardLink href="/" className="back-to-home-card">
-            <span style={{color: '#fffffe', transition: 'color 0.3s ease', display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+            <span style={{ color: '#fffffe', transition: 'color 0.3s ease', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               ← Return Home
             </span>
             <style jsx>{`
@@ -82,7 +88,7 @@ export default function UnderConstruction({ title, Icon, SpotlightCard }) {
             `}</style>
           </CardLink>
 
-        
+
         </div>
       </section>
     </div>

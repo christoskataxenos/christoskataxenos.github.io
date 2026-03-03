@@ -1,3 +1,9 @@
+/**
+ * InteractionDock Component
+ * Σκοπός: Παροχή εργαλείων αλληλεπίδρασης (Like, Share) για τα blog posts.
+ * Λειτουργία: Αποθήκευση like στο localStorage, κοινή χρήση μέσω Native Share API ή Twitter/LinkedIn.
+ * Δεδομένα: title (string) για το share content.
+ */
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -25,14 +31,19 @@ export default function InteractionDock({ title }) {
   const [liked, setLiked] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
 
-  // Ensure client-side rendering
+  // Εξασφάλιση client-side rendering (Αποφυγή hydration errors)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-    // Check local storage for like status
+  }, []); // Εκτελείται μόνο μια φορά κατά την προσάρτηση του component
+
+  // Έλεγχος κατάστασης "like" από το localStorage κατά την αλλαγή της διαδρομής
+  useEffect(() => {
     const storageKey = `like-${pathname}`;
     const isLiked = localStorage.getItem(storageKey) === 'true';
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLiked(isLiked);
-  }, [pathname]);
+  }, [pathname]); // Εκτελείται όταν αλλάζει το pathname
 
   if (!mounted) return null;
 
@@ -41,7 +52,7 @@ export default function InteractionDock({ title }) {
     const newStatus = !liked;
     setLiked(newStatus);
     localStorage.setItem(storageKey, newStatus.toString());
-    
+
     // Optional: Add haptic feedback if on mobile
     if (navigator.vibrate) navigator.vibrate(50);
   };
@@ -80,15 +91,15 @@ export default function InteractionDock({ title }) {
 
   return (
     <aside className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-6">
-      
+
       {/* Dock Container */}
       <div className="flex flex-col items-center gap-4 px-3 py-6 rounded-full 
                       bg-black/50 backdrop-blur-md border border-white/10 
                       shadow-lg shadow-purple-500/10">
-        
+
         {/* Like Button */}
         <Tooltip text={liked ? "Liked!" : "Like"}>
-          <button 
+          <button
             onClick={handleLike}
             className="hover:scale-110 transition-transform duration-200 p-2 rounded-full"
             aria-label="Like post"
@@ -105,7 +116,7 @@ export default function InteractionDock({ title }) {
 
         {/* Share Button (Main) */}
         <Tooltip text="Share">
-          <button 
+          <button
             onClick={handleShare}
             className="hover:scale-110 transition-transform duration-200 p-2 rounded-full group"
             aria-label="Share post"
@@ -116,16 +127,16 @@ export default function InteractionDock({ title }) {
 
         {/* Extra Social Shares (Visible if no native share or just always visible for desktop convenience) */}
         <div className="flex flex-col gap-4 pt-2">
-            <Tooltip text="Tweet">
-                <button onClick={shareTwitter} className="hover:scale-110 transition-transform duration-200 p-1">
-                    <FaTwitter size={18} className="text-gray-500 hover:text-[#1DA1F2]" />
-                </button>
-            </Tooltip>
-            <Tooltip text="Post">
-                <button onClick={shareLinkedin} className="hover:scale-110 transition-transform duration-200 p-1">
-                    <FaLinkedin size={18} className="text-gray-500 hover:text-[#0A66C2]" />
-                </button>
-            </Tooltip>
+          <Tooltip text="Tweet">
+            <button onClick={shareTwitter} className="hover:scale-110 transition-transform duration-200 p-1">
+              <FaTwitter size={18} className="text-gray-500 hover:text-[#1DA1F2]" />
+            </button>
+          </Tooltip>
+          <Tooltip text="Post">
+            <button onClick={shareLinkedin} className="hover:scale-110 transition-transform duration-200 p-1">
+              <FaLinkedin size={18} className="text-gray-500 hover:text-[#0A66C2]" />
+            </button>
+          </Tooltip>
         </div>
 
       </div>

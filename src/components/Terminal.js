@@ -1,7 +1,10 @@
 'use client';
 
 /**
- * Terminal component for displaying command line scripts and outputs
+ * Terminal Component
+ * Σκοπός: Προσομοίωση παραθύρου τερματικού για προβολή εντολών.
+ * Λειτουργία: Overflow-x για μεγάλες εντολές, διακοσμητικά κουμπιά ελέγχου.
+ * Δεδομένα: children (περιεχόμενο), title (τίτλος παραθύρου).
  */
 export default function Terminal({ children, title = 'terminal' }) {
     return (

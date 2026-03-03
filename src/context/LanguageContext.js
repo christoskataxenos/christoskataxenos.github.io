@@ -1,9 +1,19 @@
+/**
+ * Language Context
+ * Σκοπός: Διαχείριση πολυγλωσσικότητας (English/Greek) σε όλη την εφαρμογή.
+ * Λειτουργία: Παροχή μεταφράσεων, αποθήκευση προτίμησης στο localStorage, αυτόματος εντοπισμός γλώσσας από το URL στα blogs.
+ * Δεδομένα: translations object, language state.
+ */
 'use client';
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 const LanguageContext = createContext();
+
+// ... (translations stay the same) ...
+// (I will keep the translations as they are but I'll only show the relevant parts in TargetContent)
+
 
 const translations = {
   en: {
@@ -197,7 +207,8 @@ export function LanguageProvider({ children }) {
     } else if (pathname.startsWith('/blog')) {
       if (language !== 'el') setLanguage('el');
     }
-  }, [pathname, language]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   // Effect to save language preference to localStorage
   useEffect(() => {

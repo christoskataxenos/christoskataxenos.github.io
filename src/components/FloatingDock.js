@@ -1,3 +1,9 @@
+/**
+ * FloatingDock Component
+ * Σκοπός: Κεντρικό μενού πλοήγησης και αλλαγής γλώσσας στην κάτω πλευρά της οθόνης.
+ * Λειτουργία: Fixed θέση, προσαρμογή μεγέθους σε mobile, διαχείριση back-to-blog path.
+ * Δεδομένα: Pathname από next/navigation, language context.
+ */
 'use client';
 
 import Link from 'next/link';
@@ -28,6 +34,7 @@ export default function FloatingDock() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -57,8 +64,8 @@ export default function FloatingDock() {
 
   return (
     <div
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 
-                 flex items-center gap-6 px-6 py-3 rounded-full 
+      className="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-50 
+                 flex items-center gap-3 md:gap-6 px-4 md:px-6 py-2 md:py-3 rounded-full 
                  bg-black/50 backdrop-blur-md border border-white/10 
                  shadow-lg shadow-purple-500/10"
     >
@@ -83,7 +90,7 @@ export default function FloatingDock() {
       {isBlogPost && <div className="h-4 w-[1px] bg-gray-600"></div>}
 
       {/* Language Toggle */}
-      <div 
+      <div
         className="flex font-mono text-sm cursor-pointer hover:scale-110 transition-transform duration-200"
         onClick={handleLanguageToggle}
         aria-label="Toggle Language"

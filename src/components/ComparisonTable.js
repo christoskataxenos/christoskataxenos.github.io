@@ -1,7 +1,10 @@
 'use client';
 
 /**
- * A premium comparison table component for MDX posts
+ * ComparisonTable Component
+ * Σκοπός: Πίνακας σύγκρισης δεδομένων για MDX posts.
+ * Λειτουργία: Responsive προβολή με horizontal scroll σε mobile, hover effects στις γραμμές.
+ * Δεδομένα: headers (array), rows (array of arrays).
  */
 export default function ComparisonTable({ headers, rows }) {
     return (

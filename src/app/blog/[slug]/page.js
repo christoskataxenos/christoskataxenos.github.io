@@ -1,3 +1,9 @@
+/**
+ * Blog Post Page [slug]
+ * Σκοπός: Δυναμική προβολή περιεχομένου άρθρου (MDX).
+ * Λειτουργία: Ανάκτηση δεδομένων post, render MDX, προβολή Stats & Interaction Dock.
+ * Assumptions: Το slug αντιστοιχεί σε έγκυρο αρχείο mdx στο content/posts.
+ */
 import { getPostData, getSortedPostsData } from '../../../lib/posts';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
@@ -71,7 +77,7 @@ export default async function Post({ params }) {
   const postData = await getPostData(resolvedParams.slug);
 
   return (
-    <div className="mx-auto max-w-3xl py-8 pt-32 px-6">
+    <div className="mx-auto max-w-3xl pt-32 pb-32 px-6">
       <ReadingProgress />
       <InteractionDock title={postData.title} />
 
