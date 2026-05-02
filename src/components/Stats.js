@@ -6,14 +6,29 @@
  */
 import React from 'react';
 
-const Stats = ({ panicLevel, doubtLevel, coffeeCups, hoursSpent }) => {
+const Stats = ({ panicLevel, doubtLevel, excitementLevel, coffeeCups, hoursSpent, linesOfLogic }) => {
   // Επιλογή μετρικής προς εμφάνιση
-  const isDoubt = doubtLevel !== undefined;
-  const level = isDoubt ? doubtLevel : panicLevel;
-  const label = isDoubt ? "Doubt Level" : "Panic Level";
+  let level = 0;
+  let label = "Panic Level";
+
+  if (excitementLevel !== undefined) {
+    level = excitementLevel;
+    label = "Excitement Level";
+  } else if (doubtLevel !== undefined) {
+    level = doubtLevel;
+    label = "Doubt Level";
+  } else if (panicLevel !== undefined) {
+    level = panicLevel;
+    label = "Panic Level";
+  }
+
+  // Handle hoursSpent/linesOfLogic fallback
+  const displayHours = hoursSpent !== undefined ? hoursSpent : (linesOfLogic ? Math.floor(linesOfLogic / 100) : 0);
 
   // Επιλογή χρώματος βάσει ορίων (Critical > 80, Warning > 50, OK <= 50)
-  const barColor = level > 80 ? '#ef4444' : level > 50 ? '#f59e0b' : '#10b981';
+  // For Excitement, maybe green is better for high values? 
+  // But let's keep the user's existing logic unless excitement should be different.
+  const barColor = label === "Excitement Level" ? '#c084fc' : (level > 80 ? '#ef4444' : level > 50 ? '#f59e0b' : '#10b981');
 
   return (
     <div style={{
@@ -66,7 +81,7 @@ const Stats = ({ panicLevel, doubtLevel, coffeeCups, hoursSpent }) => {
           <span style={{ fontSize: '20px' }}>⏱️</span>
           <div>
             <div style={{ fontSize: '12px', color: '#888' }}>Time Spent</div>
-            <div style={{ fontWeight: 'bold' }}>{hoursSpent} hours</div>
+            <div style={{ fontWeight: 'bold' }}>{displayHours} hours</div>
           </div>
         </div>
 
