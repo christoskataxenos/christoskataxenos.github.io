@@ -7,7 +7,6 @@ tags: ["ai", "papatzis", "cybersecurity", "jaccard", "static-analysis", "forensi
 
 <Stats excitementLevel={110} coffeeCups={12} linesOfLogic={6000} />
 
-> **TL;DR:** Papatzis Spotter V3 now utilizes the **Jaccard Similarity** algorithm to detect "robotic uniformity" in code. By transforming code structures into mathematical sets, the tool provides objective evidence of AI origin, moving beyond the heuristic-based methods of earlier versions.
 
 ## What is the Jaccard Similarity Algorithm?
 
@@ -45,7 +44,7 @@ The Jaccard algorithm is now applied across three levels simultaneously, but the
 
 ## Exponential Weighting & Dashboard 2.0
 
-One of the "gems" of V3.5 is the scoring algorithm. We use **Exponential Weighting** ($Score = Severity^{1.4}$) so that serious AI patterns "hit" much harder than minor artifacts.
+One of the "gems" of V3.5 is the scoring algorithm. We use **Exponential Weighting** (`Score = Severity ^ 1.4`) so that serious AI patterns "hit" much harder than minor artifacts.
 
 The new UI/UX introduces an **Industrial aesthetic**:
 *   **Radar Charts:** Visual representation of the "attack" (Entropy, Structure, Comments).

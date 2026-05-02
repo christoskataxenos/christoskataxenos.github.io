@@ -7,7 +7,6 @@ tags: ["ai", "papatzis", "eap", "plh10", "jaccard", "static-analysis"]
 
 <Stats excitementLevel={110} coffeeCups={12} linesOfLogic={6000} />
 
-> **TL;DR:** Ο Papatzis Spotter V3 χρησιμοποιεί τώρα πια, σχεδόν καλά τον αλγόριθμο **Jaccard Similarity** για να εντοπίζει τη "ρομποτική ομοιομορφία" στον κώδικα. Μετατρέποντας τη δομή του κώδικα σε μαθηματικά σύνολα, το εργαλείο μπορεί να αποδείξει αντικειμενικά την προέλευση από AI, ξεπερνώντας τις εμπειρικές μεθόδους των προηγούμενων εκδόσεων.
 
 ## Τι είναι ο Αλγόριθμος Jaccard Similarity;
 
@@ -47,7 +46,7 @@ tags: ["ai", "papatzis", "eap", "plh10", "jaccard", "static-analysis"]
 
 ## Exponential Weighting & Dashboard 2.0
 
-Ένα από τα "διαμάντια" του V3.5 είναι ο αλγόριθμος βαθμολόγησης. Χρησιμοποιούμε **Exponential Weighting** ($Score = Severity^{1.4}$) ώστε τα σοβαρά AI patterns να "χτυπάνε" πολύ πιο δυνατά. 
+Ένα από τα "διαμάντια" του V3.5 είναι ο αλγόριθμος βαθμολόγησης. Χρησιμοποιούμε **Exponential Weighting** (`Score = Severity ^ 1.4`) ώστε τα σοβαρά AI patterns να "χτυπάνε" πολύ πιο δυνατά. 
 
 Το νέο UI/UX φέρνει μια **Industrial αισθητική**:
 *   **Radar Charts:** Οπτική αναπαράσταση της "επίθεσης" (Εντροπία, Δομή, Σχόλια).
