@@ -35,9 +35,9 @@ const translations = {
         description: "Focusing on AI-integrated tools, automation engines, and dataset processing.",
         projectsLabel: "Key Projects:",
         projects: [
-          { name: "Papatzis Spotter V3", desc: "AI-powered AST analysis & Jaccard similarity engine for code forensics.", url: "https://github.com/christoskataxenos/papatzis-spotter" },
-          { name: "Video-to-ML Suite", desc: "End-to-end dataset generation from raw video to ML training readiness.", url: "https://github.com/christoskataxenos" },
-          { name: "Habit Tracker WebApp", desc: "Fullstack productivity application for dynamic habit monitoring.", url: "https://github.com/christoskataxenos" }
+          { name: "Papatzis Spotter", desc: "Offline AST analysis & Jaccard similarity engine for code forensics (no AI).", url: "https://github.com/christoskataxenos/papatzis-spotter" },
+          { name: "Video-to-ML Suite", desc: "End-to-end dataset generation from raw video to ML training readiness.", url: "https://github.com/christoskataxenos/video-to-ml-suite" },
+          { name: "Habit Tracker WebApp", desc: "Fullstack productivity application for dynamic habit monitoring.", url: "https://github.com/christoskataxenos/habit-tracker-webapp" }
         ]
       },
       technician: {
@@ -132,9 +132,9 @@ const translations = {
         description: "Εστίαση σε εργαλεία ενσωματωμένα με AI, μηχανές αυτοματισμού και επεξεργασία συνόλων δεδομένων.",
         projectsLabel: "Κύρια Projects:",
         projects: [
-          { name: "Papatzis Spotter V3", desc: "AI-powered AST analysis & Jaccard similarity engine για code forensics.", url: "https://github.com/christoskataxenos/papatzis-spotter" },
-          { name: "Video-to-ML Suite", desc: "Dataset generation από video μέχρι την προετοιμασία για ML training.", url: "https://github.com/christoskataxenos" },
-          { name: "Habit Tracker WebApp", desc: "Fullstack εφαρμογή παραγωγικότητας για δυναμική παρακολούθηση συνηθειών.", url: "https://github.com/christoskataxenos" }
+          { name: "Papatzis Spotter", desc: "Offline AST analysis & Jaccard similarity engine για code forensics (χωρίς χρήση AI).", url: "https://github.com/christoskataxenos/papatzis-spotter" },
+          { name: "Video-to-ML Suite", desc: "Dataset generation από video μέχρι την προετοιμασία για ML training.", url: "https://github.com/christoskataxenos/video-to-ml-suite" },
+          { name: "Habit Tracker WebApp", desc: "Fullstack εφαρμογή παραγωγικότητας για δυναμική παρακολούθηση συνηθειών.", url: "https://github.com/christoskataxenos/habit-tracker-webapp" }
         ]
       },
       technician: {
