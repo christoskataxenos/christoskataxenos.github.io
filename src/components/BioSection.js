@@ -259,7 +259,7 @@ function DetailPanel({ activeNode, t, onClose }) {
 
       {/* Panel */}
       <div
-        className="detail-panel absolute z-30 w-[360px] max-h-[400px] overflow-y-auto bg-[#08080c]/95 backdrop-blur-xl border border-cyan-500/25 rounded-xl shadow-[0_0_50px_rgba(34,211,238,0.12),0_0_100px_rgba(168,85,247,0.08)] p-6 animate-fadeInScale"
+        className="detail-panel absolute z-30 w-[360px] bg-[#08080c]/95 backdrop-blur-xl border border-cyan-500/25 rounded-xl shadow-[0_0_50px_rgba(34,211,238,0.12),0_0_100px_rgba(168,85,247,0.08)] p-6 animate-fadeInScale"
         style={{
           top: '50%',
           left: '50%',
