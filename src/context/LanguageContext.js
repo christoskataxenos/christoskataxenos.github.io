@@ -78,7 +78,7 @@ const translations = {
       softwareAI: {
         title: "Software Engineering & AI",
         skills: [
-          { label: "PYTHON FULLSTACK (PyQt6)", level: "Production Ready", width: "90%" },
+          { label: "PYTHON FULLSTACK", level: "Production Ready", width: "90%" },
           { label: "SOFTWARE ORCHESTRATION", level: "Production Ready", width: "90%" },
           { label: "ADVANCED PROMPT DESIGN", level: "Production Ready", width: "95%" },
           { label: "AI & AGENTIC SYSTEMS", level: "Intermediate", width: "70%" }
@@ -175,7 +175,7 @@ const translations = {
       softwareAI: {
         title: "Software Engineering & AI",
         skills: [
-          { label: "PYTHON FULLSTACK (PyQt6)", level: "Production Ready", width: "90%" },
+          { label: "PYTHON FULLSTACK", level: "Production Ready", width: "90%" },
           { label: "SOFTWARE ORCHESTRATION", level: "Production Ready", width: "90%" },
           { label: "ADVANCED PROMPT DESIGN", level: "Production Ready", width: "95%" },
           { label: "AI & AGENTIC SYSTEMS", level: "Intermediate", width: "70%" }
