@@ -157,10 +157,19 @@ function DetailPanel({ activeNode, t, onClose }) {
     projects: (
       <div className="space-y-3">
         {t.roles.researchDev.projects?.map((project, i) => (
-          <div key={i} className="bg-cyan-500/5 border border-cyan-500/15 rounded-lg p-3 hover:bg-cyan-500/10 transition-colors">
-            <span className="text-cyan-400 font-mono text-xs font-bold block mb-1">▸ {project.name}</span>
+          <a
+            key={i}
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block bg-cyan-500/5 border border-cyan-500/15 rounded-lg p-3 hover:bg-cyan-500/10 hover:border-cyan-400/30 transition-all group/link"
+          >
+            <span className="text-cyan-400 font-mono text-xs font-bold block mb-1 group-hover/link:text-cyan-300 transition-colors">
+              ▸ {project.name}
+              <span className="text-gray-600 text-[9px] ml-2 group-hover/link:text-cyan-500/70">↗ GitHub</span>
+            </span>
             <span className="text-gray-400 text-xs leading-relaxed">{project.desc}</span>
-          </div>
+          </a>
         ))}
       </div>
     ),
@@ -244,7 +253,7 @@ function DetailPanel({ activeNode, t, onClose }) {
     <>
       {/* Backdrop dim - κλείνει πατώντας έξω */}
       <div
-        className="absolute inset-0 z-25 bg-black/30 backdrop-blur-[2px] animate-fadeIn"
+        className="absolute inset-0 z-[25] bg-black/30 backdrop-blur-[2px] animate-fadeIn"
         onClick={onClose}
       />
 
@@ -363,7 +372,7 @@ export default function BioSection() {
       >
         {/* SVG layer — neural paths */}
         <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
+          className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-500 ${activeNode ? 'opacity-20' : 'opacity-100'}`}
           style={{ zIndex: 1 }}
           viewBox={`0 0 ${containerSize.w} ${containerSize.h}`}
           preserveAspectRatio="none"
