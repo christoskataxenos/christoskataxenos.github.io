@@ -9,7 +9,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Providers } from "../components/Providers";
 import GridBackground from "../components/GridBackground";
-import ClientOnlyFloatingDock from "../components/ClientOnlyFloatingDock"; // Import the new wrapper component
+import ClientOnlyFloatingDock from "../components/ClientOnlyFloatingDock"; 
 import ClientOnlySocialMediaDock from "../components/ClientOnlySocialMediaDock"; // Import the new social media dock wrapper
 
 const inter = Inter({
