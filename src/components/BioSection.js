@@ -28,6 +28,25 @@ export default function BioSection() {
             </h3>
             
             <ul className="space-y-6">
+              {/* --- New Research & Development Role --- */}
+              <li className="border-l-2 border-cyan-400/50 pl-4">
+                <h4 className="text-white font-semibold text-lg">{t.roles.researchDev.title}</h4>
+                <p className="text-xs text-cyan-500/70 mb-2 font-mono">{t.roles.researchDev.date}</p>
+                <div className="text-sm text-gray-300 space-y-2">
+                  <p className="text-gray-400 italic">{t.roles.researchDev.description}</p>
+                  <p className="font-semibold text-white mt-2">{t.roles.researchDev.projectsLabel}</p>
+                  <ul className="space-y-3 mt-1">
+                    {t.roles.researchDev.projects && t.roles.researchDev.projects.map((project, index) => (
+                      <li key={index} className="bg-cyan-500/5 border border-cyan-500/10 rounded-lg p-2 hover:bg-cyan-500/10 transition-colors">
+                        <span className="text-cyan-400 font-mono text-xs block mb-1">[{project.name}]</span>
+                        <span className="text-gray-400 text-xs">{project.desc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+
+              {/* --- Technician Role --- */}
               <li className="border-l-2 border-purple-500/50 pl-4">
                 <h4 className="text-white font-semibold text-lg">{t.roles.technician.title}</h4>
                 <p className="text-xs text-gray-500 mb-2 font-mono">{t.roles.technician.dateLocation}</p>
@@ -52,6 +71,8 @@ export default function BioSection() {
                   </ul>
                 </div>
               </li>
+
+              {/* --- Security Role --- */}
               <li className="border-l-2 border-gray-700 pl-4 group-hover:border-purple-500/50 transition-colors duration-300">
                 <h4 className="text-white font-semibold text-lg">{t.roles.security.title}</h4>
                 <p className="text-xs text-gray-500 mb-2 font-mono">{t.roles.security.date}</p>

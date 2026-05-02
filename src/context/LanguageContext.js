@@ -29,6 +29,17 @@ const translations = {
     educationTitle: "Education",
     skillsTitle: "Skills",
     roles: {
+      researchDev: {
+        title: "Software Research & Development",
+        date: "2024 - Present • GitHub Highlights",
+        description: "Focusing on AI-integrated tools, automation engines, and dataset processing.",
+        projectsLabel: "Key Projects:",
+        projects: [
+          { name: "Papatzis Spotter V3", desc: "AI-powered AST analysis & Jaccard similarity engine for code forensics." },
+          { name: "Video-to-ML Suite", desc: "End-to-end dataset generation from raw video to ML training readiness." },
+          { name: "Habit Tracker WebApp", desc: "Fullstack productivity application for dynamic habit monitoring." }
+        ]
+      },
       technician: {
         title: "Network and Computer Technician (Freelancer)",
         dateLocation: "2007 - Present • Remote/Client Sites",
@@ -55,11 +66,6 @@ const translations = {
         title: "Security Systems Technician",
         date: "2014 - 2018",
         description: "Installation, maintenance, fault diagnosis, and technical support for alarm and security camera systems."
-      },
-      seniorDev: {
-        title: "Senior Developer",
-        date: "2023 - Present",
-        description: "Leading frontend architecture and cyberpunk UI implementation."
       }
     },
     education: {
@@ -69,35 +75,43 @@ const translations = {
       iekDegree: "Computer and Network Technician"
     },
     skillGroups: {
+      softwareAI: {
+        title: "Software Engineering & AI",
+        skills: [
+          { label: "PYTHON FULLSTACK (PyQt6)", level: "Production Ready", width: "90%" },
+          { label: "SOFTWARE ORCHESTRATION", level: "Production Ready", width: "90%" },
+          { label: "ADVANCED PROMPT DESIGN", level: "Production Ready", width: "95%" },
+          { label: "AI & AGENTIC SYSTEMS", level: "Intermediate", width: "70%" }
+        ]
+      },
       frontend: {
         title: "Frontend & UI",
         skills: [
-          { label: "REACT / NEXT.JS", level: "Exploring", width: "15%" },
-          { label: "CSS / TAILWIND", level: "Exploring", width: "20%" }
-        ]
-      },
-      backend: {
-        title: "Backend",
-        skills: [
-          { label: "PYTHON", level: "Intermediate", width: "50%" },
-          { label: "C LANGUAGE", level: "Loading...", width: "33%" }
+          { label: "REACT / NEXT.JS", level: "Production Ready", width: "85%" },
+          { label: "CSS / TAILWIND", level: "Production Ready", width: "90%" }
         ]
       },
       infrastructure: {
         title: "Infrastructure",
         skills: [
-          { label: "NETWORKING", level: "Production Ready", width: "95%" },
-          { label: "HARDWARE & SYSTEMS", level: "Production Ready", width: "100%" }
+          { label: "NETWORKING", level: "Production Ready", width: "90%" },
+          { label: "HARDWARE & SYSTEMS", level: "Production Ready", width: "90%" }
         ]
       },
-      interestsTitle: "Interests",
-      interests: [
-        "PHOTOGRAPHY",
-        "GAMING",
-        "TRAVELLING",
-        "CUSTOM RIGS & SERVERS"
-      ]
-    }
+      backendLegacy: {
+        title: "CS Fundamentals",
+        skills: [
+          { label: "C LANGUAGE", level: "Loading...", width: "33%" }
+        ]
+      }
+    },
+    interestsTitle: "Interests",
+    interests: [
+      "PHOTOGRAPHY",
+      "GAMING",
+      "TRAVELLING",
+      "CUSTOM RIGS & SERVERS"
+    ]
   },
   el: {
     heroDescription: "Από τη διαχείριση δικτύων, στον σχεδιασμό λογισμικού. Με έδρα τη Στουτγκάρδη και ως φοιτητής Computer Science, εξελίσσω το τεχνικό μου υπόβαθρο σε δημιουργική γνώση. Στόχος μου είναι να συνδυάσω την εμπειρία των υποδοδομών με τον κώδικα, χτίζοντας γερές βάσεις για μια σύγχρονη καριέρα στο Software Development.",
@@ -112,6 +126,17 @@ const translations = {
     educationTitle: "Εκπαίδευση",
     skillsTitle: "Δεξιότητες",
     roles: {
+      researchDev: {
+        title: "Software Research & Development",
+        date: "2024 - Σήμερα • GitHub Highlights",
+        description: "Εστίαση σε εργαλεία ενσωματωμένα με AI, μηχανές αυτοματισμού και επεξεργασία συνόλων δεδομένων.",
+        projectsLabel: "Κύρια Projects:",
+        projects: [
+          { name: "Papatzis Spotter V3", desc: "AI-powered AST analysis & Jaccard similarity engine για code forensics." },
+          { name: "Video-to-ML Suite", desc: "Dataset generation από video μέχρι την προετοιμασία για ML training." },
+          { name: "Habit Tracker WebApp", desc: "Fullstack εφαρμογή παραγωγικότητας για δυναμική παρακολούθηση συνηθειών." }
+        ]
+      },
       technician: {
         title: "Τεχνικός Δικτύων και Η/Υ (Freelancer)",
         dateLocation: "2007 - Σήμερα • Απομακρυσμένα/Σε πελάτες",
@@ -138,11 +163,6 @@ const translations = {
         title: "Τεχνικός Συστημάτων Ασφαλείας",
         date: "2014 - 2018",
         description: "Εγκατάσταση, συντήρηση, διάγνωση βλαβών και τεχνική υποστήριξη για συστήματα συναγερμού και κάμερες ασφαλείας."
-      },
-      seniorDev: {
-        title: "Senior Developer",
-        date: "2023 - Σήμερα",
-        description: "Ηγεσία frontend αρχιτεκτονικής και υλοποίηση cyberpunk UI."
       }
     },
     education: {
@@ -152,25 +172,33 @@ const translations = {
       iekDegree: "Τεχνικός ηλεκτρονικών υπολογιστών και δικτύων"
     },
     skillGroups: {
+      softwareAI: {
+        title: "Software Engineering & AI",
+        skills: [
+          { label: "PYTHON FULLSTACK (PyQt6)", level: "Production Ready", width: "90%" },
+          { label: "SOFTWARE ORCHESTRATION", level: "Production Ready", width: "90%" },
+          { label: "ADVANCED PROMPT DESIGN", level: "Production Ready", width: "95%" },
+          { label: "AI & AGENTIC SYSTEMS", level: "Intermediate", width: "70%" }
+        ]
+      },
       frontend: {
         title: "Frontend & UI",
         skills: [
-          { label: "REACT / NEXT.JS", level: "Exploring", width: "15%" },
-          { label: "CSS / TAILWIND", level: "Exploring", width: "20%" }
-        ]
-      },
-      backend: {
-        title: "Backend",
-        skills: [
-          { label: "PYTHON", level: "Intermediate", width: "50%" },
-          { label: "ΓΛΩΣΣΑ C", level: "Loading...", width: "33%" }
+          { label: "REACT / NEXT.JS", level: "Production Ready", width: "85%" },
+          { label: "CSS / TAILWIND", level: "Production Ready", width: "90%" }
         ]
       },
       infrastructure: {
         title: "Υποδομές",
         skills: [
-          { label: "NETWORKING", level: "Production Ready", width: "95%" },
-          { label: "HARDWARE & SYSTEMS", level: "Production Ready", width: "100%" }
+          { label: "NETWORKING", level: "Production Ready", width: "90%" },
+          { label: "HARDWARE & SYSTEMS", level: "Production Ready", width: "90%" }
+        ]
+      },
+      backendLegacy: {
+        title: "Θεμέλια Πληροφορικής",
+        skills: [
+          { label: "ΓΛΩΣΣΑ C", level: "Loading...", width: "33%" }
         ]
       }
     },
