@@ -113,11 +113,55 @@ def _clear_content(self) -> None:
 
 ---
 
-## Ο Αόρατος Ήρωας: backup.py
+## Ο Αόρατος Ήρωας: backup.py (aka Το Καταφύγιο από Ραδιενεργά Drops)
 
-Δεν μας ζητήθηκε ποτέ. Αλλά ως developers, ξέρουμε ότι **data loss is the ultimate sin**. Έτσι, αφιέρωσα 6 ώρες για να γράψω ένα αυτόνομο backup σύστημα (`backup.py`).
+Στις επίσημες οδηγίες της εργασίας, η λέξη «backup» δεν υπήρχε ούτε ως υποσημείωση. Αλλά αν έχεις περάσει έστω και μία εβδομάδα γράφοντας κώδικα για παραγωγικό περιβάλλον, ξέρεις καλά ένα πράγμα: ο χρήστης (και ο συμφοιτητής) έχει την υπερδύναμη να καταστρέψει τη βάση δεδομένων με τρόπους που η επιστήμη δεν μπορεί ακόμα να εξηγήσει. Ένα «τυχαίο» alt-F4 την ώρα που γράφεται ένα query, ή ένα πείραμα με ωμό SQL κώδικα, και αντίο δεδομένα. Για εμάς, η απώλεια δεδομένων είναι το προπατορικό αμάρτημα. 
 
-Κάθε φορά που ανοίγει η εφαρμογή, δημιουργείται ένα timestamped αντίγραφο της SQLite βάσης στο `/backups`. Αν ο δίσκος καταρρεύσει ή αν ο χρήστης κάνει κάποια καταστροφική αλλαγή, το σύστημα κρατάει τα 5 τελευταία αντίγραφα και σβήνει τα παλιά για να μην γεμίσει ο δίσκος. 
+Έτσι, αποφάσισα να αφιερώσω `$6$` ολόκληρες ώρες (ώρες που θα μπορούσα να είχα κοιμηθεί ή να είχα πιει άλλον έναν Freddo Espresso) για να γράψω έναν αόρατο, αυτόνομο φύλακα άγγελο: το `backup.py`.
+
+Η λογική του; Απλή αλλά αμείλικτη. Κάθε φορά που το `gui_main.py` παίρνει μπρος, το `backup.py` ξυπνάει αθόρυβα στο background. Κοιτάζει τη βάση δεδομένων `randeboo.db`, παίρνει ένα ακριβές snapshot με timestamp στο όνομα (π.χ. `backup_20260531_2151.db`) και το αποθηκεύει σε έναν ειδικό φάκελο `/backups`. 
+
+Φυσικά, επειδή δεν θέλουμε ο δίσκος του χρήστη να γεμίσει με gigabytes από άχρηστα snapshots μετά από μερικές εβδομάδες χρήσης, υλοποίησα έναν αλγόριθμο rotation: το σύστημα κρατάει πάντα τα 5 πιο πρόσφατα αρχεία backup και διαγράφει τα παλαιότερα χωρίς οίκτο. 
+
+Ο κώδικας γράφτηκε με καθαρό Pythonic τρόπο, με εκτενή σχόλια στα ελληνικά:
+
+```python
+import os
+import shutil
+import glob
+from datetime import datetime
+
+def perform_db_backup(db_path: str, backup_dir: str, max_backups: int = 5) -> None:
+    # Δημιουργία του φακέλου backups αν δεν υπάρχει ήδη
+    if not os.path.exists(backup_dir):
+        os.makedirs(backup_dir)
+        
+    # Παραγωγή timestamp για το όνομα του αρχείου
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_filename = f"randeboo_backup_{timestamp}.db"
+    destination_path = os.path.join(backup_dir, backup_filename)
+    
+    # Αντιγραφή της SQLite βάσης στο φάκελο backups
+    try:
+        shutil.copy2(db_path, destination_path)
+    except IOError as e:
+        print(f"Σφάλμα κατά τη δημιουργία του backup: {e}")
+        return
+        
+    # Διαχείριση rotation: κρατάμε μόνο τα τελευταία max_backups αρχεία
+    backup_pattern = os.path.join(backup_dir, "randeboo_backup_*.db")
+    existing_backups = sorted(glob.glob(backup_pattern))
+    
+    # Αν ξεπεράσαμε το όριο, σβήνουμε τα παλαιότερα
+    while len(existing_backups) > max_backups:
+        oldest_backup = existing_backups.pop(0)
+        try:
+            os.remove(oldest_backup)
+        except OSError as e:
+            print(f"Αδυναμία διαγραφής παλαιού backup {oldest_backup}: {e}")
+```
+
+Αυτό το μικρό αρχειάκι ήταν η ασπίδα μας. Κατά τη διάρκεια των δοκιμών, όταν ένας συμφοιτητής αποφάσισε να κάνει drop έναν πίνακα «για να δει τι θα γίνει», το `backup.py` μας έσωσε από εγκεφαλικό επεισόδιο μέσα σε 3 δευτερόλεπτα. data loss avoided. Saint Linus approved.
 
 ---
 

@@ -113,11 +113,55 @@ Clean, instantaneous view-switching with zero memory leaks, which would make eve
 
 ---
 
-## 💾 The Unsung Hero: backup.py
+## 💾 The Unsung Hero: backup.py (aka The Fallout Shelter for SQLite)
 
-It was never requested in the guidelines. But as developers, we know that **data loss is the ultimate sin**. So, I dedicated 6 hours to write an autonomous backup system (`backup.py`).
+In the official university guidelines, the word “backup” was nowhere to be found. But if you've spent even a single week writing code for production-like environments, you know one absolute truth: users (and classmates) possess a unique superpower to obliterate databases in ways science cannot yet explain. A random Alt-F4 during a write transaction, or an experimental raw SQL query run on a whim, and *poof*—weeks of dummy data disappear. In our book, data loss is the ultimate sin.
 
-Every time the application boots, a timestamped copy of the SQLite database is created in `/backups`. If the drive crashes or the user messes up, the system keeps the 5 most recent backups and deletes older ones to save disk space.
+So, I decided to dedicate `$6$` whole hours (hours I could have spent sleeping or drinking yet another Freddo Espresso) to write a silent, autonomous guardian angel: `backup.py`.
+
+The logic is simple but merciless. Every time `gui_main.py` boots, `backup.py` quietly wakes up in the background. It takes a precise snapshot of the active `randeboo.db` database, stamps it with the current date and time (e.g., `randeboo_backup_20260531_2151.db`), and stores it safely in a designated `/backups` directory.
+
+Of course, to prevent the user's drive from choking on gigabytes of database snapshots after a few weeks of use, I implemented a custom file rotation algorithm: the system keeps only the 5 most recent backups, wiping out any older snapshots without hesitation.
+
+The script was written with clean Pythonic patterns, featuring comprehensive comments in Greek (because when the database crashes, you need explanations in your native language):
+
+```python
+import os
+import shutil
+import glob
+from datetime import datetime
+
+def perform_db_backup(db_path: str, backup_dir: str, max_backups: int = 5) -> None:
+    # Δημιουργία του φακέλου backups αν δεν υπάρχει ήδη
+    if not os.path.exists(backup_dir):
+        os.makedirs(backup_dir)
+        
+    # Παραγωγή timestamp για το όνομα του αρχείου
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_filename = f"randeboo_backup_{timestamp}.db"
+    destination_path = os.path.join(backup_dir, backup_filename)
+    
+    # Αντιγραφή της SQLite βάσης στο φάκελο backups
+    try:
+        shutil.copy2(db_path, destination_path)
+    except IOError as e:
+        print(f"Σφάλμα κατά τη δημιουργία του backup: {e}")
+        return
+        
+    # Διαχείριση rotation: κρατάμε μόνο τα τελευταία max_backups αρχεία
+    backup_pattern = os.path.join(backup_dir, "randeboo_backup_*.db")
+    existing_backups = sorted(glob.glob(backup_pattern))
+    
+    # Αν ξεπεράσαμε το όριο, σβήνουμε τα παλαιότερα
+    while len(existing_backups) > max_backups:
+        oldest_backup = existing_backups.pop(0)
+        try:
+            os.remove(oldest_backup)
+        except OSError as e:
+            print(f"Αδυναμία διαγραφής παλαιού backup {oldest_backup}: {e}")
+```
+
+This single utility file was our shield. During manual testing, when a teammate decided to drop a table “just to see what happens,” `backup.py` restored the state and saved us from a near-fatal panic attack in exactly 3 seconds. Data loss avoided. Saint Linus approved.
 
 ---
 
