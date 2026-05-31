@@ -81,27 +81,35 @@ The UI finally had personality. It was no longer "just a Tkinter app." It was **
 
 ---
 
-## 🚦 SPA Routing: Single Page Architecture in Tkinter
+## 🚦 SPA Routing: Single Page Architecture in Tkinter (aka The Hack of the Century)
 
-To avoid the chaos of multiple windows popping open (reminiscent of 00s adware), I implemented a custom **Router** in `gui_main.py`. The app behaves like a Single Page Application (SPA).
+When my classmate suggested, *“Hey, why don't we just pop open 5-6 independent `Toplevel` windows to toggle between views? Who's going to notice?”*, I felt a cold shiver run down my spine. Standard Tkinter, if left to its own devices, will turn your screen into a Windows Millennium adware pop-up nightmare in 5 seconds. No, folks. We are here to do software engineering, not sell CD-keys in Zappeion hangouts.
+
+Since my DNA is basically React (I am a lover of the modern web), I decided to bring SPA (Single Page Application) routing to the Tkinter universe. Yes, SPA in Tkinter. No virtual DOM, no web browser, just raw Python and pure stubbornness.
+
+I built a custom `Router` inside [gui_main.py] (the name of the file is, to say the least, funny). The logic is simple but effective: a dictionary mapping route strings to view-rendering functions, and a dynamic frame cleaner. Clicking a sidebar button executes a silent but merciless `widget.destroy()` on all children of the active frame, immediately drawing the new view on the same parent container. The view-switching is so snappy you'd think it's running on Next.js App Router at 120Hz.
 
 ```python
-def open_view(self, name: str) -> None:
-    """Central router for swapping panels (SPA)."""
-    if name not in self.views:
-        logging.warning(f"Unknown view: {name}")
+def open_view(self, view_name: str) -> None:
+    # Έλεγχος αν η σελίδα που ζήτησε ο χρήστης υπάρχει στο routing map
+    if view_name not in self.views:
+        logging.warning(f"Unknown view name requested: {view_name}")
         return
 
+    # Καθάρισμα της οθόνης από το προηγούμενο view για να μην γίνει μπάχαλο
     self._clear_content()
-    self.views[name]()   # Dynamically render the panel on the shared canvas
+    
+    # Δυναμική κλήση της function που σχεδιάζει το νέο panel
+    self.views[view_name]()
 
-def _clear_content(self):
-    """Destroys all widgets in the central Content Frame."""
+def _clear_content(self) -> None:
+    # Διαγραφή όλων των ενεργών widgets στο κεντρικό frame
+    # Με αυτόν τον τρόπο αποφεύγουμε τα memory leaks και το stackάρισμα των panels
     for widget in self.content_frame.winfo_children():
         widget.destroy()
 ```
 
-When the user clicks the sidebar, the router clears the active view and renders the new one in the central frame. Clean, fast, and leak-free.
+Clean, instantaneous view-switching with zero memory leaks, which would make even React developers weep with emotion (or despair over how we ended up writing an SPA in Tkinter).
 
 ---
 

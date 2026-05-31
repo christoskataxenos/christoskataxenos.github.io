@@ -81,27 +81,35 @@ cursor.execute('''
 
 ---
 
-## SPA Routing: Single Page Architecture στο Tkinter
+## SPA Routing: Single Page Architecture στο Tkinter (aka Η Πατέντα του Αιώνα)
 
-Για να αποφύγουμε το χάος των πολλαπλών παραθύρων που ανοιγοκλείνουν (που θυμίζει adware των 00s), υλοποίησα έναν customized **Router** στο `gui_main.py`. Η εφαρμογή λειτουργεί ως SPA (Single Page Application).
+Όταν ο συμφοιτητής μου είπε *«Έλα μωρέ, πέτα εκεί 5-6 αυτόνομα `Toplevel` παράθυρα να ανοιγοκλείνουν, ποιος θα το καταλάβει;»*, ένιωσα ένα ρίγος να με διαπερνά. Το Tkinter, αν το αφήσεις στην τύχη του, μπορεί να μετατρέψει την οθόνη σου σε desktop από adware των Windows Millennium μέσα σε 5 δευτερόλεπτα πλοήγησης. Όχι, κύριοι. Εδώ είμαστε για να κάνουμε software engineering, όχι να πουλάμε CD-keys σε στέκια του Ζαππείου.
+
+Επειδή λοιπόν στο DNA μου κυλάει React (είμαι εραστής του modern web), πήρα την απόφαση να φέρω το SPA (Single Page Application) routing στον κόσμο του Tkinter. Ναι, καλά διαβάσατε. SPA στο Tkinter, χωρίς Router DOM, χωρίς web browsers, μόνο με ωμό Python κώδικα και ακατέργαστο πείσμα.
+
+Σχεδίασα έναν custom `Router` στο [gui_main.py] (το όνομα του αρχείου είναι, τουλάχιστον, αστείο). Η λογική είναι απλή αλλά δολοφονική: Ένα dictionary mapping που αντιστοιχεί strings με views (functions που ζωγραφίζουν τα panels), και ένας dynamic καθαριστής frame. Όταν πατάς ένα κουμπί στο sidebar, ο router ρίχνει ένα αόρατο αλλά αμείλικτο `widget.destroy()` σε όλα τα widgets του τρέχοντος panel και σχεδιάζει το επόμενο view ακαριαία, πάνω στο ίδιο κεντρικό frame. Το transition είναι τόσο ομαλό που αν κλείσεις τα μάτια σου, νομίζεις ότι τρέχεις Next.js App Router στα 120Hz.
 
 ```python
-def open_view(self, name: str) -> None:
-    """Κεντρικός router για την εναλλαγή των panels (SPA)."""
-    if name not in self.views:
-        logging.warning(f"Unknown view: {name}")
+def open_view(self, view_name: str) -> None:
+    # Έλεγχος αν η σελίδα που ζήτησε ο χρήστης υπάρχει στο routing map
+    if view_name not in self.views:
+        logging.warning(f"Unknown view name requested: {view_name}")
         return
 
+    # Καθάρισμα της οθόνης από το προηγούμενο view για να μην γίνει μπάχαλο
     self._clear_content()
-    self.views[name]()   # Δυναμική σχεδίαση του panel στον κοινό καμβά
+    
+    # Δυναμική κλήση της function που σχεδιάζει το νέο panel
+    self.views[view_name]()
 
-def _clear_content(self):
-    """Καταστρέφει όλα τα widgets του κεντρικού Content Frame."""
+def _clear_content(self) -> None:
+    # Διαγραφή όλων των ενεργών widgets στο κεντρικό frame
+    # Με αυτόν τον τρόπο αποφεύγουμε τα memory leaks και το stackάρισμα των panels
     for widget in self.content_frame.winfo_children():
         widget.destroy()
 ```
 
-Όταν ο χρήστης πατάει στο sidebar, ο router σβήνει το τρέχον view και σχεδιάζει το καινούριο μέσα στο κεντρικό frame. Καθαρό, γρήγορο, χωρίς memory leak-like συμπεριφορές.
+Καθαρό, ακαριαίο view-switching χωρίς memory leaks, που θα έκανε ακόμη και τους React developers να δακρύσουν από συγκίνηση (ή από απόγνωση για το πώς καταλήξαμε να γράφουμε SPA σε Tkinter).
 
 ---
 
