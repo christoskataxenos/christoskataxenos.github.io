@@ -1,0 +1,143 @@
+---
+title: "RandeBoo Post-Mortem: Πώς το 36% Έγινε V1.0 (και ο Θρίαμβος του Aegean Theme)"
+date: "2026-05-31"
+description: "Η τελική ανασκόπηση του Project 07 του ΕΑΠ. Από το χάος των ρόλων, στη C-like SQLite, το SPA routing με Tkinter και το κλείσιμο του server."
+tags: ["eap", "python", "sqlite", "tkinter", "software-architecture", "post-mortem"]
+---
+
+<Stats panicLevel={0} coffeeCups={148} hoursSpent={160} />
+
+Θυμάστε εκείνο το [36% progress της 1ης εβδομάδας](/blog/one-week-into-project-development); Εκείνο το pre-alpha bioweapon που ισορροπούσε ανάμεσα στη λογική και στο runtime error; 
+
+Λοιπόν, ο Θεός του open-source έκανε το θαύμα του. Ή μάλλον, για να είμαστε ακριβείς, **εμείς** κάναμε το θαύμα μας. Το **Project 07 (RandeBoo)** είναι πλέον έτοιμο. Βρισκόμαστε στη φάση των τελικών ελέγχων, του documentation και της ψυχικής προετοιμασίας για την παράδοση και την επικείμενη παρουσίαση. Παραδόξως, ούτε η βάση δεδομένων κάηκε μέχρι στιγμής, ούτε ο καθηγητής μας έστειλε στο τμήμα ψυχικής υγείας του ΕΑΠ. 
+
+Αλλά πίσω από την επικείμενη παράδοση κρύβεται η κλασική ιστορία κάθε software project: **σχεδιασμός, πανικός, pivot της τελευταίας στιγμής και πολλή καφεΐνη**.
+
+---
+
+## 🔄 Το Μεγάλο Pivot: Από τα Silos στο Full Stack
+
+Ξεκινήσαμε όπως προτείνουν τα κλασικά βιβλία Software Engineering: "Εσύ θα κάνεις Frontend, εσύ Backend, εσύ Testing". 
+
+**Αποτέλεσμα;** Deadlocks παντού. Ο Frontendας περίμενε το API, ο Backendας περίμενε το Database schema, και ο Tester έπαιζε πασιέντζα. Κάθε αλλαγή χρειαζόταν Viber call με ήχο ηλεκτρικής σκούπας στο background για να συγχρονιστούμε.
+
+Συνειδητοποιώντας ότι με αυτόν τον ρυθμό θα παίρναμε πτυχίο το 2035, πρότεινα ένα δραστικό **pivot**: **Full Stack Module Ownership**.
+
+<Callout type="info" title="Η Νέα Στρατηγική">
+Κάθε μέλος της ομάδας ανέλαβε ένα ολοκληρωμένο functional κομμάτι της εφαρμογής (module) και το έχτισε από την αρχή μέχρι το τέλος: από τα SQL queries στη βάση, μέχρι το layout στο Tkinter. 
+</Callout>
+
+Αυτό μείωσε τις εξαρτήσεις στο μηδέν. Η συνεργασία με τον Δημήτρη, τον Πάνο και την Καλλιόπη έγινε ασύγχρονη και αποδοτική. Ο καθένας είχε το sandbox του, έσπαγε πράγματα χωρίς να ενοχλεί τους άλλους, και το Git σταμάτησε να θυμίζει εμπόλεμη ζώνη.
+
+---
+
+## 🗄️ Το 24ωρο του Pointers-and-Queries (database.py)
+
+Η Καλλιόπη είχε κάνει εξαιρετική δουλειά στο θεωρητικό μοντέλο (UML/ER). Το δικό μου task; Να μετατρέψω το θεωρητικό ιδεατό σε ωμό, λειτουργικό SQLite κώδικα (`database.py`). 
+
+Αν νομίζετε ότι το SQLite σε Python είναι "απλό", δοκιμάστε να γράψετε έναν αλγόριθμο που ελέγχει αν ένα νέο ραντεβού συμπίπτει με ένα ήδη υπάρχον, λαμβάνοντας υπόψη το ωράριο της επιχείρησης, τις εξαιρέσεις (αργίες) και τη διάρκεια του ραντεβού. 
+
+Πέρασα **25-35 ώρες** πάνω από την οθόνη σε ένα μόνο Σαββατοκύριακο (bye bye social life). 
+
+```python
+# Η καρδιά του conflict check - SQLite Edition
+cursor.execute('''
+    SELECT 1 FROM appointments 
+    WHERE employee_id = ? 
+      AND date = ? 
+      AND (
+          (start_time <= ? AND end_time > ?) OR
+          (start_time < ? AND end_time >= ?) OR
+          (start_time >= ? AND end_time <= ?)
+      )
+''', (emp_id, date_str, start_t, start_t, end_t, end_t, start_t, end_t))
+```
+
+Η βάση όμως δεν έμεινε στατική. Ο Δημήτρης πρόσθεσε functions για τις ανάγκες των δικών του modules, και ο Πάνος έκανε fine-tuning για να υποστηρίξει τα exports και τα custom search queries. Ομαδική δουλειά στην πράξη.
+
+---
+
+## 🎨 Aegean Theme: Όταν το Tkinter θυμίζει Κυκλάδες
+
+Ας είμαστε ειλικρινείς. Το Tkinter από default έχει την αισθητική των Windows 95. Αν αφήναμε τα default γκρίζα κουμπιά, ο καθηγητής θα πάθαινε κατάθλιψη πριν καν δει τη λειτουργικότητα.
+
+Έτσι, γεννήθηκε το **Aegean Theme**. 
+
+<ComparisonTable 
+  headers={["Στοιχείο UI", "Χρώμα (HEX)", "Σκοπός"]}
+  rows={[
+    ["Sidebar & Τίτλοι", "#0A3D62 (Deep Greek Blue)", "Σταθερότητα & Οργάνωση"],
+    ["Κουμπιά & Accent", "#1E90FF (Aegean Blue)", "Call to Action & Focus"],
+    ["Φόντο Panel", "#F7F9FC (Ice White)", "Ξεκούραστο διάβασμα"],
+    ["Alerts & Errors", "#E74C3C / #2ECC71", "Instant feedback"]
+  ]}
+/>
+
+Το UI απέκτησε χαρακτήρα. Δεν ήταν πια "ένα Tkinter app". Ήταν το **RandeBoo**, με καθαρό layout, σωστό spacing και flat modern design.
+
+---
+
+## 🚦 SPA Routing: Single Page Architecture στο Tkinter
+
+Για να αποφύγουμε το χάος των πολλαπλών παραθύρων που ανοιγοκλείνουν (που θυμίζει adware των 00s), υλοποίησα έναν customized **Router** στο `gui_main.py`. Η εφαρμογή λειτουργεί ως SPA (Single Page Application).
+
+```python
+def open_view(self, name: str) -> None:
+    """Κεντρικός router για την εναλλαγή των panels (SPA)."""
+    if name not in self.views:
+        logging.warning(f"Unknown view: {name}")
+        return
+
+    self._clear_content()
+    self.views[name]()   # Δυναμική σχεδίαση του panel στον κοινό καμβά
+
+def _clear_content(self):
+    """Καταστρέφει όλα τα widgets του κεντρικού Content Frame."""
+    for widget in self.content_frame.winfo_children():
+        widget.destroy()
+```
+
+Όταν ο χρήστης πατάει στο sidebar, ο router σβήνει το τρέχον view και σχεδιάζει το καινούριο μέσα στο κεντρικό frame. Καθαρό, γρήγορο, χωρίς memory leak-like συμπεριφορές.
+
+---
+
+## 💾 Ο Αόρατος Ήρωας: backup.py
+
+Δεν μας ζητήθηκε ποτέ. Αλλά ως developers, ξέρουμε ότι **data loss is the ultimate sin**. Έτσι, αφιέρωσα 6 ώρες για να γράψω ένα αυτόνομο backup σύστημα (`backup.py`).
+
+Κάθε φορά που ανοίγει η εφαρμογή, δημιουργείται ένα timestamped αντίγραφο της SQLite βάσης στο `/backups`. Αν ο δίσκος καταρρεύσει ή αν ο χρήστης κάνει κάποια καταστροφική αλλαγή, το σύστημα κρατάει τα 5 τελευταία αντίγραφα και σβήνει τα παλιά για να μην γεμίσει ο δίσκος. 
+
+---
+
+## ⚡ Η Τελική Ευθεία και το \"Δημιουργικό\" Copy-Paste
+
+Όπως σε κάθε release, οι τελευταίες μέρες ήταν ένα sprint επιβίωσης. 
+- Το module των Υπαλλήλων (`gui_employees.py`) έπρεπε να γραφτεί χθες. Αντί για over-engineering, εφάρμοσα την ιερή τέχνη του **DRY (ή μάλλον, του Copy-Paste-Refactor)**: πήρα το δοκιμασμένο logic του Customer module, άλλαξα τα fields, προσάρμοσα τα queries και μέσα σε λίγες ώρες είχαμε ένα πλήρως λειτουργικό Employee panel.
+- Η αποστολή email (`email_service.py`): Υλοποιήθηκε ασύγχρονα (σε ξεχωριστό thread) για να μην παγώνει το GUI κατά το SMTP handshake. Δημιούργησα ένα demo Gmail account, ενεργοποίησα τα App Passwords και στο live demo τα emails με τα ραντεβού έφταναν στο inbox σε λιγότερο από 3 δευτερόλεπτα.
+
+---
+
+## 🧠 Το Μεγάλο Συμπέρασμα: Από Code Monkey σε Architect
+
+Αυτό το project ήταν μια άσκηση ωριμότητας. Με έκανε να συνειδητοποιήσω κάτι σημαντικό: **Με ελκύει περισσότερο η αρχιτεκτονική σκέψη παρά η απλή πληκτρολόγηση κώδικα.**
+
+Με νοιάζει το πώς στήνεται ένα σύστημα, πώς επικοινωνούν τα modules, πώς διασφαλίζεται η επεκτασιμότητα χωρίς να γίνει ο κώδικας \"σπαγγέτι\". Το coding είναι το εργαλείο. Ο σχεδιασμός είναι η τέχνη. 
+
+Το RandeBoo V1.0 είναι πλέον στο GitHub. Ήταν δύσκολο, ήταν κουραστικό, αλλά το \"ship a product\" συναίσθημα είναι εθιστικό. 
+
+<Terminal title="Project Status: Pre-Submission Checks">
+============================================================
+ RANDEBOO V1.0 - PRE-SUBMISSION CHECKS ACTIVE
+============================================================
+SQLite DB Connector  | OK (100% Conflict Resolution)
+SPA Routing System   | OK (0.00s View Switch latency)
+Aegean UI Palette    | OK (Contrast ratio approved)
+Backup Daemon        | OK (Auto-rotation active)
+Email Service (SMTP) | OK (Async queue handler active)
+------------------------------------------------------------
+[FINAL GRADE PREDICTION]
+Caffeine Invested    | 148 cups
+Sanity Preserved     | 8% (Enough for the next semester)
+Status               | READY FOR DEPLOYMENT
+============================================================
+</Terminal>

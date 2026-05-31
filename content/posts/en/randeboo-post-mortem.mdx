@@ -1,0 +1,143 @@
+---
+title: "RandeBoo Post-Mortem: How 36% Became V1.0 (and the Triumph of the Aegean Theme)"
+date: "2026-05-31"
+description: "The final review of EAP Project 07. From the chaos of roles to a C-like SQLite backend, Tkinter SPA routing, and shutting down the server."
+tags: ["eap", "python", "sqlite", "tkinter", "software-architecture", "post-mortem"]
+---
+
+<Stats panicLevel={0} coffeeCups={148} hoursSpent={160} />
+
+Remember that [36% progress in Week 1](/blog/one-week-into-project-development)? That pre-alpha bioweapon that balanced precariously between logic and runtime errors? 
+
+Well, the god of open-source worked a miracle. Or rather, to be precise, **we** did. **Project 07 (RandeBoo)** is now ready. We are in the phase of running final checks, writing documentation, and preparing mentally for the submission and the upcoming live presentation. Surprisingly, the database hasn't caught fire yet, and the professor hasn't sent us to the EAP mental health department. 
+
+But behind the upcoming delivery lies the classic story of every software project: **design, panic, last-minute pivots, and an ungodly amount of caffeine**.
+
+---
+
+## 🔄 The Great Pivot: From Silos to Full Stack
+
+We started exactly as classic Software Engineering textbooks recommend: "You do Frontend, you do Backend, you do Testing." 
+
+**The result?** Deadlocks everywhere. The Frontend guy was waiting for the API, the Backend guy was waiting for the database schema, and the Tester was playing solitaire. Every single change required a Viber call with vacuum cleaner noises in the background just to get on the same page.
+
+Realizing that at this rate we would graduate in 2035, I proposed a drastic **pivot**: **Full Stack Module Ownership**.
+
+<Callout type="info" title="The New Strategy">
+Each team member took over a complete functional feature (module) and built it from top to bottom: from the database SQL queries to the Tkinter UI layout.
+</Callout>
+
+This reduced dependencies to zero. Collaboration with Demetris, Panos, and Calliope became asynchronous and highly efficient. Everyone had their own sandbox to break things without bothering the others, and Git stopped looking like a war zone.
+
+---
+
+## 🗄️ The 24-Hour Pointers-and-Queries Marathon (database.py)
+
+Calliope did an outstanding job on the theoretical model (UML/ER). My task? To turn that ideal model into raw, functional SQLite code (`database.py`). 
+
+If you think SQLite in Python is "simple," try writing an algorithm that checks if a new appointment overlaps with an existing one, taking into account business hours, exceptions (holidays), and appointment duration. 
+
+I spent **25-35 hours** glued to the screen in a single weekend (bye-bye social life). 
+
+```python
+# The heart of the conflict check - SQLite Edition
+cursor.execute('''
+    SELECT 1 FROM appointments 
+    WHERE employee_id = ? 
+      AND date = ? 
+      AND (
+          (start_time <= ? AND end_time > ?) OR
+          (start_time < ? AND end_time >= ?) OR
+          (start_time >= ? AND end_time <= ?)
+      )
+''', (emp_id, date_str, start_t, start_t, end_t, end_t, start_t, end_t))
+```
+
+But the database wasn't static. Demetris added functions to serve his own modules, and Panos fine-tuned it to support export features and custom search queries. Teamwork in practice.
+
+---
+
+## 🎨 Aegean Theme: Making Tkinter Look Like the Cyclades
+
+Let's be honest. Tkinter's default look has the aesthetic of Windows 95. If we left the default gray buttons, the professor would have developed depression before even looking at the functionality.
+
+Thus, the **Aegean Theme** was born. 
+
+<ComparisonTable 
+  headers={["UI Element", "Color (HEX)", "Purpose"]}
+  rows={[
+    ["Sidebar & Titles", "#0A3D62 (Deep Greek Blue)", "Stability & Structure"],
+    ["Buttons & Accents", "#1E90FF (Aegean Blue)", "Call to Action & Focus"],
+    ["Panel Background", "#F7F9FC (Ice White)", "Readability & Clean look"],
+    ["Alerts & Errors", "#E74C3C / #2ECC71", "Instant feedback"]
+  ]}
+/>
+
+The UI finally had personality. It was no longer "just a Tkinter app." It was **RandeBoo**, with a clean layout, proper spacing, and a modern flat design.
+
+---
+
+## 🚦 SPA Routing: Single Page Architecture in Tkinter
+
+To avoid the chaos of multiple windows popping open (reminiscent of 00s adware), I implemented a custom **Router** in `gui_main.py`. The app behaves like a Single Page Application (SPA).
+
+```python
+def open_view(self, name: str) -> None:
+    """Central router for swapping panels (SPA)."""
+    if name not in self.views:
+        logging.warning(f"Unknown view: {name}")
+        return
+
+    self._clear_content()
+    self.views[name]()   # Dynamically render the panel on the shared canvas
+
+def _clear_content(self):
+    """Destroys all widgets in the central Content Frame."""
+    for widget in self.content_frame.winfo_children():
+        widget.destroy()
+```
+
+When the user clicks the sidebar, the router clears the active view and renders the new one in the central frame. Clean, fast, and leak-free.
+
+---
+
+## 💾 The Unsung Hero: backup.py
+
+It was never requested in the guidelines. But as developers, we know that **data loss is the ultimate sin**. So, I dedicated 6 hours to write an autonomous backup system (`backup.py`).
+
+Every time the application boots, a timestamped copy of the SQLite database is created in `/backups`. If the drive crashes or the user messes up, the system keeps the 5 most recent backups and deletes older ones to save disk space.
+
+---
+
+## ⚡ The Final Crunch and "Creative" Copy-Paste
+
+Like every software release, the final days were a sprint for survival.
+- The Employee module (`gui_employees.py`) had to be written yesterday. Instead of over-engineering, I practiced the sacred art of **DRY (or rather, Copy-Paste-Refactor)**: I took the tried-and-tested logic from the Customer module, renamed the fields, adjusted the queries, and within a few hours, we had a fully functional Employee panel.
+- Email dispatch (`email_service.py`): Implemented asynchronously (in a separate thread) to prevent the GUI from freezing during the SMTP handshake. I set up a demo Gmail account, enabled App Passwords, and during the live demo, booking notification emails reached the inbox in less than 3 seconds.
+
+---
+
+## 🧠 The Big Takeaway: From Code Monkey to Architect
+
+This project was a lesson in maturity. It made me realize something crucial: **I am drawn to architectural thinking far more than just writing raw code.**
+
+I care about how a system is structured, how modules communicate, and how to ensure scalability without turning code into spaghetti. Coding is the tool; design is the art. 
+
+RandeBoo V1.0 is now on GitHub. It was hard, it was exhausting, but the "shipping a product" feeling is highly addictive. 
+
+<Terminal title="Project Status: Pre-Submission Checks">
+============================================================
+ RANDEBOO V1.0 - PRE-SUBMISSION CHECKS ACTIVE
+============================================================
+SQLite DB Connector  | OK (100% Conflict Resolution)
+SPA Routing System   | OK (0.00s View Switch latency)
+Aegean UI Palette    | OK (Contrast ratio approved)
+Backup Daemon        | OK (Auto-rotation active)
+Email Service (SMTP) | OK (Async queue handler active)
+------------------------------------------------------------
+[FINAL GRADE PREDICTION]
+Caffeine Invested    | 148 cups
+Sanity Preserved     | 8% (Enough for the next semester)
+Status               | READY FOR DEPLOYMENT
+============================================================
+</Terminal>
