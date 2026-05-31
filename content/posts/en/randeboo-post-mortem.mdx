@@ -27,17 +27,17 @@ Realizing that at this rate we would graduate in 2035, I proposed a drastic **pi
 Each team member took over a complete functional feature (module) and built it from top to bottom: from adapting and extending the database queries for their specific features to the Tkinter UI layout.
 </Callout>
 
-This reduced dependencies to zero. Collaboration with Demetris, Panos, and Calliope became asynchronous and highly efficient. Everyone had their own sandbox to break things without bothering the others, and Git stopped looking like a war zone.
+This reduced dependencies to zero. Collaboration with my other teammates became asynchronous and highly efficient. Everyone had their own sandbox to break things without bothering the others, and Git stopped looking like a war zone.
 
 ---
 
 ## 🗄️ The 24-Hour Pointers-and-Queries Marathon (database.py)
 
-Calliope did an outstanding job on the theoretical model (UML/ER). My task? To turn that ideal model into raw, functional SQLite code (`database.py`). 
+One of my teammates did an outstanding job on the theoretical model (UML/ER). My task? To turn that ideal model into raw, functional SQLite code (`database.py`). 
 
 If you think SQLite in Python is "simple," try writing an algorithm that checks if a new appointment overlaps with an existing one, taking into account business hours, exceptions (holidays), and appointment duration. 
 
-I spent **25-35 hours** glued to the screen in a single weekend (bye-bye social life). 
+I spent **$X^e$ hours** glued to the screen in a single weekend (bye-bye social life). 
 
 ```python
 # The heart of the conflict check - SQLite Edition
@@ -53,7 +53,7 @@ cursor.execute('''
 ''', (emp_id, date_str, start_t, start_t, end_t, end_t, start_t, end_t))
 ```
 
-But the database wasn't static. Demetris added functions to serve his own modules, and Panos fine-tuned it to support export features and custom search queries. Teamwork in practice.
+But the database wasn't static. My teammates added functions to serve their own modules and fine-tuned it to support export features and custom search queries. Teamwork in practice.
 
 ---
 
