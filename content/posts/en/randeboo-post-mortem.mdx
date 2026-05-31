@@ -37,11 +37,11 @@ Of course, Git was anything but peaceful at first. We went through a whole drama
 
 ## 🗄️ The 24-Hour Pointers-and-Queries Marathon (database.py)
 
-One of my teammates did an outstanding job on the theoretical model (UML/ER). My task? To turn that ideal model into raw, functional SQLite code (`database.py`). 
+Theory is nice in university halls. But when it's time to turn UML arrows into lines of code, reality slaps you in the face with `sqlite3.db`. One of my teammates did an outstanding job on the theoretical model (UML/ER). My task? To turn that ideal model into raw, functional SQLite code (`database.py`) and solve the application's biggest riddle: appointment conflict management.
 
-If you think SQLite in Python is "simple," try writing an algorithm that checks if a new appointment overlaps with an existing one, taking into account business hours, exceptions (holidays), and appointment duration. 
+If you think SQLite in Python is "simple," try writing an algorithm that checks if a new appointment overlaps with an existing one. Sounds easy? Now add to the equation: 1) the specific employee's working hours, 2) exceptions (e.g., the employee took a day off or it's a public holiday), 3) varying appointment durations, and 4) the fact that time is stored as text-based timestamps.
 
-I spent **$X^e$ hours** glued to the screen in a single weekend (bye-bye social life). 
+I spent **$X^e$ hours** glued to the screen in a single weekend. The scenario was classic: 3 AM, the room smelling of Monster, the laptop fan screaming like a Boeing 747 turbine, and me trying to figure out why my queries returned true for appointments that occurred in 2024. When the query finally ran correctly and the tests started showing green checkmarks, I felt like I had decoded the Antikythera Mechanism. Goodbye social life, welcome SQLite. 
 
 ```python
 # The heart of the conflict check - SQLite Edition
