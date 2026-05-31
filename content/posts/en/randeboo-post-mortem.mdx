@@ -165,11 +165,17 @@ This single utility file was our shield. During manual testing, when a teammate 
 
 ---
 
-## ⚡ The Final Crunch and "Creative" Copy-Paste
+## ⚡ The Final Crunch, Casper the Ghost, and "Creative" Copy-Paste
 
-Like every software release, the final days were a sprint for survival.
-- The Employee module (`gui_employees.py`) had to be written yesterday. Instead of over-engineering, I practiced the sacred art of **DRY (or rather, Copy-Paste-Refactor)**: I took the tried-and-tested logic from the Customer module, renamed the fields, adjusted the queries, and within a few hours, we had a fully functional Employee panel.
-- Email dispatch (`email_service.py`): Implemented asynchronously (in a separate thread) to prevent the GUI from freezing during the SMTP handshake. I set up a demo Gmail account, enabled App Passwords, and during the live demo, booking notification emails reached the inbox in less than 3 seconds.
+Like any self-respecting software release, the final days leading up to submission were a sprint for survival. And right on cue, the hard reality of university group projects knocked on our door.
+
+We all know that in every academic group project, there is at least one teammate who is more invisible than Casper the Friendly Ghost. People who "undertake" critical modules, only to vanish into the shadows, leaving behind nothing but radio silence in the Viber chat groups. When I realized that the Employee module (`gui_employees.py`)—which had to be ready... yesterday—was still a completely blank page, I knew I had to step up for a solo coding rescue mission.
+
+Instead of over-engineering or deep architectural debates, I resorted to the sacred, ancient art of **DRY (or rather, Copy-Paste-Refactor)**. I took the tried-and-tested logic of the Customer module, swapped the labels, adjusted the SQLite queries, refactored the frames, and within `$3$` hours (powered by a double Freddo Espresso), we had a fully functional Employee panel. It was the kind of work Casper would be proud of... if he ever read it.
+
+The second major hurdle of the final stretch was email dispatch (`email_service.py`). Here, we faced a technical bottleneck: if you sent the email synchronously within the UI thread, the SMTP handshake with Google's servers froze the screen for `$2$`-`$3$` seconds. In the user's mind, a frozen UI for `$3$` seconds means "the app crashed, let's force close it."
+
+The solution? Multi-threading. I implemented the email dispatch asynchronously, spinning up a separate thread for the SMTP request. During our live tests, the user clicked "Confirm Appointment," the UI remained instantly responsive, and the booking notification reached the inbox in less than `$3$` seconds via a demo Gmail account using App Passwords. Pure magic.
 
 ---
 
