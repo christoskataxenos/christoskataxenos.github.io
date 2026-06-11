@@ -1,7 +1,6 @@
 'use client';
 
 import HeroTitle from '../components/HeroTitle';
-import MiniGlobe from '../components/MiniGlobe';
 import { useLanguage } from '../context/LanguageContext';
 import SpotlightCard from '../components/SpotlightCard';
 import { useRef } from 'react'; // Import useRef
@@ -63,9 +62,8 @@ export default function Home() {
               background: `radial-gradient(600px circle at 0px 0px, rgba(127, 90, 240, 0.15), transparent 40%)`,
             }}
           />
-          <div className="flex flex-row items-center justify-center gap-4 md:gap-8 flex-wrap z-10 relative">
+          <div className="relative z-10 text-center">
             <HeroTitle />
-            <MiniGlobe />
           </div>
           <p className="hero-description relative z-10 max-w-2xl mx-auto mt-4 text-white text-lg"> 
             {t.heroDescription}
