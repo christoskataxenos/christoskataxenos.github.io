@@ -100,8 +100,11 @@ export default async function Post({ params }) {
       />
 
       <div className="bg-[#0a0a0c]/60 backdrop-blur-xl rounded-3xl border border-white/5 shadow-2xl p-8 md:p-12 relative z-10 mt-8">
-        <article className="prose prose-invert max-w-none font-sans prose-p:font-sans prose-headings:font-sans prose-li:font-sans prose-strong:font-sans leading-loose space-y-6 text-gray-300">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+        <article 
+          className="prose prose-invert max-w-none leading-loose space-y-6 text-gray-300"
+          style={{ fontFamily: "'Courier New', Courier, monospace" }}
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight" style={{ fontFamily: "'Courier New', Courier, monospace" }}>
             {postData.title}
           </h1>
 

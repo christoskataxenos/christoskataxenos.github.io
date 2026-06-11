@@ -153,7 +153,7 @@ export default function BlogCard({ slug, date, title, description, readingTime, 
         }
 
         .title {
-          font-family: var(--font-sans);
+          font-family: 'Courier New', Courier, monospace;
           font-size: 1.5rem;
           font-weight: 700;
           color: #fffffe !important;
@@ -166,6 +166,7 @@ export default function BlogCard({ slug, date, title, description, readingTime, 
         }
 
         .description {
+          font-family: 'Courier New', Courier, monospace;
           font-size: 1rem;
           color: #94a1b2 !important;
           line-height: 1.6;
