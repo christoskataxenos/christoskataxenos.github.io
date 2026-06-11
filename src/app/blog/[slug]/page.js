@@ -77,7 +77,7 @@ export default async function Post({ params }) {
   const postData = await getPostData(resolvedParams.slug);
 
   return (
-    <div className="mx-auto max-w-3xl pt-32 pb-32 px-6">
+    <div className="mx-auto max-w-4xl pt-32 pb-32 px-6">
       <ReadingProgress />
       <InteractionDock title={postData.title} />
 
@@ -99,30 +99,32 @@ export default async function Post({ params }) {
         }}
       />
 
-      <article className="prose prose-invert max-w-none font-sans prose-p:font-sans prose-headings:font-sans prose-li:font-sans prose-strong:font-sans leading-loose space-y-6 text-gray-300">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-          {postData.title}
-        </h1>
+      <div className="bg-[#0a0a0c]/60 backdrop-blur-xl rounded-3xl border border-white/5 shadow-2xl p-8 md:p-12 relative z-10 mt-8">
+        <article className="prose prose-invert max-w-none font-sans prose-p:font-sans prose-headings:font-sans prose-li:font-sans prose-strong:font-sans leading-loose space-y-6 text-gray-300">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+            {postData.title}
+          </h1>
 
-        {/* Date and reading time with Monospace styling */}
-        <div className="font-mono text-xs text-cyan-500/80 mb-12 border-b border-gray-800 pb-8 flex items-center gap-4">
-          <span>PUBLISHED: {postData.date}</span>
-          <span className="text-gray-600">•</span>
-          <span className="text-purple-400">{postData.readingTime} MIN READ</span>
-        </div>
+          {/* Date and reading time with Monospace styling */}
+          <div className="font-mono text-xs text-cyan-500/80 mb-12 border-b border-gray-800 pb-8 flex items-center gap-4">
+            <span>PUBLISHED: {postData.date}</span>
+            <span className="text-gray-600">•</span>
+            <span className="text-purple-400">{postData.readingTime} MIN READ</span>
+          </div>
 
-        <MDXRemote
-          source={postData.content}
-          components={mdxComponents}
-          options={{
-            mdxOptions: {
-              rehypePlugins: [
-                [rehypePrettyCode, prettyCodeOptions],
-              ],
-            },
-          }}
-        />
-      </article>
+          <MDXRemote
+            source={postData.content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                rehypePlugins: [
+                  [rehypePrettyCode, prettyCodeOptions],
+                ],
+              },
+            }}
+          />
+        </article>
+      </div>
     </div>
   );
 }

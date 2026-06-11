@@ -6,7 +6,7 @@
  */
 import React from 'react';
 
-const Stats = ({ panicLevel, doubtLevel, excitementLevel, coffeeCups, hoursSpent, linesOfLogic }) => {
+const Stats = ({ panicLevel, doubtLevel, excitementLevel, coffeeCups, freddos, redbulls, hoursSpent, linesOfLogic }) => {
   // Επιλογή μετρικής προς εμφάνιση
   let level = 0;
   let label = "Panic Level";
@@ -61,20 +61,56 @@ const Stats = ({ panicLevel, doubtLevel, excitementLevel, coffeeCups, hoursSpent
           </div>
         </div>
 
-        {/* Caffeine Counter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: '0 1 auto' }}>
-          <span style={{ fontSize: coffeeCups > 20 ? '28px' : '20px', transition: 'all 0.3s' }}>☕</span>
-          <div>
-            <div style={{ fontSize: '12px', color: '#888' }}>Caffeine</div>
-            <div style={{
-              fontWeight: 'bold',
-              fontSize: coffeeCups > 20 ? '16px' : '14px',
-              color: coffeeCups > 20 ? '#f59e0b' : '#fff'
-            }}>
-              {coffeeCups} {coffeeCups > 20 ? 'MASSIVE' : ''} cups
+        {/* Caffeine Counter (Coffee) */}
+        {coffeeCups !== undefined && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: '0 1 auto' }}>
+            <span style={{ fontSize: coffeeCups > 20 ? '28px' : '20px', transition: 'all 0.3s' }}>☕</span>
+            <div>
+              <div style={{ fontSize: '12px', color: '#888' }}>Caffeine</div>
+              <div style={{
+                fontWeight: 'bold',
+                fontSize: coffeeCups > 20 ? '16px' : '14px',
+                color: coffeeCups > 20 ? '#f59e0b' : '#fff'
+              }}>
+                {coffeeCups} {coffeeCups > 20 ? 'MASSIVE ' : ''}cups
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* Freddos Counter */}
+        {freddos !== undefined && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: '0 1 auto' }}>
+            <span style={{ fontSize: freddos > 20 ? '28px' : '20px', transition: 'all 0.3s' }}>🧊</span>
+            <div>
+              <div style={{ fontSize: '12px', color: '#888' }}>Freddo Espresso</div>
+              <div style={{
+                fontWeight: 'bold',
+                fontSize: freddos > 20 ? '16px' : '14px',
+                color: freddos > 20 ? '#f59e0b' : '#fff'
+              }}>
+                {freddos} {freddos > 20 ? 'LITERS' : 'cups'}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Redbulls Counter */}
+        {redbulls !== undefined && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: '0 1 auto' }}>
+            <span style={{ fontSize: redbulls > 10 ? '28px' : '20px', transition: 'all 0.3s' }}>⚡</span>
+            <div>
+              <div style={{ fontSize: '12px', color: '#888' }}>Redbulls</div>
+              <div style={{
+                fontWeight: 'bold',
+                fontSize: redbulls > 10 ? '16px' : '14px',
+                color: redbulls > 10 ? '#ef4444' : '#fff'
+              }}>
+                {redbulls} {redbulls > 10 ? 'HEART ATTACKS' : 'cans'}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Time Counter */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: '0 1 auto' }}>

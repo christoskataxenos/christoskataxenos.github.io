@@ -3,40 +3,41 @@
 import HeroTitle from '../components/HeroTitle';
 import { useLanguage } from '../context/LanguageContext';
 import SpotlightCard from '../components/SpotlightCard';
-import { useRef, useState } from 'react'; // Import useRef and useState
+import { useRef } from 'react'; // Import useRef
 import { FaUser, FaTerminal, FaCamera } from 'react-icons/fa'; // Import icons from react-icons/fa
 
 export default function Home() {
   const { t } = useLanguage();
 
-  // Logic for the hover effect on hero-content
+  // Logic for the hover effect on hero-content (Refs to avoid state re-renders)
   const divRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
+  const heroSpotlightRef = useRef(null);
 
   const handleMouseMove = (e) => {
-    if (!divRef.current) return;
+    if (!divRef.current || !heroSpotlightRef.current) return;
 
     const div = divRef.current;
     const rect = div.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    heroSpotlightRef.current.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(127, 90, 240, 0.15), transparent 40%)`;
   };
 
   const handleFocus = () => {
-    setOpacity(1);
+    if (heroSpotlightRef.current) heroSpotlightRef.current.style.opacity = '1';
   };
 
   const handleBlur = () => {
-    setOpacity(0);
+    if (heroSpotlightRef.current) heroSpotlightRef.current.style.opacity = '0';
   };
 
   const handleMouseEnter = () => {
-    setOpacity(1);
+    if (heroSpotlightRef.current) heroSpotlightRef.current.style.opacity = '1';
   };
 
   const handleMouseLeave = () => {
-    setOpacity(0);
+    if (heroSpotlightRef.current) heroSpotlightRef.current.style.opacity = '0';
   };
 
   return (
@@ -52,12 +53,13 @@ export default function Home() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Spotlight Overlay for hero-content */}
+          {/* Spotlight Overlay for hero-content (optimized with refs) */}
           <div
+            ref={heroSpotlightRef}
             className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0" 
             style={{
-              opacity,
-              background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(127, 90, 240, 0.15), transparent 40%)`,
+              opacity: 0,
+              background: `radial-gradient(600px circle at 0px 0px, rgba(127, 90, 240, 0.15), transparent 40%)`,
             }}
           />
           <HeroTitle />

@@ -1,35 +1,37 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 export default function SpotlightCard({ children, href, className = "" }) {
   const divRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
+  const spotlightRef = useRef(null); // Ref for direct DOM manipulation to avoid state re-renders
 
   const handleMouseMove = (e) => {
-    if (!divRef.current) return;
+    if (!divRef.current || !spotlightRef.current) return;
 
     const div = divRef.current;
     const rect = div.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    // Direct DOM styling updates the gradient position on every frame at 120Hz without React re-renders
+    spotlightRef.current.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(127, 90, 240, 0.15), transparent 40%)`;
   };
 
   const handleFocus = () => {
-    setOpacity(1);
+    if (spotlightRef.current) spotlightRef.current.style.opacity = '1';
   };
 
   const handleBlur = () => {
-    setOpacity(0);
+    if (spotlightRef.current) spotlightRef.current.style.opacity = '0';
   };
 
   const handleMouseEnter = () => {
-    setOpacity(1);
+    if (spotlightRef.current) spotlightRef.current.style.opacity = '1';
   };
 
   const handleMouseLeave = () => {
-    setOpacity(0);
+    if (spotlightRef.current) spotlightRef.current.style.opacity = '0';
   };
 
   return (
@@ -50,10 +52,11 @@ export default function SpotlightCard({ children, href, className = "" }) {
       `}
     >
       <div
+        ref={spotlightRef}
         className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-10"
         style={{
-          opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(127, 90, 240, 0.15), transparent 40%)`,
+          opacity: 0,
+          background: `radial-gradient(600px circle at 0px 0px, rgba(127, 90, 240, 0.15), transparent 40%)`,
         }}
       />
       
