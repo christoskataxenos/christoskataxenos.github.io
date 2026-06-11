@@ -20,8 +20,8 @@ export default function BlogPage() {
             <ParticleTitle 
               text="BLOG" 
               subtitle="INSIGHTS FROM THE DIGITAL FRONTIER"
-              scale={1.45}
-              particleSize={1.5}
+              scale={1.2}
+              particleSize={4.0}
             />
           </div>
         </header>

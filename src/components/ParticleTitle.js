@@ -42,8 +42,8 @@ const ParticleTitle = ({
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Χρησιμοποιούμε '200' ή '300' (light) αντί για 'bold' για πιο ντελικάτο αποτέλεσμα
-    ctx.font = '200 140px Inter, sans-serif'; 
+    // Χρησιμοποιούμε Courier New για να ταιριάζει με το terminal θέμα
+    ctx.font = 'bold 140px "Courier New", Courier, monospace';
     
     // Συνδυάζουμε ένα απαλό γέμισμα με ένα περίγραμμα για "αστερικό" (constellation) look
     ctx.fillStyle = '#ffffff';
