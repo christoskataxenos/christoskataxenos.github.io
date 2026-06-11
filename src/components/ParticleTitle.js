@@ -42,8 +42,8 @@ const ParticleTitle = ({
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Χρησιμοποιούμε Courier New για να ταιριάζει με το terminal θέμα
-    ctx.font = 'bold 140px "Courier New", Courier, monospace';
+    // Χρησιμοποιούμε Courier New (χωρίς bold) για πιο ντελικάτο, terminal-style αποτέλεσμα
+    ctx.font = '140px "Courier New", Courier, monospace';
     
     // Συνδυάζουμε ένα απαλό γέμισμα με ένα περίγραμμα για "αστερικό" (constellation) look
     ctx.fillStyle = '#ffffff';
@@ -56,7 +56,7 @@ const ParticleTitle = ({
     ctx.fillText(safeText, canvas.width / 2, canvas.height / 2);
     
     // Προσθέτουμε και ένα ελαφρύ stroke για να τονίσουμε τις άκρες
-    ctx.lineWidth = 3.0; // Thicker stroke for Courier New
+    ctx.lineWidth = 1.5; // Επαναφορά σε λεπτό stroke
     ctx.strokeStyle = '#ffffff';
     ctx.strokeText(safeText, canvas.width / 2, canvas.height / 2);
 
@@ -66,15 +66,15 @@ const ParticleTitle = ({
     const colors = [];
     const randomness = [];
     
-    // Sample every N pixels (αυξάνουμε το step για λιγότερα, πιο ξεχωριστά σωματίδια)
-    const step = 3; 
+    // Sample every N pixels
+    const step = 4; // Επαναφορά στο 4 για λιγότερα, πιο αραιά σωματίδια
     
     for (let y = 0; y < canvas.height; y += step) {
       for (let x = 0; x < canvas.width; x += step) {
         const index = (y * canvas.width + x) * 4;
         const r = imgData[index]; // read red channel (since text is white)
         
-        if (r > 64) { // Lower threshold to capture thinner fonts
+        if (r > 128) { // Επαναφορά στο 128 για να πιάνει μόνο τα έντονα pixel
           // Center the coordinates and scale them to Three.js units
           const pX = (x - canvas.width / 2) * 0.035;
           const pY = -(y - canvas.height / 2) * 0.035;
