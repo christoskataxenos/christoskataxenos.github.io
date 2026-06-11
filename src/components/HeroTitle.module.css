@@ -13,16 +13,18 @@
   transition: opacity 0.3s ease 0.1s; /* Duration 0.3s, Delay 0.1s */
   
   /* Typography & Styling matching global theme */
-  font-size: 4rem; /* Matches previous h1 size */
-  font-weight: 700;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 3.5rem; /* Adjusted slightly for monospace readability */
+  font-weight: 400;
+  letter-spacing: normal;
   line-height: 1.2;
   white-space: nowrap;
-  color: #7f5af0; /* Electric Purple */
-  text-shadow: 0 0 20px rgba(127, 90, 240, 0.6);
+  color: #a855f7; /* Neon Purple */
+  text-shadow: 0 0 25px rgba(168, 85, 247, 0.7), 0 0 10px rgba(168, 85, 247, 0.5);
   
   /* --- Typewriter & Blink Effect Restored --- */
   overflow: hidden; /* Hide text until typed */
-  border-right: 4px solid #7f5af0; /* The Cursor */
+  border-right: 4px solid #a855f7; /* The Cursor */
   width: 0; /* Start with 0 width */
   
   /* Animation: Typewriter (1.5s) + Blink (infinite) */
@@ -44,19 +46,21 @@
   pointer-events: none;
 
   /* Typography */
-  font-size: 4rem;
-  font-weight: 700;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: normal;
   line-height: 1.2;
   white-space: nowrap;
-  color: #7f5af0;
-  text-shadow: 0 0 20px rgba(127, 90, 240, 0.6);
+  color: #a855f7;
+  text-shadow: 0 0 25px rgba(168, 85, 247, 0.7), 0 0 10px rgba(168, 85, 247, 0.5);
 }
 
 /* Optional: Add cursor to Greek text too (on the box edge) 
    Note: Since this is absolutely centered, the cursor will appear 
    at the edge of the "English" width box. */
 .container:hover .greekLayer {
-  border-right: 4px solid #7f5af0;
+  border-right: 4px solid #a855f7;
   animation: blink 0.75s steps(18) infinite;
 }
 
@@ -77,7 +81,7 @@
 /* --- Disable Hover Effect (when language is English) --- */
 .noHoverEffect:hover .englishLayer {
   opacity: 1 !important; /* Ensure English text always visible on hover */
-  border-right-color: #7f5af0 !important; /* Keep cursor visible */
+  border-right-color: #a855f7 !important; /* Keep cursor visible */
 }
 
 .noHoverEffect:hover .greekLayer {

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getSortedPostsData } from '../../../lib/posts';
 import BlogCard from '../../../components/BlogCard';
+import ParticleTitle from '../../../components/ParticleTitle';
 
 export const metadata = {
   title: 'Blog | Christos Kataxenos',
@@ -15,14 +16,15 @@ export default function BlogPage() {
     <main className="min-h-screen py-8 pt-20 font-sans">
       <div className="max-w-[800px] mx-auto space-y-6">
 
-        <header className="mb-12 text-center pt-8 relative">
-
-          <h1 className="text-4xl font-bold tracking-tight text-white mb-4">
-            Blog
-          </h1>
-          <p className="text-gray-400">
-            Insights from the digital frontier.
-          </p>
+        <header className="mb-12 text-center pt-8 relative flex justify-center">
+          <div className="w-full max-w-lg mb-4">
+            <ParticleTitle 
+              text="BLOG" 
+              subtitle="INSIGHTS FROM THE DIGITAL FRONTIER"
+              scale={1.45}
+              particleSize={1.5}
+            />
+          </div>
         </header>
 
         <div className="flex flex-col space-y-6">

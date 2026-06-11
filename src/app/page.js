@@ -45,7 +45,7 @@ export default function Home() {
       {/* Section 1: Hero */}
       <section id="hero" className="section hero-section mb-16">
         <div 
-          className="hero-content relative p-8 md:p-12 rounded-2xl bg-black/30 backdrop-blur-lg border border-white/10 shadow-xl mx-auto max-w-4xl overflow-hidden" 
+          className="hero-content relative p-8 md:p-12 rounded-2xl bg-gray-900/50 backdrop-blur-md border border-purple-500/30 shadow-lg mx-auto max-w-4xl overflow-hidden" 
           ref={divRef} 
           onMouseMove={handleMouseMove} 
           onFocus={handleFocus}
@@ -56,16 +56,15 @@ export default function Home() {
           {/* Spotlight Overlay for hero-content (optimized with refs) */}
           <div
             ref={heroSpotlightRef}
-            className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0" 
+            className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 z-0" 
             style={{
-              opacity: 0,
-              background: `radial-gradient(600px circle at 0px 0px, rgba(127, 90, 240, 0.15), transparent 40%)`,
+              background: `radial-gradient(600px circle at 0px 0px, rgba(168, 85, 247, 0.15), transparent 40%)`,
             }}
           />
           <div className="relative z-10 text-center">
             <HeroTitle />
           </div>
-          <p className="hero-description relative z-10 max-w-2xl mx-auto mt-4 text-white text-lg"> 
+          <p className="hero-description relative z-10 max-w-3xl mx-auto mt-6 text-gray-300 text-sm md:text-base leading-relaxed font-['Courier_New',_Courier,_monospace]"> 
             {t.heroDescription}
           </p>
         </div>
@@ -75,18 +74,15 @@ export default function Home() {
       <section id="cards-section" className="section"> {/* Removed mt-24, now handled by overall flex gap */}
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <SpotlightCard href="/bio" className="h-full">
-              <FaUser className="text-5xl text-gray-600 group-hover:text-purple-400 group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] transition-all duration-300 ease-in-out group-hover:scale-110" />
+            <SpotlightCard href="/bio" className="h-full" iconType="user">
               <span className="card-title font-mono uppercase tracking-widest">{t.bioTitle}</span>
             </SpotlightCard>
             
-            <SpotlightCard href="/blog" className="h-full">
-              <FaTerminal className="text-5xl text-gray-600 group-hover:text-purple-400 group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] transition-all duration-300 ease-in-out group-hover:scale-110" />
+            <SpotlightCard href="/blog" className="h-full" iconType="terminal">
               <span className="card-title font-mono uppercase tracking-widest">{t.blogTitle}</span>
             </SpotlightCard>
             
-            <SpotlightCard href="/portfolio" className="h-full">
-              <FaCamera className="text-5xl text-gray-600 group-hover:text-purple-400 group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] transition-all duration-300 ease-in-out group-hover:scale-110" />
+            <SpotlightCard href="/portfolio" className="h-full" iconType="camera">
               <span className="card-title font-mono uppercase tracking-widest">{t.photoTitle}</span>
             </SpotlightCard>
           </div>

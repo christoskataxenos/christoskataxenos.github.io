@@ -4,7 +4,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-
+import ParticleTitle from './ParticleTitle';
 // ============================================================
 // HELPERS & CONFIG: Hologram Definitions Generator
 // Σκοπός: Δομημένα δεδομένα για τις ονοματικές οθόνες (holograms)
@@ -23,7 +23,7 @@ const getHologramDefinitions = (t) => ({
       offset: new THREE.Vector3(3.8, 0.8, -0.8),
       title: t.roles.technician.title,
       subtitle: t.roles.technician.dateLocation,
-      body: t.roles.technician.responsibilitiesList ? t.roles.technician.responsibilitiesList.slice(0, 3).join(' • ') : '',
+      body: t.roles.technician.responsibilitiesList ? t.roles.technician.responsibilitiesList.join(' • ') : '',
     },
     {
       id: 'exp3',
@@ -68,36 +68,15 @@ const getHologramDefinitions = (t) => ({
     subtitle: 'Expertise Matrix',
     skillsList: group.skills
   })),
-  interests: [
-    {
-      id: 'int1',
-      offset: new THREE.Vector3(-3.0, 1.6, 0.8),
-      title: 'Photography',
-      subtitle: 'INTEREST',
-      body: 'Capturing moments, street photography, landscapes.'
-    },
-    {
-      id: 'int2',
-      offset: new THREE.Vector3(3.2, 0.8, -0.8),
-      title: 'Gaming',
-      subtitle: 'INTEREST',
-      body: 'RPG, strategy, simulation, VR experiences.'
-    },
-    {
-      id: 'int3',
-      offset: new THREE.Vector3(-2.5, -1.6, 1.2),
-      title: 'Travelling',
-      subtitle: 'INTEREST',
-      body: 'Exploring new cultures, roadtrips, documentation.'
-    },
-    {
-      id: 'int4',
-      offset: new THREE.Vector3(2.8, -1.4, -1.2),
-      title: 'Custom Rigs',
-      subtitle: 'INTEREST',
-      body: 'PC building, hardware tweaking, server setups.'
-    }
-  ]
+  interests: (t.interests || []).map((interest, idx) => ({
+    id: `int${idx + 1}`,
+    offset: idx === 0 
+      ? new THREE.Vector3(-3.0, 1.6, 0.8) 
+      : (idx === 1 ? new THREE.Vector3(3.2, 0.8, -0.8) : (idx === 2 ? new THREE.Vector3(-2.5, -1.6, 1.2) : new THREE.Vector3(2.8, -1.4, -1.2))),
+    title: interest.title || interest, // Fallback to interest string if title is missing
+    subtitle: 'INTEREST',
+    body: interest.body || ''
+  }))
 });
 
 // ============================================================
@@ -113,7 +92,8 @@ const TypewriterText = ({ text, delay = 15 }) => {
     
     let currentIndex = 0;
     const intervalId = setInterval(() => {
-      setDisplayedText((prev) => prev + text.charAt(currentIndex));
+      const charToAdd = text.charAt(currentIndex);
+      setDisplayedText((prev) => prev + charToAdd);
       currentIndex++;
       if (currentIndex >= text.length) {
         clearInterval(intervalId);
@@ -1120,14 +1100,13 @@ export default function BioSection() {
 
         <div
           className={`absolute pointer-events-none z-25 text-center transition-all duration-500 w-full ${activeNode ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100'}`}
-          style={{ top: '6%', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ top: '2%', left: '50%', transform: 'translateX(-50%)' }}
         >
-          <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-widest uppercase mb-1">
-            {t.bioTitle}
-          </h1>
-          <p className="text-[9px] text-cyan-400 font-mono tracking-widest animate-pulse">
-            {'// MOVE MOUSE TO GRAVITATE • CLICK NODES TO EXPLORE'}
-          </p>
+          <ParticleTitle 
+            text={t.bioTitle} 
+            scale={1.0}
+            particleSize={1.5}
+          />
         </div>
 
         {activeNode && (

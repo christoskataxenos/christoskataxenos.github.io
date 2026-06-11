@@ -17,7 +17,7 @@ const LanguageContext = createContext();
 
 const translations = {
   en: {
-    heroDescription: "From network administration to software engineering, shaped by a global background. As a Computer Science student in Stuttgart with years of experience troubleshooting networks and systems across the globe, I combine infrastructure expertise with modern code. My travels have reinforced my adaptability and systemic problem-solving, building resilient foundations for Software Development.",
+    heroDescription: "Bridging networks and software engineering. As a Computer Science student (HOU) based in Stuttgart with years of global IT support experience, I combine infrastructure expertise with modern code. My travels have shaped my adaptability and systemic problem-solving skills, building resilient foundations for Software Development.",
     bioTitle: "Biography",
     bioCaption: "// System: ONLINE. CV and portfolio core data stream.",
     blogTitle: "Dev Blog",
@@ -32,12 +32,12 @@ const translations = {
       researchDev: {
         title: "Software Research & Development",
         date: "2024 - Present • GitHub Highlights",
-        description: "Focusing on AI-integrated tools, automation engines, and dataset processing.",
+        description: "Building custom automation tools, integrating AI features, and streamlining data pipelines.",
         projectsLabel: "Key Projects:",
         projects: [
-          { name: "Papatzis Spotter", desc: "Offline AST analysis & Jaccard similarity engine for code forensics (no AI).", url: "https://github.com/christoskataxenos/papatzis-spotter" },
-          { name: "Video-to-ML Suite", desc: "End-to-end dataset generation from raw video to ML training readiness.", url: "https://github.com/christoskataxenos/video-to-ml-suite" },
-          { name: "Habit Tracker WebApp", desc: "Fullstack productivity application for dynamic habit monitoring.", url: "https://github.com/christoskataxenos/habit-tracker-webapp" }
+          { name: "Papatzis Spotter", desc: "Code forensics tool using AST and Jaccard similarity to analyze code locally, without AI.", url: "https://github.com/christoskataxenos/papatzis-spotter" },
+          { name: "Video-to-ML Suite", desc: "Automated pipeline for extracting and processing raw video into ready-to-use ML datasets.", url: "https://github.com/christoskataxenos/video-to-ml-suite" },
+          { name: "Habit Tracker WebApp", desc: "Fullstack web app designed to help users effectively track and build their daily habits.", url: "https://github.com/christoskataxenos/habit-tracker-webapp" }
         ]
       },
       technician: {
@@ -45,10 +45,9 @@ const translations = {
         dateLocation: "2007 - Present • Remote/Client Sites",
         responsibilities: "Responsibilities:",
         responsibilitiesList: [
-          "System administration",
-          "Network setup/support",
-          "Hardware/software troubleshooting",
-          "Client consultation"
+          "Network setup & administration",
+          "Hardware & software troubleshooting",
+          "Direct client support & consulting"
         ],
         skillsLabel: "Skills:",
         skillsList: [
@@ -65,7 +64,7 @@ const translations = {
       security: {
         title: "Security Systems Technician",
         date: "2014 - 2018",
-        description: "Installation, maintenance, fault diagnosis, and technical support for alarm and security camera systems."
+        description: "Installation, maintenance, and comprehensive technical support for CCTV and security alarm networks."
       }
     },
     education: {
@@ -101,20 +100,20 @@ const translations = {
       backendLegacy: {
         title: "CS Fundamentals",
         skills: [
-          { label: "C LANGUAGE", level: "Loading...", width: "33%" }
+          { label: "C / C++ / C#", level: "Loading...", width: "33%" }
         ]
       }
     },
     interestsTitle: "Interests",
     interests: [
-      "PHOTOGRAPHY",
-      "GAMING",
-      "TRAVELLING",
-      "CUSTOM RIGS & SERVERS"
+      { title: "PHOTOGRAPHY", body: "Capturing moments, street photography, landscapes." },
+      { title: "GAMING", body: "RPG, strategy, simulation, VR experiences." },
+      { title: "TRAVELLING", body: "Exploring new cultures, roadtrips, documentation." },
+      { title: "CUSTOM PCs & SERVERS", body: "PC building, hardware tweaking, server setups." }
     ]
   },
   el: {
-    heroDescription: "Από τη διαχείριση δικτύων στη μηχανική λογισμικού, με βάση τη διεθνή εμπειρία. Ως φοιτητής Πληροφορικής στη Στουτγκάρδη με πολυετή εμπειρία στην υποστήριξη συστημάτων και δικτύων παγκοσμίως, συνδυάζω τις υποδομές με τον σύγχρονο κώδικα. Τα ταξίδια μου ενίσχυσαν την προσαρμοστικότητα και τη συστημική επίλυση προβλημάτων, χτίζοντας ανθεκτικές βάσεις για το Software Development.",
+    heroDescription: "Από τα Δίκτυα στη Μηχανική Λογισμικού. Συνδυάζω την πολυετή παγκόσμια εμπειρία στο IT support με την ανάπτυξη σύγχρονου κώδικα. Ως φοιτητής Πληροφορικής στο ΕΑΠ, με βάση τη Στουτγκάρδη, αξιοποιώ την προσαρμοστικότητα από τα ταξίδια μου για να δίνω συστημικές λύσεις, χτίζοντας ανθεκτικές βάσεις στο Software Development.",
     bioTitle: "Βιογραφικό",
     bioCaption: "// System: ONLINE. Ροή δεδομένων βιογραφικού.",
     blogTitle: "Dev Blog",
@@ -129,12 +128,12 @@ const translations = {
       researchDev: {
         title: "Software Research & Development",
         date: "2024 - Σήμερα • GitHub Highlights",
-        description: "Εστίαση σε εργαλεία ενσωματωμένα με AI, μηχανές αυτοματισμού και επεξεργασία συνόλων δεδομένων.",
+        description: "Ανάπτυξη custom εργαλείων και αυτοματισμών, με έμφαση στην ενσωμάτωση AI και την επεξεργασία δεδομένων.",
         projectsLabel: "Κύρια Projects:",
         projects: [
-          { name: "Papatzis Spotter", desc: "Offline AST analysis & Jaccard similarity engine για code forensics (χωρίς χρήση AI).", url: "https://github.com/christoskataxenos/papatzis-spotter" },
-          { name: "Video-to-ML Suite", desc: "Dataset generation από video μέχρι την προετοιμασία για ML training.", url: "https://github.com/christoskataxenos/video-to-ml-suite" },
-          { name: "Habit Tracker WebApp", desc: "Fullstack εφαρμογή παραγωγικότητας για δυναμική παρακολούθηση συνηθειών.", url: "https://github.com/christoskataxenos/habit-tracker-webapp" }
+          { name: "Papatzis Spotter", desc: "Εργαλείο ανάλυσης κώδικα (code forensics) με αλγορίθμους AST και Jaccard, εντελώς offline (χωρίς AI).", url: "https://github.com/christoskataxenos/papatzis-spotter" },
+          { name: "Video-to-ML Suite", desc: "Αυτοματοποιημένη ροή εξαγωγής δεδομένων από raw video, δημιουργώντας έτοιμα datasets για ML.", url: "https://github.com/christoskataxenos/video-to-ml-suite" },
+          { name: "Habit Tracker WebApp", desc: "Fullstack web app παραγωγικότητας, σχεδιασμένο για να χτίζεις και να παρακολουθείς τις συνήθειές σου.", url: "https://github.com/christoskataxenos/habit-tracker-webapp" }
         ]
       },
       technician: {
@@ -142,10 +141,9 @@ const translations = {
         dateLocation: "2007 - Σήμερα • Απομακρυσμένα/Σε πελάτες",
         responsibilities: "Αρμοδιότητες:",
         responsibilitiesList: [
-          "Διαχείριση συστημάτων",
-          "Εγκατάσταση/υποστήριξη δικτύων",
-          "Διάγνωση βλαβών hardware/software",
-          "Συμβουλευτική πελατών"
+          "Στήσιμο και διαχείριση δικτύων",
+          "Αντιμετώπιση τεχνικών προβλημάτων (hardware/software)",
+          "Άμεση υποστήριξη και καθοδήγηση πελατών"
         ],
         skillsLabel: "Δεξιότητες:",
         skillsList: [
@@ -162,7 +160,7 @@ const translations = {
       security: {
         title: "Τεχνικός Συστημάτων Ασφαλείας",
         date: "2014 - 2018",
-        description: "Εγκατάσταση, συντήρηση, διάγνωση βλαβών και τεχνική υποστήριξη για συστήματα συναγερμού και κάμερες ασφαλείας."
+        description: "Μελέτη, εγκατάσταση και τεχνική υποστήριξη σε συστήματα ασφαλείας, κάμερες παρακολούθησης και δίκτυα συναγερμών."
       }
     },
     education: {
@@ -198,16 +196,16 @@ const translations = {
       backendLegacy: {
         title: "Θεμέλια Πληροφορικής",
         skills: [
-          { label: "ΓΛΩΣΣΑ C", level: "Loading...", width: "33%" }
+          { label: "C / C++ / C#", level: "Loading...", width: "33%" }
         ]
       }
     },
     interestsTitle: "Ενδιαφέροντα",
     interests: [
-      "ΦΩΤΟΓΡΑΦΙΑ",
-      "GAMING",
-      "ΤΑΞΙΔΙΑ",
-      "CUSTOM PCs & SERVERS"
+      { title: "ΦΩΤΟΓΡΑΦΙΑ", body: "Απαθανάτιση στιγμών, φωτογραφία δρόμου, τοπία." },
+      { title: "GAMING", body: "RPG, παιχνίδια στρατηγικής, εξομοιωτές, εμπειρίες VR." },
+      { title: "ΤΑΞΙΔΙΑ", body: "Εξερεύνηση νέων πολιτισμών, roadtrips, καταγραφή." },
+      { title: "CUSTOM PCs & SERVERS", body: "Συναρμολόγηση υπολογιστών, βελτιστοποίηση hardware, στήσιμο servers." }
     ]
   }
 };
