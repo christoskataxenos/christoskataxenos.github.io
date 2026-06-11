@@ -282,6 +282,8 @@ h1, h2, h3 {
 
 .prose p {
   margin-bottom: 1.75rem;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .prose ul, .prose ol {
@@ -291,6 +293,7 @@ h1, h2, h3 {
 
 .prose li {
   margin-bottom: 0.5rem;
+  text-align: justify;
 }
 
 .prose strong {
