@@ -235,10 +235,17 @@ export default function BioSection() {
     camera.add(dirLight);
     scene.add(camera);
 
-    const nodeMeshes = [];
+       const nodeMeshes = [];
     const connectionLines = [];
     const signals = [];
-    const ringMeshes = [];
+    const nodeGroups = {}; // Αναφορές στα groups των πλανητών για το hover scaling
+    
+    // Πίνακες για την παρακολούθηση των custom στοιχείων κάθε πλανήτη
+    const experienceRings = []; // Για περιστροφή των δακτυλίων της Εμπειρίας
+    const projectMoons = [];    // Για τις τροχιές των δορυφόρων των Projects
+    const educationCages = [];   // Για την περιστροφή του πλέγματος της Εκπαίδευσης
+    const skillKnots = [];       // Για τον παλμό και την περιστροφή του Torus Knot
+    const interestGyros = [];    // Για τους γυροσκοπικούς δακτυλίους των Interests
 
     const centerGroup = new THREE.Group();
     scene.add(centerGroup);
@@ -258,20 +265,143 @@ export default function BioSection() {
       const nodeGroup = new THREE.Group();
       nodeGroup.position.copy(node.pos3D);
       scene.add(nodeGroup);
+      nodeGroups[node.id] = nodeGroup;
 
-      const sphereGeom = new THREE.SphereGeometry(0.5, 32, 32);
-      const sphereMat = new THREE.MeshPhongMaterial({ color: 0x7f5af0, specular: 0x22d3ee, shininess: 100, transparent: true, opacity: 0.9 });
+      // Δημιουργία κύριας σφαίρας (click target / collider) - γίνεται αόρατη για όλους τους πλανήτες
+      const sphereGeom = new THREE.SphereGeometry(0.45, 32, 32);
+      const sphereMat = new THREE.MeshBasicMaterial({ visible: false }); // Αόρατο click target
       const sphereMesh = new THREE.Mesh(sphereGeom, sphereMat);
       sphereMesh.userData = { id: node.id };
       nodeGroup.add(sphereMesh);
       nodeMeshes.push(sphereMesh);
 
-      const nodeRingGeom = new THREE.RingGeometry(0.65, 0.7, 32);
-      const nodeRingMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, side: THREE.DoubleSide, transparent: true, opacity: 0.5 });
-      const nodeRingMesh = new THREE.Mesh(nodeRingGeom, nodeRingMat);
-      nodeRingMesh.rotation.x = Math.PI / 4;
-      nodeGroup.add(nodeRingMesh);
-      ringMeshes.push(nodeRingMesh);
+      // Προσθήκη custom 3D διακοσμητικών στοιχείων για κάθε πλανήτη
+      if (node.id === 'experience') {
+        // Κεντρικός μικρός μεταλλικός πυρήνας
+        const coreGeom = new THREE.SphereGeometry(0.2, 32, 32);
+        const coreMat = new THREE.MeshPhongMaterial({ color: 0x7f5af0, specular: 0x22d3ee, shininess: 80 });
+        const coreMesh = new THREE.Mesh(coreGeom, coreMat);
+        nodeGroup.add(coreMesh);
+
+        // Διπλοί τρισδιάστατοι δακτύλιοι (Toruses) τύπου Κρόνου
+        const ringGeom1 = new THREE.TorusGeometry(0.48, 0.035, 12, 64);
+        const ringMat1 = new THREE.MeshPhongMaterial({ color: 0x22d3ee, shininess: 100 });
+        const ringMesh1 = new THREE.Mesh(ringGeom1, ringMat1);
+        ringMesh1.rotation.x = Math.PI / 3;
+        ringMesh1.rotation.y = Math.PI / 6;
+        nodeGroup.add(ringMesh1);
+        experienceRings.push(ringMesh1);
+
+        const ringGeom2 = new THREE.TorusGeometry(0.64, 0.03, 12, 64);
+        const ringMat2 = new THREE.MeshPhongMaterial({ color: 0xec4899, shininess: 80 });
+        const ringMesh2 = new THREE.Mesh(ringGeom2, ringMat2);
+        ringMesh2.rotation.x = Math.PI / 3;
+        ringMesh2.rotation.y = -Math.PI / 6;
+        nodeGroup.add(ringMesh2);
+        experienceRings.push(ringMesh2);
+      } else if (node.id === 'projects') {
+        // Κεντρικός λαμπερός πυρήνας (Ήλιος)
+        const coreGeom = new THREE.SphereGeometry(0.16, 32, 32);
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee });
+        const coreMesh = new THREE.Mesh(coreGeom, coreMat);
+        nodeGroup.add(coreMesh);
+
+        // Τρεις δορυφόροι (moons) που εκτελούν τροχιές
+        const moonGeom1 = new THREE.SphereGeometry(0.065, 16, 16);
+        const moonMat1 = new THREE.MeshPhongMaterial({ color: 0x06b6d4, emissive: 0x06b6d4, shininess: 100 });
+        const moonMesh1 = new THREE.Mesh(moonGeom1, moonMat1);
+        nodeGroup.add(moonMesh1);
+
+        const moonGeom2 = new THREE.SphereGeometry(0.05, 16, 16);
+        const moonMat2 = new THREE.MeshPhongMaterial({ color: 0xa855f7, emissive: 0xa855f7, shininess: 100 });
+        const moonMesh2 = new THREE.Mesh(moonGeom2, moonMat2);
+        nodeGroup.add(moonMesh2);
+
+        const moonGeom3 = new THREE.SphereGeometry(0.055, 16, 16);
+        const moonMat3 = new THREE.MeshPhongMaterial({ color: 0xdb2777, emissive: 0xdb2777, shininess: 100 });
+        const moonMesh3 = new THREE.Mesh(moonGeom3, moonMat3);
+        nodeGroup.add(moonMesh3);
+
+        projectMoons.push(
+          { mesh: moonMesh1, radius: 0.55, speed: 1.6, phase: 0, tilt: 0.35 },
+          { mesh: moonMesh2, radius: 0.8, speed: -1.1, phase: Math.PI / 3, tilt: -0.4 },
+          { mesh: moonMesh3, radius: 1.05, speed: 0.7, phase: (2 * Math.PI) / 3, tilt: 0.2 }
+        );
+
+        // Λεπτές γραμμές τροχιάς των δορυφόρων
+        const trackGeom1 = new THREE.RingGeometry(0.54, 0.55, 64);
+        const trackMat1 = new THREE.MeshBasicMaterial({ color: 0x22d3ee, side: THREE.DoubleSide, transparent: true, opacity: 0.12 });
+        const trackMesh1 = new THREE.Mesh(trackGeom1, trackMat1);
+        trackMesh1.rotation.x = Math.PI / 2 + 0.35;
+        nodeGroup.add(trackMesh1);
+
+        const trackGeom2 = new THREE.RingGeometry(0.79, 0.8, 64);
+        const trackMat2 = new THREE.MeshBasicMaterial({ color: 0xa855f7, side: THREE.DoubleSide, transparent: true, opacity: 0.08 });
+        const trackMesh2 = new THREE.Mesh(trackGeom2, trackMat2);
+        trackMesh2.rotation.x = Math.PI / 2 - 0.4;
+        nodeGroup.add(trackMesh2);
+
+        const trackGeom3 = new THREE.RingGeometry(1.04, 1.05, 64);
+        const trackMat3 = new THREE.MeshBasicMaterial({ color: 0xdb2777, side: THREE.DoubleSide, transparent: true, opacity: 0.06 });
+        const trackMesh3 = new THREE.Mesh(trackGeom3, trackMat3);
+        trackMesh3.rotation.x = Math.PI / 2 + 0.2;
+        nodeGroup.add(trackMesh3);
+      } else if (node.id === 'education') {
+        // Κεντρικός πυρήνας εικοσάεδρου
+        const coreGeom = new THREE.OctahedronGeometry(0.18, 0);
+        const coreMat = new THREE.MeshPhongMaterial({ color: 0x1d4ed8, shininess: 80 });
+        const coreMesh = new THREE.Mesh(coreGeom, coreMat);
+        nodeGroup.add(coreMesh);
+
+        // Εσωτερικός κλωβός (οκτάεδρο wireframe)
+        const innerCageGeom = new THREE.OctahedronGeometry(0.48, 0);
+        const innerCageMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee, wireframe: true, transparent: true, opacity: 0.4 });
+        const innerCageMesh = new THREE.Mesh(innerCageGeom, innerCageMat);
+        nodeGroup.add(innerCageMesh);
+        educationCages.push({ mesh: innerCageMesh, speedX: 0.4, speedY: 0.3 });
+
+        // Εξωτερικός κλωβός (δωδεκάεδρο wireframe)
+        const outerCageGeom = new THREE.DodecahedronGeometry(0.72, 0);
+        const outerCageMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, wireframe: true, transparent: true, opacity: 0.3 });
+        const outerCageMesh = new THREE.Mesh(outerCageGeom, outerCageMat);
+        nodeGroup.add(outerCageMesh);
+        educationCages.push({ mesh: outerCageMesh, speedX: -0.2, speedY: -0.4 });
+      } else if (node.id === 'skills') {
+        // Κεντρικός κόμβος-σπείρα Torus Knot
+        const knotGeom = new THREE.TorusKnotGeometry(0.28, 0.08, 64, 8);
+        const knotMat = new THREE.MeshPhongMaterial({ color: 0xdb2777, specular: 0xec4899, shininess: 100 });
+        const knotMesh = new THREE.Mesh(knotGeom, knotMat);
+        nodeGroup.add(knotMesh);
+        skillKnots.push(knotMesh);
+      } else if (node.id === 'interests') {
+        // Κεντρικός μικρός πυρήνας
+        const coreGeom = new THREE.SphereGeometry(0.16, 32, 32);
+        const coreMat = new THREE.MeshPhongMaterial({ color: 0x10b981, shininess: 80 });
+        const coreMesh = new THREE.Mesh(coreGeom, coreMat);
+        nodeGroup.add(coreMesh);
+
+        // Γυροσκοπική δομή 3 δακτυλίων (Toruses) στους άξονες X, Y, Z
+        const gyroRingGeom = new THREE.TorusGeometry(0.46, 0.02, 8, 48);
+        const gyroMat1 = new THREE.MeshBasicMaterial({ color: 0x10b981, side: THREE.DoubleSide });
+        const gyroMesh1 = new THREE.Mesh(gyroRingGeom, gyroMat1);
+        nodeGroup.add(gyroMesh1);
+
+        const gyroMat2 = new THREE.MeshBasicMaterial({ color: 0xf59e0b, side: THREE.DoubleSide });
+        const gyroMesh2 = new THREE.Mesh(gyroRingGeom, gyroMat2);
+        gyroMesh2.rotation.y = Math.PI / 2;
+        nodeGroup.add(gyroMesh2);
+
+        const gyroMat3 = new THREE.MeshBasicMaterial({ color: 0x22d3ee, side: THREE.DoubleSide });
+        const gyroMesh3 = new THREE.Mesh(gyroRingGeom, gyroMat3);
+        gyroMesh3.rotation.x = Math.PI / 2;
+        nodeGroup.add(gyroMesh3);
+
+        interestGyros.push(
+          { mesh: gyroMesh1, axis: 'z', speed: 0.6 },
+          { mesh: gyroMesh2, axis: 'x', speed: -0.8 },
+          { mesh: gyroMesh3, axis: 'y', speed: 1.0 }
+        );
+      }
 
       const points = [new THREE.Vector3(0, 0, 0), node.pos3D];
       const lineGeom = new THREE.BufferGeometry().setFromPoints(points);
@@ -469,7 +599,40 @@ export default function BioSection() {
       } else {
         centerGroup.rotation.y = elapsed * 0.05;
       }
-      ringMeshes.forEach((r, i) => { r.rotation.y = elapsed * (1.0 + i * 0.15); });
+      // Animation των δακτυλίων της Εμπειρίας
+      experienceRings.forEach((r, idx) => {
+        const direction = idx === 0 ? 1 : -1;
+        r.rotation.z = elapsed * 0.6 * direction;
+      });
+
+      // Animation των δορυφόρων στα Projects
+      projectMoons.forEach((m) => {
+        const angle = elapsed * m.speed + m.phase;
+        m.mesh.position.x = Math.cos(angle) * m.radius;
+        m.mesh.position.y = Math.sin(angle) * Math.sin(m.tilt) * m.radius;
+        m.mesh.position.z = Math.sin(angle) * Math.cos(m.tilt) * m.radius;
+      });
+
+      // Animation του πλέγματος της Εκπαίδευσης (πολλαπλοί κλωβοί)
+      educationCages.forEach((cage) => {
+        cage.mesh.rotation.y += cage.speedY * 0.015;
+        cage.mesh.rotation.x += cage.speedX * 0.015;
+      });
+
+      // Animation του Torus Knot των Skills (περιστροφή & παλμός)
+      skillKnots.forEach((knot) => {
+        knot.rotation.x = elapsed * 0.8;
+        knot.rotation.y = elapsed * 0.5;
+        const scale = 1.0 + Math.sin(elapsed * 2.2) * 0.1;
+        knot.scale.set(scale, scale, scale);
+      });
+
+      // Animation των γυροσκοπικών δακτυλίων των Interests
+      interestGyros.forEach((g) => {
+        if (g.axis === 'x') g.mesh.rotation.x += g.speed * 0.015;
+        if (g.axis === 'y') g.mesh.rotation.y += g.speed * 0.015;
+        if (g.axis === 'z') g.mesh.rotation.z += g.speed * 0.015;
+      });
 
       signals.forEach((s) => {
         const t = (elapsed * s.speed + s.offset) % 1.0;
@@ -512,11 +675,15 @@ export default function BioSection() {
       const intersects = raycaster.intersectObjects(nodeMeshes);
       const curHover = (intersects.length > 0 && !activeNode) ? intersects[0].object : null;
 
-      nodeMeshes.forEach((m) => {
-        const id = m.userData.id;
-        const isH = (m === curHover) || (hoveredNodeIdRef.current === id);
-        m.scale.lerp(new THREE.Vector3(isH ? 1.45 : 1.0, isH ? 1.45 : 1.0, isH ? 1.45 : 1.0), 0.1);
-        m.material.color.lerp(isH || activeNode === id ? new THREE.Color(0x22d3ee) : new THREE.Color(0x7f5af0), 0.1);
+      // Ομαλό Hover Scaling για ολόκληρη την ομάδα (Group) κάθε πλανήτη
+      nodeDefinitions.forEach((node) => {
+        const group = nodeGroups[node.id];
+        if (group) {
+          const isH = (curHover && curHover.userData.id === node.id) || (hoveredNodeIdRef.current === node.id);
+          const isActive = activeNode === node.id;
+          const targetScale = isActive ? 1.25 : (isH ? 1.35 : 1.0);
+          group.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.15);
+        }
       });
 
       nodeDefinitions.forEach((n) => {
@@ -633,7 +800,6 @@ export default function BioSection() {
             onClick={() => handleNodeClick(node.id)}
           >
             <div className="px-4 py-2 bg-[#0a0a0c]/90 border border-purple-500/40 rounded-lg backdrop-blur-md text-center shadow-lg transition-all group-hover:border-cyan-400">
-              <span className="text-base mr-1.5">{node.icon}</span>
               <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-white group-hover:text-cyan-300">
                 {node.label}
               </span>
@@ -771,7 +937,7 @@ export default function BioSection() {
           style={{ left: 0, top: 0 }}
         >
           <div className="w-14 h-14 rounded-full border border-purple-500/20 bg-purple-500/5 flex items-center justify-center mb-1">
-            <span className="text-2xl animate-pulse">👨‍💻</span>
+            <span className="text-xl font-mono text-cyan-400 animate-pulse">&gt;_</span>
           </div>
           <span className="text-[9px] text-cyan-400 font-mono tracking-widest">USER_ID: CHRIS</span>
           <span className="text-[8px] text-purple-400 font-mono tracking-wider animate-pulse">STATUS: ONLINE</span>

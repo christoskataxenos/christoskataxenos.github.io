@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7f5af0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="#0a0a0c" />
+  <path d="M8 8 L8 24 M8 16 L14 8 M8 16 L14 24" stroke="url(#grad)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M18 8 L18 24 M18 16 L24 8 M18 16 L24 24" stroke="url(#grad)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5" />
+  <text x="16" y="21" font-family="monospace" font-size="14" font-weight="bold" fill="white" text-anchor="middle">CK</text>
+</svg>
