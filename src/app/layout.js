@@ -57,16 +57,11 @@ export const metadata = {
     images: ['/images/og-default.png'],
     creator: '@christoskataxenos', // Update if you have a handle
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="el" suppressHydrationWarning={true}>
+    <html lang="el" suppressHydrationWarning={true} data-scroll-behavior="smooth">
       {/* Font configuration */}
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased text-white bg-[#0a0a0c] leading-relaxed`} suppressHydrationWarning>
         <GridBackground />

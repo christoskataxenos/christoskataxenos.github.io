@@ -101,6 +101,32 @@ const getHologramDefinitions = (t) => ({
 });
 
 // ============================================================
+// HELPER COMPONENT: Typewriter Text
+// Σκόπος: Εφέ γραφομηχανής για sci-fi αίσθηση εμφάνισης κειμένου
+// ============================================================
+const TypewriterText = ({ text, delay = 15 }) => {
+  const [displayedText, setDisplayedText] = useState('');
+
+  useEffect(() => {
+    setDisplayedText('');
+    if (!text) return;
+    
+    let currentIndex = 0;
+    const intervalId = setInterval(() => {
+      setDisplayedText((prev) => prev + text.charAt(currentIndex));
+      currentIndex++;
+      if (currentIndex >= text.length) {
+        clearInterval(intervalId);
+      }
+    }, delay);
+
+    return () => clearInterval(intervalId);
+  }, [text, delay]);
+
+  return <span>{displayedText}</span>;
+};
+
+// ============================================================
 // MAIN COMPONENT: 3D Holographic Constellation Bio
 // Σκοπός: 3D διαδραστικός αστερισμός με ολόγραμματα (Three.js WebGL)
 // ============================================================
@@ -144,11 +170,11 @@ export default function BioSection() {
   });
 
   const nodeDefinitions = [
-    { id: 'experience', icon: '💼', label: t.experienceTitle, pos3D: new THREE.Vector3(-4.5, 2.5, 1.5) },
-    { id: 'projects',   icon: '🚀', label: 'Projects',       pos3D: new THREE.Vector3(4.5, 2.5, -1.5) },
-    { id: 'education',  icon: '🎓', label: t.educationTitle,  pos3D: new THREE.Vector3(-3.5, -2.5, 2.0) },
-    { id: 'skills',     icon: '⚡', label: t.skillsTitle,     pos3D: new THREE.Vector3(3.5, -2.5, -2.0) },
-    { id: 'interests',  icon: '🎮', label: t.interestsTitle || 'Interests', pos3D: new THREE.Vector3(0.0, -4.0, 1.0) },
+    { id: 'experience', label: t.experienceTitle, pos3D: new THREE.Vector3(-4.5, 2.5, 1.5) },
+    { id: 'projects',   label: 'Projects',       pos3D: new THREE.Vector3(4.5, 2.5, -1.5) },
+    { id: 'education',  label: t.educationTitle,  pos3D: new THREE.Vector3(-3.5, -2.5, 2.0) },
+    { id: 'skills',     label: t.skillsTitle,     pos3D: new THREE.Vector3(3.5, -2.5, -2.0) },
+    { id: 'interests',  label: t.interestsTitle || 'Interests', pos3D: new THREE.Vector3(0.0, -4.0, 1.0) },
   ];
 
   // Εφέ για τον καθορισμό των θέσεων-στόχων της κάμερας (Inspect Mode)
@@ -235,10 +261,87 @@ export default function BioSection() {
     camera.add(dirLight);
     scene.add(camera);
 
-       const nodeMeshes = [];
+    const nodeMeshes = [];
     const connectionLines = [];
     const signals = [];
     const nodeGroups = {}; // Αναφορές στα groups των πλανητών για το hover scaling
+    
+    // ============================================================
+    // PROCEDURAL TEXTURES GENERATION (Sci-Fi / Cybernetic Themes)
+    // ============================================================
+    
+    // 1. Μεταλλική υφή (Metal Bump Map) για τον κόμβο της Εμπειρίας
+    const createMetalBumpTexture = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 128;
+      canvas.height = 128;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#808080';
+      ctx.fillRect(0, 0, 128, 128);
+      // Προσθήκη κόκκων θορύβου
+      for (let i = 0; i < 2000; i++) {
+        const x = Math.random() * 128;
+        const y = Math.random() * 128;
+        const val = Math.floor(Math.random() * 80) - 40;
+        ctx.fillStyle = `rgb(${128+val}, ${128+val}, ${128+val})`;
+        ctx.fillRect(x, y, 1, 1);
+      }
+      return new THREE.CanvasTexture(canvas);
+    };
+
+    // 2. Ψηφιακό πλέγμα (Grid Texture) για την Εκπαίδευση
+    const createGridTexture = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, 64, 64);
+      // Σχεδίαση πλέγματος
+      ctx.strokeStyle = '#22d3ee';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(0, 0, 64, 64);
+      ctx.beginPath();
+      ctx.moveTo(32, 0);
+      ctx.lineTo(32, 64);
+      ctx.moveTo(0, 32);
+      ctx.lineTo(64, 32);
+      ctx.stroke();
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat.set(4, 4);
+      return texture;
+    };
+
+    // 3. Ρίγες Neon (Neon Stripes) για τα Projects και τα Skills
+    const createNeonStripesTexture = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 128;
+      canvas.height = 128;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, 128, 128);
+      
+      const grad = ctx.createLinearGradient(0, 0, 0, 128);
+      grad.addColorStop(0.0, '#db2777');
+      grad.addColorStop(0.2, '#000000');
+      grad.addColorStop(0.4, '#a855f7');
+      grad.addColorStop(0.6, '#000000');
+      grad.addColorStop(0.8, '#22d3ee');
+      grad.addColorStop(1.0, '#000000');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 128, 128);
+      
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      return texture;
+    };
+
+    const metalBumpTexture = createMetalBumpTexture();
+    const gridTexture = createGridTexture();
+    const neonStripesTexture = createNeonStripesTexture();
     
     // Πίνακες για την παρακολούθηση των custom στοιχείων κάθε πλανήτη
     const experienceRings = []; // Για περιστροφή των δακτυλίων της Εμπειρίας
@@ -277,9 +380,15 @@ export default function BioSection() {
 
       // Προσθήκη custom 3D διακοσμητικών στοιχείων για κάθε πλανήτη
       if (node.id === 'experience') {
-        // Κεντρικός μικρός μεταλλικός πυρήνας
+        // Κεντρικός μικρός μεταλλικός πυρήνας με ανάγλυφη υφή
         const coreGeom = new THREE.SphereGeometry(0.2, 32, 32);
-        const coreMat = new THREE.MeshPhongMaterial({ color: 0x7f5af0, specular: 0x22d3ee, shininess: 80 });
+        const coreMat = new THREE.MeshStandardMaterial({ 
+          color: 0x7f5af0, 
+          metalness: 0.95, 
+          roughness: 0.05,
+          bumpMap: metalBumpTexture,
+          bumpScale: 0.04
+        });
         const coreMesh = new THREE.Mesh(coreGeom, coreMat);
         nodeGroup.add(coreMesh);
 
@@ -300,9 +409,16 @@ export default function BioSection() {
         nodeGroup.add(ringMesh2);
         experienceRings.push(ringMesh2);
       } else if (node.id === 'projects') {
-        // Κεντρικός λαμπερός πυρήνας (Ήλιος)
+        // Κεντρικός λαμπερός πυρήνας με neon ρίγες
         const coreGeom = new THREE.SphereGeometry(0.16, 32, 32);
-        const coreMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee });
+        const coreMat = new THREE.MeshStandardMaterial({ 
+          color: 0xffffff,
+          map: neonStripesTexture,
+          roughness: 0.15,
+          metalness: 0.85,
+          emissive: 0x22d3ee,
+          emissiveIntensity: 0.5
+        });
         const coreMesh = new THREE.Mesh(coreGeom, coreMat);
         nodeGroup.add(coreMesh);
 
@@ -347,36 +463,55 @@ export default function BioSection() {
         trackMesh3.rotation.x = Math.PI / 2 + 0.2;
         nodeGroup.add(trackMesh3);
       } else if (node.id === 'education') {
-        // Κεντρικός πυρήνας εικοσάεδρου
+        // Κεντρικός πυρήνας εικοσάεδρου με πλέγμα
         const coreGeom = new THREE.OctahedronGeometry(0.18, 0);
-        const coreMat = new THREE.MeshPhongMaterial({ color: 0x1d4ed8, shininess: 80 });
+        const coreMat = new THREE.MeshStandardMaterial({ 
+          color: 0x1d4ed8, 
+          metalness: 0.8, 
+          roughness: 0.2,
+          bumpMap: gridTexture,
+          bumpScale: 0.03
+        });
         const coreMesh = new THREE.Mesh(coreGeom, coreMat);
         nodeGroup.add(coreMesh);
 
-        // Εσωτερικός κλωβός (οκτάεδρο wireframe)
+        // Εσωτερικός κλωβός (οκτάεδρο wireframe) με υφή πλέγματος
         const innerCageGeom = new THREE.OctahedronGeometry(0.48, 0);
-        const innerCageMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee, wireframe: true, transparent: true, opacity: 0.4 });
+        const innerCageMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee, wireframe: true, transparent: true, opacity: 0.4, map: gridTexture });
         const innerCageMesh = new THREE.Mesh(innerCageGeom, innerCageMat);
         nodeGroup.add(innerCageMesh);
         educationCages.push({ mesh: innerCageMesh, speedX: 0.4, speedY: 0.3 });
 
-        // Εξωτερικός κλωβός (δωδεκάεδρο wireframe)
+        // Εξωτερικός κλωβός (δωδεκάεδρο wireframe) με υφή πλέγματος
         const outerCageGeom = new THREE.DodecahedronGeometry(0.72, 0);
-        const outerCageMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, wireframe: true, transparent: true, opacity: 0.3 });
+        const outerCageMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, wireframe: true, transparent: true, opacity: 0.3, map: gridTexture });
         const outerCageMesh = new THREE.Mesh(outerCageGeom, outerCageMat);
         nodeGroup.add(outerCageMesh);
         educationCages.push({ mesh: outerCageMesh, speedX: -0.2, speedY: -0.4 });
       } else if (node.id === 'skills') {
-        // Κεντρικός κόμβος-σπείρα Torus Knot
+        // Κεντρικός κόμβος-σπείρα Torus Knot με neon ρίγες
         const knotGeom = new THREE.TorusKnotGeometry(0.28, 0.08, 64, 8);
-        const knotMat = new THREE.MeshPhongMaterial({ color: 0xdb2777, specular: 0xec4899, shininess: 100 });
+        const knotMat = new THREE.MeshStandardMaterial({ 
+          color: 0xffffff,
+          map: neonStripesTexture,
+          roughness: 0.1,
+          metalness: 0.9,
+          emissive: 0xdb2777,
+          emissiveIntensity: 0.5
+        });
         const knotMesh = new THREE.Mesh(knotGeom, knotMat);
         nodeGroup.add(knotMesh);
         skillKnots.push(knotMesh);
       } else if (node.id === 'interests') {
-        // Κεντρικός μικρός πυρήνας
+        // Κεντρικός μικρός πυρήνας με μεταλλική υφή
         const coreGeom = new THREE.SphereGeometry(0.16, 32, 32);
-        const coreMat = new THREE.MeshPhongMaterial({ color: 0x10b981, shininess: 80 });
+        const coreMat = new THREE.MeshStandardMaterial({ 
+          color: 0x10b981, 
+          metalness: 0.75, 
+          roughness: 0.25,
+          bumpMap: metalBumpTexture,
+          bumpScale: 0.02
+        });
         const coreMesh = new THREE.Mesh(coreGeom, coreMat);
         nodeGroup.add(coreMesh);
 
@@ -572,14 +707,16 @@ export default function BioSection() {
       }
     });
 
-    const clock = new THREE.Clock();
+    // Χρήση THREE.Timer αντί του Clock (deprecated) για σταθερό χρόνο
+    const timer = new THREE.Timer();
     const tempV = new THREE.Vector3();
     let animationFrameId;
     let lastActiveNode = null;
 
-    const animate = () => {
+    const animate = (timestamp) => {
       animationFrameId = requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
+      timer.update(timestamp);
+      const elapsed = timer.getElapsed();
 
       const curW = renderer.domElement.clientWidth;
       const curH = renderer.domElement.clientHeight;
@@ -589,8 +726,44 @@ export default function BioSection() {
         rebuildHologramsIn3D(lastActiveNode);
       }
 
-      // Κλειδώνουμε το rotation των controls όταν είμαστε σε Inspect Mode για να μην χαλάει το κάδρο
-      controls.enableRotate = !activeNodeRef.current;
+      // Απενεργοποίηση χειροκίνητης περιστροφής, ο έλεγχος γίνεται μέσω Mouse Gravity
+      controls.enableRotate = false;
+
+      // ============================================================
+      // YΠΟΛΟΓΙΣΜΟΣ ΒΑΡΥΤΗΤΑΣ ΠΟΝΤΙΚΙΟΥ (Mouse Gravity Calculation)
+      // ============================================================
+      if (!activeNodeRef.current) {
+        let closestNode = null;
+        let minDist = Infinity;
+        const tempV2 = new THREE.Vector2();
+
+        // Εύρεση πλησιέστερου κόμβου σε NDC συντεταγμένες
+        nodeDefinitions.forEach((node) => {
+          tempV.copy(node.pos3D).project(camera);
+          tempV2.set(tempV.x, tempV.y);
+          const dist = mouse.distanceTo(tempV2);
+          if (dist < minDist) {
+            minDist = dist;
+            closestNode = node;
+          }
+        });
+
+        // Όριο βαρυτικής έλξης (threshold)
+        const gravityThreshold = 0.9;
+        if (closestNode && minDist < gravityThreshold) {
+          // Υπολογισμός δύναμης έλξης με smoothstep
+          const t = 1.0 - (minDist / gravityThreshold);
+          const influence = t * t * (3 - 2 * t);
+
+          // Έλξη της κάμερας προς τον κόμβο
+          targetsRef.current.lookAt.copy(closestNode.pos3D).multiplyScalar(0.22 * influence);
+          targetsRef.current.cameraPos.set(0, 0, 12).addScaledVector(closestNode.pos3D, 0.14 * influence);
+        } else {
+          // Επαναφορά στην κεντρική θέση
+          targetsRef.current.lookAt.set(0, 0, 0);
+          targetsRef.current.cameraPos.set(0, 0, 12);
+        }
+      }
 
       if (!activeNode) {
         centerGroup.rotation.y = elapsed * 0.15;
@@ -793,7 +966,7 @@ export default function BioSection() {
           <div
             key={node.id}
             ref={(el) => (labelRefs.current[node.id] = el)}
-            className="absolute z-20 flex flex-col items-center cursor-pointer group pointer-events-auto transition-all duration-300"
+            className="absolute z-20 flex flex-col items-center cursor-pointer group pointer-events-auto transition-opacity duration-300"
             style={{ left: 0, top: 0, transform: 'translate(-50%, -100%)' }}
             onMouseEnter={() => { hoveredNodeIdRef.current = node.id; }}
             onMouseLeave={() => { hoveredNodeIdRef.current = null; }}
@@ -910,7 +1083,9 @@ export default function BioSection() {
                           ))}
                         </div>
                       ) : (
-                        <p className="text-[10px] text-gray-300 mt-2.5 leading-relaxed font-sans">{holo.body}</p>
+                        <p className="text-[10px] text-gray-300 mt-2.5 leading-relaxed font-sans">
+                          <TypewriterText text={holo.body} />
+                        </p>
                       )}
 
                       {holo.url && (
@@ -951,7 +1126,7 @@ export default function BioSection() {
             {t.bioTitle}
           </h1>
           <p className="text-[9px] text-cyan-400 font-mono tracking-widest animate-pulse">
-            {'// DRAG TO ROTATE • CLICK NODES TO EXPLORE'}
+            {'// MOVE MOUSE TO GRAVITATE • CLICK NODES TO EXPLORE'}
           </p>
         </div>
 

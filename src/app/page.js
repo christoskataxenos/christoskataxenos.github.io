@@ -1,6 +1,7 @@
 'use client';
 
 import HeroTitle from '../components/HeroTitle';
+import MiniGlobe from '../components/MiniGlobe';
 import { useLanguage } from '../context/LanguageContext';
 import SpotlightCard from '../components/SpotlightCard';
 import { useRef } from 'react'; // Import useRef
@@ -43,7 +44,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4"> {/* New container for overall centering */}
       {/* Section 1: Hero */}
-      <section id="hero" className="section hero-section mb-16"> {/* Adjusted margin-bottom */}
+      <section id="hero" className="section hero-section mb-16">
         <div 
           className="hero-content relative p-8 md:p-12 rounded-2xl bg-black/30 backdrop-blur-lg border border-white/10 shadow-xl mx-auto max-w-4xl overflow-hidden" 
           ref={divRef} 
@@ -62,7 +63,10 @@ export default function Home() {
               background: `radial-gradient(600px circle at 0px 0px, rgba(127, 90, 240, 0.15), transparent 40%)`,
             }}
           />
-          <HeroTitle />
+          <div className="flex flex-row items-center justify-center gap-4 md:gap-8 flex-wrap z-10 relative">
+            <HeroTitle />
+            <MiniGlobe />
+          </div>
           <p className="hero-description relative z-10 max-w-2xl mx-auto mt-4 text-white text-lg"> 
             {t.heroDescription}
           </p>
