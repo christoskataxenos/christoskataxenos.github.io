@@ -48,13 +48,15 @@ const ParticleTitle = ({
     // Συνδυάζουμε ένα απαλό γέμισμα με ένα περίγραμμα για "αστερικό" (constellation) look
     ctx.fillStyle = '#ffffff';
     ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
     // Remove accents before converting to uppercase to ensure font compatibility for Greek
-    const safeText = text.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toUpperCase();
+    const safeText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
     
     ctx.fillText(safeText, canvas.width / 2, canvas.height / 2);
     
     // Προσθέτουμε και ένα ελαφρύ stroke για να τονίσουμε τις άκρες
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 3.0; // Thicker stroke for Courier New
     ctx.strokeStyle = '#ffffff';
     ctx.strokeText(safeText, canvas.width / 2, canvas.height / 2);
 
@@ -65,14 +67,14 @@ const ParticleTitle = ({
     const randomness = [];
     
     // Sample every N pixels (αυξάνουμε το step για λιγότερα, πιο ξεχωριστά σωματίδια)
-    const step = 4; 
+    const step = 3; 
     
     for (let y = 0; y < canvas.height; y += step) {
       for (let x = 0; x < canvas.width; x += step) {
         const index = (y * canvas.width + x) * 4;
         const r = imgData[index]; // read red channel (since text is white)
         
-        if (r > 128) { // If pixel is bright enough
+        if (r > 64) { // Lower threshold to capture thinner fonts
           // Center the coordinates and scale them to Three.js units
           const pX = (x - canvas.width / 2) * 0.035;
           const pY = -(y - canvas.height / 2) * 0.035;
