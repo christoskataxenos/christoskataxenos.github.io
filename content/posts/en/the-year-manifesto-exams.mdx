@@ -1,0 +1,85 @@
+---
+title: "Exam Manifesto: C on Paper, Python On The Fly"
+date: "2026-06-22"
+description: "When your mind becomes an ANSI C compiler and professors interrogate you in Python. The first year at EAP is over and we survived."
+tags: ["eap", "plh10", "plhpro", "exams", "c", "python", "devlog", "manifesto"]
+---
+
+<Stats panicLevel={99} coffeeCups={42} hoursSpent={120} />
+
+And just like that, the time came when the studying, the all-nighters, the existential questions of the type "why am I doing this to myself?" and the countless segmentation faults gave way to the ultimate judgment: the final exams. If you thought the Written Assignments during the year were tough, sit back, make a double espresso (or take a sedative) because we need to talk about the real, raw experience of exams in PLH10 and PLHPRO.
+
+This is not just a post. It is the manifesto of the year. An ode to the pain, the persistence, and the paranoia of studying computer science from a distance.
+
+---
+
+## PLH10: When Paper Becomes an IDE (and You Are the Compiler)
+
+The PLH10 exam was an experience that is hard to forget – no matter how much my therapist tries to help me repress it. You had to write a lot. And when I say a lot, I mean **C code on paper**.
+
+Yes, you read that right. In the year 2026, in the era of Copilot, GPT-5 Agents, and IDEs that make you coffee before you even hit compile, we found ourselves with a blue Bic pen in hand, drawing pointers, structs, and 2D arrays. No compiler, no debugger, no stack trace.
+
+Our only debugging tool was our own brain. A brain already "melted" from months of intensive studying, lack of sleep, and anxiety, trying to "dry run" the code, praying not to suffer some kind of mental segmentation fault in the middle of the exam paper.
+
+And this is where the irony of the year begins: all year long they had nagged us about **Pseudocode**. We wasted endless hours and they dragged us over the coals in two entire Written Assignments on how to write the "correct" pseudolanguage, only for us to **never** see it on the exam paper! Instead, the exams focused on what really matters: pure algorithmic thinking. Binary trees, sorting and searching algorithms, and number systems all made their expected appearance (as they should have), asking us to solve real problems.
+
+Because at the end of the day, the PLH10 exam wasn't just a syntax test in C. The course is essentially an "Introduction to Computer Science", and C served as the vehicle – the tool to understand how a computer thinks. But if C on paper was a survival exercise, the PLHPRO project was an exercise in diplomacy, teamwork, and pure... paranoid implementation.
+
+## PLHPRO: RandeBoo, the 'Casper', and the Art of Not Hanging Your Teammate Out to Dry
+
+A week after the shock of PLH10, it was time for the presentation and examination of the PLHPRO group project. Here, things were theoretically simpler: the project was submitted, ran like clockwork, and the job was already done. It was just a typical presentation, right? **Wrong.**
+
+Because our project – the infamous **RandeBoo** (a desktop appointment management app in Tkinter with SQLite) – started as an exercise in high-end software engineering and ended as a lesson in humility. We designed an over-engineered modular architecture that even NASA would envy: beautiful clean blueprints, UML diagrams, and perfectly separated abstractions. In practice? Deadlocks, merge conflicts, and thread collisions that turned the repository into a war zone.
+
+When we realized that if we kept going like this we would submit the project somewhere in 2060, shortly after our retirement, we made the big decision for an epic U-turn: we threw the clean principles into the trash (?), took off the masks of over-engineering, became full-stack hustlers, and rewrote the system from scratch. In a single afternoon, our progress rolled back from 36% to an absolute 0% – it was our only hope to climb back up.
+
+And what didn't we put in this app to impress the "Plato-like" professors:
+- A custom **SPA Routing** system in Tkinter, dynamically destroying and rendering panels with `widget.destroy()`.
+- A Conflict Management algorithm in SQLite (`database.py`) that took us weeks to write, with the PC fan screaming like a Caterpillar turbine and us feeling like we were assembling the Antikythera Mechanism.
+- An **Aegean Theme** palette so the professor wouldn't fall into depression from the default gray of Tkinter.
+- Asynchronous email dispatch with multi-threading so the screen wouldn't freeze.
+- 1200+ lines of test code (which, for the professor's good luck, I never mentioned or showed him anywhere) just for the overkill.
+
+Of course, a software project without team drama doesn't exist. We had our own "Casper" on Viber – the member who disappeared due to force majeure. This meant 3-hour midnight sprints to cover the code gaps using the sacred art of copy-paste-refactoring, in order to save the employees' module.
+
+But because we are a team, but above all humans, we didn't leave him behind. When "Casper" finally showed up, we didn't hang him out to dry, even though he wanted to quit. We adjusted the roles and the code so that he had a specific, clean piece of his own to present to the professors. And he passed along with the whole team, with flying colors. Because, as the famous Game of Thrones quote goes: *the lone wolf dies, but the pack survives*.
+
+With all this on our shoulders, we walked into the examination ready to blow them away with our awesome project. There were some small bugs in the code, BUT the professor overlooked them. However, he was determined to make sure that ChatGPT didn't write the code, but we did.
+
+He asked us to explain RandeBoo **line by line**. All the logic, the imports, the queries, even the thread-safe operations. And to top it all off, we had the "on the fly" examination. Fast-paced questions on Python, like we were in a game show where the prize was a passing grade or the penalty was public humiliation.
+
+<Terminal title="Professor's Interrogation Prompt">
+> Question: What does this list comprehension return if we change the condition to [x for x in list if x % 2 == 0];
+> User: (Cold sweat running down my forehead) It returns...
+> Question: How would you do this with map and lambda? Write it in the chat now. You have 10 seconds.
+> User: 🤯 (My brain hit exit code 137 - out of memory)
+</Terminal>
+
+It was a test of speed and reflexes, where the mind had to switch context faster than a CPU thread. If you didn't know 100% what even the last line of your code did, you were doomed.
+
+### 💡 Survival Guide for the Next Ones:
+1. **Don't hide behind the team:** If there are 3 people in the project and one writes 90% of the code, the other two will be "executed" in the presentation. Professors smell ignorance from miles away.
+2. **Know your libraries:** Don't just `import pandas` or `import matplotlib` because you saw it in a tutorial. You need to know *why* you chose that specific structure and how it works under the hood.
+3. **Clean Code & Comments:** Write clean code and add comments. When they ask you to explain a function 3 months later, comments will be your lifesaver.
+
+---
+
+## 19 Years Later: A Personal Victory
+
+But you know what? Behind the jokes about pointers, C on paper, and "Casper" on Viber, lies a reality that only someone who has tried to study at an older age can understand.
+
+This year was, without exaggeration, one of the most difficult, exhausting, and pressure-filled periods of my life.
+
+It had been **19 whole years** since the last time I sat down to study. Nineteen years is a lifetime. Returning to study isn't just a matter of time; it's a constant battle with self-doubt. Can I still do it? Does my brain work at the same pace? Do I have the same stamina?
+
+When your daily routine includes an 8-hour (and then some) job, the responsibilities of adult life, running around, and commitments, squeezing in hours of study at 3 AM or sacrificing every weekend for months on end is a process that drains you mentally. There were countless moments when I felt like breaking down, when anxiety paralyzed me, when I looked at the screen with tears in my eyes from exhaustion and just wanted to give up on everything, shut down the computer, and disappear.
+
+But in the end... **I passed.** Both courses. And actually with grades I didn't even dare dream of when I started this journey.
+
+When I saw the results, the relief was so deep that it made me realize the weight I had been carrying all this time. It's not just two passed courses. It is proof that indeed, the effort, the sweat, and the sacrifices pay off. It is a huge, personal victory against my own insecurities.
+
+I still have 12 courses left for my degree. The road is still long, uphill, and will surely bring more difficult moments, Segment Faults, and all-nighters. But self-doubt has given way to confidence. Now, I know. **I know it can be done.**
+
+The first blood has been spilled, the first XP has been gathered.
+
+Level up, then. Let's go for the next 12!
