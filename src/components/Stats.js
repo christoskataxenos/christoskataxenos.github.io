@@ -6,7 +6,7 @@
  */
 import React from 'react';
 
-const Stats = ({ panicLevel, doubtLevel, excitementLevel, coffeeCups, freddos, redbulls, hoursSpent, linesOfLogic }) => {
+const Stats = ({ panicLevel, doubtLevel, excitementLevel, frustrationLevel, coffeeCups, freddos, redbulls, hoursSpent, linesOfLogic, illegalActs }) => {
   // Επιλογή μετρικής προς εμφάνιση
   let level = 0;
   let label = "Panic Level";
@@ -14,6 +14,9 @@ const Stats = ({ panicLevel, doubtLevel, excitementLevel, coffeeCups, freddos, r
   if (excitementLevel !== undefined) {
     level = excitementLevel;
     label = "Excitement Level";
+  } else if (frustrationLevel !== undefined) {
+    level = frustrationLevel;
+    label = "Frustration Level";
   } else if (doubtLevel !== undefined) {
     level = doubtLevel;
     label = "Doubt Level";
@@ -107,6 +110,19 @@ const Stats = ({ panicLevel, doubtLevel, excitementLevel, coffeeCups, freddos, r
                 color: redbulls > 10 ? '#ef4444' : '#fff'
               }}>
                 {redbulls} {redbulls > 10 ? 'HEART ATTACKS' : 'cans'}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Illegal Acts Counter */}
+        {illegalActs !== undefined && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: '0 1 auto' }}>
+            <span style={{ fontSize: '20px' }}>⚖️</span>
+            <div>
+              <div style={{ fontSize: '12px', color: '#888' }}>Illegal Acts</div>
+              <div style={{ fontWeight: 'bold' }}>
+                {illegalActs} {illegalActs === 1 ? 'act' : 'acts'}
               </div>
             </div>
           </div>
