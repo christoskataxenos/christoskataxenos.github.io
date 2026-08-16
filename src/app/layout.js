@@ -50,6 +50,13 @@ export const metadata = {
       },
     ],
   },
+  alternates: {
+    canonical: 'https://christoskataxenos.com',
+    languages: {
+      'el-GR': 'https://christoskataxenos.com',
+      'en-US': 'https://christoskataxenos.com/en',
+    },
+  },
   twitter: {
     card: 'summary_large_image',
     title: "Christos Kataxenos | Developer & Photographer",
@@ -59,9 +66,41 @@ export const metadata = {
   },
 };
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://christoskataxenos.com/#website',
+      'url': 'https://christoskataxenos.com',
+      'name': 'Christos Kataxenos',
+      'description': 'Software Development, Network Infrastructure, and Photography.',
+      'inLanguage': ['el', 'en'],
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://christoskataxenos.com/#person',
+      'name': 'Christos Kataxenos',
+      'url': 'https://christoskataxenos.com',
+      'jobTitle': 'Software Developer',
+      'sameAs': [
+        'https://github.com/christoskataxenos',
+        'https://www.linkedin.com/in/christos-kataxenos-4b57a586',
+        'https://www.instagram.com/christoskataxenos/'
+      ]
+    }
+  ]
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="el" suppressHydrationWarning={true} data-scroll-behavior="smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+        />
+      </head>
       {/* Font configuration */}
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased text-white bg-[#0a0a0c] leading-relaxed`} suppressHydrationWarning>
         <GridBackground />
