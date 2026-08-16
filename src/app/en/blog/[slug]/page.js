@@ -23,14 +23,23 @@ export async function generateMetadata({ params }) {
     }
 
     const { title, date, description } = post;
+    const slug = resolvedParams.slug;
+    const canonical = `https://christoskataxenos.com/en/blog/${slug}`;
 
     return {
       title: `${title} | Christos Kataxenos DevLog`,
       description: description,
+      alternates: {
+        canonical,
+        languages: {
+          'el-GR': `https://christoskataxenos.com/blog/${slug}`,
+        },
+      },
       openGraph: {
         title: title,
         description: description,
         type: 'article',
+        locale: 'en_US',
         publishedTime: date,
         authors: ['Christos Kataxenos'],
         images: [
