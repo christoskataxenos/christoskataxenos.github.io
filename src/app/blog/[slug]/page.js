@@ -29,14 +29,23 @@ export async function generateMetadata({ params }) {
     }
 
     const { title, date, description } = post;
+    const slug = resolvedParams.slug;
+    const canonical = `https://christoskataxenos.com/blog/${slug}`;
 
     return {
       title: `${title} | Christos Kataxenos DevLog`,
       description: description,
+      alternates: {
+        canonical,
+        languages: {
+          'en-US': `https://christoskataxenos.com/en/blog/${slug}`,
+        },
+      },
       openGraph: {
         title: title,
         description: description,
         type: 'article',
+        locale: 'el_GR',
         publishedTime: date,
         authors: ['Christos Kataxenos'],
         images: [
@@ -95,7 +104,7 @@ export default async function Post({ params }) {
               name: 'Christos Kataxenos',
               url: 'https://christoskataxenos.com',
             },
-          }),
+          }).replace(/</g, '\\u003c'),
         }}
       />
 
