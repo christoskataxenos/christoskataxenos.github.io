@@ -46,5 +46,10 @@ function getPortfolioData() {
 export default function PortfolioPage() {
   const categories = getPortfolioData();
   
-  return <PortfolioSection categories={categories} />;
+  return (
+    <main>
+      <h1 className="hero-headline">Portfolio</h1>
+      <PortfolioSection categories={categories} />
+    </main>
+  );
 }
