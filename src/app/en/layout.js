@@ -1,5 +1,4 @@
 import { Inter, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
 import "../globals.css";
 import { Providers } from "../../components/Providers";
 import GridBackground from "../../components/GridBackground";
@@ -50,6 +49,21 @@ export const metadata = {
     description: "Software Development, Network Infrastructure, and Photography.",
     images: ['/images/og-default.png'],
     creator: '@christoskataxenos',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
+  alternates: {
+    canonical: "https://christoskataxenos.com/en",
+    languages: {
+      el: "https://christoskataxenos.com",
+    },
   },
 };
 

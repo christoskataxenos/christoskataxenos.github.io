@@ -5,7 +5,6 @@
  * SEO: Ορισμός OpenGraph, Twitter cards και meta tags.
  */
 import { Inter, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { Providers } from "../components/Providers";
 import GridBackground from "../components/GridBackground";
@@ -57,11 +56,53 @@ export const metadata = {
     images: ['/images/og-default.png'],
     creator: '@christoskataxenos', // Update if you have a handle
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
+  alternates: {
+    canonical: "https://christoskataxenos.com",
+    languages: {
+      en: "https://christoskataxenos.com/en",
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Christos Kataxenos",
+    url: "https://christoskataxenos.com",
+    sameAs: [
+      "https://www.linkedin.com/in/christoskataxenos/",
+    ],
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Christos Kataxenos",
+    url: "https://christoskataxenos.com",
+  };
+
   return (
     <html lang="el" suppressHydrationWarning={true} data-scroll-behavior="smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       {/* Font configuration */}
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased text-white bg-[#0a0a0c] leading-relaxed`} suppressHydrationWarning>
         <GridBackground />
