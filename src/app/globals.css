@@ -69,6 +69,18 @@ h1, h2, h3 {
    color: #7f5af0 !important;
 }
 
+/* --- ACCESSIBILITY: Focus Indicators --- */
+:focus {
+ outline: 3px solid rgba(127, 90, 240, 0.95);
+ outline-offset: 3px;
+ box-shadow: 0 0 0 3px rgba(127, 90, 240, 0.12);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+ :focus { transition: none !important; }
+}
+
 /* --- LAYOUT & SCROLLING --- */
 .scroll-container {
   /* No specific scroll properties here */

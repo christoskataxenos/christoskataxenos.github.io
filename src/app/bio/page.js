@@ -6,5 +6,10 @@ export const metadata = {
 };
 
 export default function BioPage() {
-  return <BioSection />;
+  return (
+    <main>
+      <h1 className="hero-headline">Bio</h1>
+      <BioSection />
+    </main>
+  );
 }
