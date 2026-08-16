@@ -89,7 +89,7 @@ export default async function Post({ params }) {
               name: 'Christos Kataxenos',
               url: 'https://christoskataxenos.com',
             },
-          }),
+          }).replace(/</g, '\\u003c'),
         }}
       />
 
