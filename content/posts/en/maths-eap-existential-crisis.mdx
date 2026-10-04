@@ -80,8 +80,12 @@ Each unit belongs to a different partition. If a light bulb blows out in the sec
 
 #### 2. Autonomous Heating: The 1985 Presidential Decree (FEK 631/D)
 This is where software development descends into pure mathematical terror. You open the legal decree governing autonomous central heating allocation (via hour meters or calorie meters) and you aren't reading law. You are deciphering an arcane mathematical manuscript:
-$$q_i = \epsilon_i \cdot Q + (1 - \sum \epsilon) \cdot \frac{f_i \cdot h_i}{\sum (f_j \cdot h_j)} \cdot Q$$
-Thermal loss coefficients ($f_i$), base heating factor ($\epsilon_i$), operating run-hours ($h_i$), startup load allowances, closed apartments, minimum consumption clauses.
+
+```text
+q_i = ε_i · Q + (1 - Σ ε_i) · [ (f_i · h_i) / Σ (f_j · h_j) ] · Q
+```
+
+Thermal loss coefficients (`f_i`), base heating factor (`ε_i`), operating run-hours (`h_i`), startup load allowances, closed apartments, minimum consumption clauses.
 
 Do you know what happened when I asked AI: *“Write me the autonomous heating calculation function based on the Greek presidential decree”*?
 It spat out code within 10 seconds, topped with a smug comment: *“Here is your fully compliant calculation!”*.
@@ -148,7 +152,11 @@ Without discrete math, you are completely blind to how data connects, traverses,
 
 #### 3. Probability & Statistics: The Antidote to Voodoo
 A Large Language Model doesn't "think" and it doesn't "understand." It is an enormous conditional probability calculation engine:
-$$P(w_t \mid w_1, w_2, \dots, w_{t-1})$$
+
+```text
+P(w_t | w_1, w_2, ..., w_t-1)
+```
+
 It predicts the next most likely token. If you don't understand probability distributions, variance, bias, sampling temperatures, and Bayes' Theorem, you treat AI like an oracle. When you possess the theoretical foundation, you understand exactly why hallucinations occur and how to architect guardrails against them.
 
 #### 4. Calculus: How Models Actually Learn
