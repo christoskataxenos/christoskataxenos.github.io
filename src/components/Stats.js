@@ -8,30 +8,31 @@ import React from 'react';
 
 const Stats = ({ panicLevel, doubtLevel, excitementLevel, frustrationLevel, coffeeCups, freddos, redbulls, hoursSpent, linesOfLogic, illegalActs }) => {
   // Επιλογή μετρικής προς εμφάνιση
-  let level = 0;
+  let rawLevel = 0;
   let label = "Panic Level";
 
   if (excitementLevel !== undefined) {
-    level = excitementLevel;
+    rawLevel = excitementLevel;
     label = "Excitement Level";
   } else if (frustrationLevel !== undefined) {
-    level = frustrationLevel;
+    rawLevel = frustrationLevel;
     label = "Frustration Level";
   } else if (doubtLevel !== undefined) {
-    level = doubtLevel;
+    rawLevel = doubtLevel;
     label = "Doubt Level";
   } else if (panicLevel !== undefined) {
-    level = panicLevel;
+    rawLevel = panicLevel;
     label = "Panic Level";
   }
 
+  const level = typeof rawLevel === 'string' && !isNaN(Number(rawLevel)) ? Number(rawLevel) : rawLevel;
+
   // Handle hoursSpent/linesOfLogic fallback
-  const displayHours = hoursSpent !== undefined ? hoursSpent : (linesOfLogic ? Math.floor(linesOfLogic / 100) : 0);
+  const displayHours = hoursSpent !== undefined ? hoursSpent : (linesOfLogic ? Math.floor(Number(linesOfLogic) / 100) : 0);
 
   // Επιλογή χρώματος βάσει ορίων (Critical > 80, Warning > 50, OK <= 50)
-  // For Excitement, maybe green is better for high values? 
-  // But let's keep the user's existing logic unless excitement should be different.
-  const barColor = label === "Excitement Level" ? '#c084fc' : (level > 80 ? '#ef4444' : level > 50 ? '#f59e0b' : '#10b981');
+  const numLevel = typeof level === 'number' ? level : (Number(level) || 0);
+  const barColor = label === "Excitement Level" ? '#c084fc' : (numLevel > 80 ? '#ef4444' : numLevel > 50 ? '#f59e0b' : '#10b981');
 
   return (
     <div style={{

@@ -118,6 +118,8 @@ export default async function Post({ params }) {
           source={postData.content}
           components={mdxComponents}
           options={{
+            blockJS: false,
+            blockDangerousJS: true,
             mdxOptions: {
               rehypePlugins: [
                 [rehypePrettyCode, prettyCodeOptions],
