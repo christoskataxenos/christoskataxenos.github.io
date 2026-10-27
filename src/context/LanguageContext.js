@@ -110,7 +110,15 @@ const translations = {
       { title: "GAMING", body: "RPG, strategy, simulation, VR experiences." },
       { title: "TRAVELLING", body: "Exploring new cultures, roadtrips, documentation." },
       { title: "CUSTOM PCs & SERVERS", body: "PC building, hardware tweaking, server setups." }
-    ]
+    ],
+    underConstruction: {
+      title: "Photography Portfolio",
+      subtitle: "Visual Index",
+      badge: "UNDER CONSTRUCTION",
+      status: "calibrating lenses and developing frames...",
+      description: "I'm currently building this part of my digital home. Check back soon for updates or return to the main landing page.",
+      ctaLabel: "Return Home"
+    }
   },
   el: {
     heroDescription: "Από τα Δίκτυα στη Μηχανική Λογισμικού. Συνδυάζω την πολυετή παγκόσμια εμπειρία στο IT support με την ανάπτυξη σύγχρονου κώδικα. Ως φοιτητής Πληροφορικής στο ΕΑΠ, με βάση τη Στουτγκάρδη, αξιοποιώ την προσαρμοστικότητα από τα ταξίδια μου για να δίνω συστημικές λύσεις, χτίζοντας ανθεκτικές βάσεις στο Software Development.",
@@ -206,7 +214,15 @@ const translations = {
       { title: "GAMING", body: "RPG, παιχνίδια στρατηγικής, εξομοιωτές, εμπειρίες VR." },
       { title: "ΤΑΞΙΔΙΑ", body: "Εξερεύνηση νέων πολιτισμών, roadtrips, καταγραφή." },
       { title: "CUSTOM PCs & SERVERS", body: "Συναρμολόγηση υπολογιστών, βελτιστοποίηση hardware, στήσιμο servers." }
-    ]
+    ],
+    underConstruction: {
+      title: "Φωτογραφικό Portfolio",
+      subtitle: "Οπτικό Ευρετήριο",
+      badge: "ΥΠΟ ΚΑΤΑΣΚΕΥΗ",
+      status: "βαθμονόμηση φακών και εμφάνιση καρέ...",
+      description: "Αυτό το τμήμα του ψηφιακού μου σπιτιού είναι υπό κατασκευή. Επισκέψου σύντομα ξανά ή γύρνα στην κεντρική σελίδα.",
+      ctaLabel: "Επιστροφή στην Αρχική"
+    }
   }
 };
 
@@ -248,7 +264,7 @@ export function LanguageProvider({ children }) {
   const t = translations[language] || translations.en;
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
