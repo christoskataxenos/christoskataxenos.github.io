@@ -108,14 +108,17 @@ flowchart TD
 ### Τα Ευρήματα στο GitHub Security Log
 Σκαλίζοντας το security audit log του GitHub λογαριασμού μου (`christoskataxenos`), εντόπισα το εξής συμβάν:
 
-| Πεδίο | Τιμή |
-|---|---|
-| **Action** | `user_session.country_change` |
-| **Timestamp** | 2026-10-31 10:37:37 +0100 |
-| **IP Address** | `54.183.172.24` (Amazon EC2, `ec2-54-183-172-24.us-west-1.compute.amazonaws.com`, San Jose) |
-| **User Agent** | `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ... Chrome/141.0.0.0` |
-| **Document ID** | `4WTAssApzjV5Ne45mShS8Q` |
-| **Request ID** | `F267:17432F:66E3A7:7F9332:6AE5B6DF` |
+<ComparisonTable 
+  headers={["Πεδίο", "Τιμή"]}
+  rows={[
+    ["Action", "user_session.country_change"],
+    ["Timestamp", "2026-10-31 10:37:37 +0100"],
+    ["IP Address", "54.183.172.24 (Amazon EC2, San Jose)"],
+    ["User Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/141.0.0.0"],
+    ["Document ID", "4WTAssApzjV5Ne45mShS8Q"],
+    ["Request ID", "F267:17432F:66E3A7:7F9332:6AE5B6DF"]
+  ]}
+/>
 
 Ο εισβολέας, καθήμενος πίσω από EC2 instance στην Καλιφόρνια, απαρίθμησε μέσω του OAuth integration **και τα 47 repositories του λογαριασμού μου** (δημόσια και private).
 
@@ -257,13 +260,16 @@ node rag/search.js "pipop" --malicious -k 10 --json
 
 Το περιστατικό αυτό ήταν το απόλυτο crash-test για το αμυντικό σύστημα **Sotiria** που είχα αρχίσει να αναπτύσσω μετά το προηγούμενο περιστατικό. Η ανάλυση του INC-2026-PX01 αποκάλυψε κενά που έπρεπε να καλυφθούν άμεσα:
 
-| Διάνυσμα Επίθεσης (Attack Vector) | Αντίστοιχο Layer στη Sotiria | Κατάσταση Μετά το Incident |
-|---|---|---|
-| **Staging του Cookie Injector** (`.ts` source tree) | **Module 7.9 (Browser Session Audit)** | Επεκτάθηκε για να σαρώνει φακέλους source κώδικα injector και όχι μόνο έτοιμα `.exe` |
-| **Υποκλοπή GitHub CLI Token** (`hosts.yml`) | **Module 7.9 & Module 9 (AI/CLI Audit)** | Προστέθηκε έλεγχος για plaintext `oauth_token` στο `%APPDATA%\GitHub CLI` |
-| **Stolen Cookie AI Authentication** | **Module 9 (AI Security Guard)** | Ανίχνευση custom host tools (`perplexity_login`/`perplexity_status`) σε τοπικά AI configs |
-| **YARA Hunting για Injector Internals** | **Module 6 (YARA Engine)** | Προσθήκη κανόνα `Hijacker_Cookie_Session_Injector` (DPAPI unwrap, `sql.js`, AES-GCM v10/v11) |
-| **Proxy DLL Sideloading** (`rtx-encore`) | **Module 8 (Proxy DLL Scanner)** | Εντοπισμός ύποπτων `version.dll`, `winmm.dll`, `dinput8.dll` εκτός System32 |
+<ComparisonTable 
+  headers={["Διάνυσμα Επίθεσης (Attack Vector)", "Layer στη Sotiria", "Κατάσταση Μετά το Incident"]}
+  rows={[
+    ["Staging του Cookie Injector (.ts source)", "Module 7.9 (Browser Session Audit)", "Επεκτάθηκε για να σαρώνει φακέλους source κώδικα injector και όχι μόνο έτοιμα .exe"],
+    ["Υποκλοπή GitHub CLI Token (hosts.yml)", "Module 7.9 & Module 9 (AI/CLI Audit)", "Προστέθηκε έλεγχος για plaintext oauth_token στο %APPDATA%\\GitHub CLI"],
+    ["Stolen Cookie AI Authentication", "Module 9 (AI Security Guard)", "Ανίχνευση custom host tools (perplexity_login/status) σε τοπικά AI configs"],
+    ["YARA Hunting για Injector Internals", "Module 6 (YARA Engine)", "Προσθήκη κανόνα Hijacker_Cookie_Session_Injector (DPAPI unwrap, sql.js, AES-GCM v10/v11)"],
+    ["Proxy DLL Sideloading (rtx-encore)", "Module 8 (Proxy DLL Scanner)", "Εντοπισμός ύποπτων version.dll, winmm.dll, dinput8.dll εκτός System32"]
+  ]}
+/>
 
 ---
 

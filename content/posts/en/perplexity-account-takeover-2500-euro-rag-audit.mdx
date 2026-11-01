@@ -106,14 +106,17 @@ The attacker did not need my GitHub credentials. They did not need to bypass my 
 ### Forensic Evidence in GitHub Security Logs
 Auditing the audit logs of my GitHub account (`christoskataxenos`) uncovered the footprint:
 
-| Metric | Recorded Value |
-|---|---|
-| **Event Action** | `user_session.country_change` |
-| **Timestamp** | 2026-10-31 10:37:37 +0100 |
-| **Source IP** | `54.183.172.24` (Amazon EC2, `ec2-54-183-172-24.us-west-1.compute.amazonaws.com`, San Jose) |
-| **User Agent** | `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ... Chrome/141.0.0.0` |
-| **Document ID** | `4WTAssApzjV5Ne45mShS8Q` |
-| **Request ID** | `F267:17432F:66E3A7:7F9332:6AE5B6DF` |
+<ComparisonTable 
+  headers={["Metric", "Recorded Value"]}
+  rows={[
+    ["Event Action", "user_session.country_change"],
+    ["Timestamp", "2026-10-31 10:37:37 +0100"],
+    ["Source IP", "54.183.172.24 (Amazon EC2, San Jose)"],
+    ["User Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/141.0.0.0"],
+    ["Document ID", "4WTAssApzjV5Ne45mShS8Q"],
+    ["Request ID", "F267:17432F:66E3A7:7F9332:6AE5B6DF"]
+  ]}
+/>
 
 Operating through an Amazon EC2 instance in California, the attacker used this session to enumerate **all 47 repositories on my profile** (public and private).
 
@@ -253,13 +256,16 @@ This local retrieval pipeline allowed instant identification of every malicious 
 
 This breach served as a direct real-world stress test for **Sotiria**, the endpoint defense suite designed following the initial extension discovery. The telemetry from INC-2026-PX01 highlighted attack surfaces requiring immediate coverage:
 
-| Threat Vector | Targeted Sotiria Module | Operational Hardening Applied |
-|---|---|---|
-| **Staged Cookie Injector Source** (`.ts` files) | **Module 7.9 (Browser Session Audit)** | Expanded to detect uncompiled injector source trees, not merely standalone `.exe` binaries |
-| **GitHub CLI Token Theft** (`hosts.yml`) | **Module 7.9 & Module 9 (AI/CLI Audit)** | Added proactive scanning for plaintext `oauth_token` inside `%APPDATA%\GitHub CLI` |
-| **Stolen Cookie AI Authentication** | **Module 9 (AI Security Guard)** | Added behavioral flags for custom host tools (`perplexity_login`, `perplexity_status`) |
-| **YARA Rules for Stealer Internals** | **Module 6 (YARA Engine)** | Added signature `Hijacker_Cookie_Session_Injector` covering DPAPI unwrap, `sql.js`, and AES-GCM v10/v11 |
-| **Proxy DLL Sideloading** (`rtx-encore`) | **Module 8 (Proxy DLL Scanner)** | Flags anomalous `version.dll`, `winmm.dll`, and `dinput8.dll` binaries outside System32 |
+<ComparisonTable 
+  headers={["Threat Vector", "Targeted Sotiria Module", "Operational Hardening Applied"]}
+  rows={[
+    ["Staged Cookie Injector Source (.ts files)", "Module 7.9 (Browser Session Audit)", "Expanded to detect uncompiled injector source trees, not merely standalone .exe binaries"],
+    ["GitHub CLI Token Theft (hosts.yml)", "Module 7.9 & Module 9 (AI/CLI Audit)", "Added proactive scanning for plaintext oauth_token inside %APPDATA%\\GitHub CLI"],
+    ["Stolen Cookie AI Authentication", "Module 9 (AI Security Guard)", "Added behavioral flags for custom host tools (perplexity_login, perplexity_status)"],
+    ["YARA Rules for Stealer Internals", "Module 6 (YARA Engine)", "Added signature Hijacker_Cookie_Session_Injector covering DPAPI unwrap, sql.js, and AES-GCM v10/v11"],
+    ["Proxy DLL Sideloading (rtx-encore)", "Module 8 (Proxy DLL Scanner)", "Flags anomalous version.dll, winmm.dll, and dinput8.dll binaries outside System32"]
+  ]}
+/>
 
 ---
 
